@@ -10,7 +10,7 @@ SELECT
   D.CAEM, ----------------------
   D.IDNO    
 
-FROM USER_BANCU.CUATM D
+FROM USER_BANCU.CON_5 D
 
                                 
 --                                
