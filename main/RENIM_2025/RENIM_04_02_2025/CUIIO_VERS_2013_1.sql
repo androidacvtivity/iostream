@@ -90,7 +90,7 @@ CUIIO IN (
 SELECT 
     CUIIO
     
-    FROM CUATM_CIS 
+    FROM  
 )
 
 AND CUIIO_VERS  <> 1065
