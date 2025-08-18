@@ -4,6 +4,7 @@
             
             WHERE
             
-            DENUMIRE LIKE 'TAB%'
+            DENUMIRE LIKE 'ZA%'
             
-            AND CUIIO_VERS = 480
+            AND 
+            CUIIO_VERS = 480
