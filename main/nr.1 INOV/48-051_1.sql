@@ -31,7 +31,7 @@ WHERE
   
   D.FORM IN (48)  AND
   D.CAPITOL IN (100,1044) 
-  
+  capitol=1040&capitol_vers=2013
   
   GROUP BY
   D.CUIIO,
