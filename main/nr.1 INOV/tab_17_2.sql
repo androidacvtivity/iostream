@@ -21,6 +21,7 @@ SELECT DISTINCT
       (:pID_MDTABLE=:pID_MDTABLE) AND
       D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%'  AND 
       D.FORM IN (48)
+      capitol=1040&capitol_vers=2013
     GROUP BY
       D.CUIIO,
       R.DENUMIRE,
