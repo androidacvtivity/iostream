@@ -7,7 +7,7 @@ WHERE
 STATUT = '1'
 
 AND 
-capitol=10004 AND capitol_vers=299
+capitol=10006 AND capitol_vers=299
 
  AND DINAMIC IS NOT NULL
  
