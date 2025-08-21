@@ -3,9 +3,10 @@ DECLARE -- ====================================================================
 CURSOR C IS
 
  
+
 SELECT 
 DISTINCT CUIIO,
-1058 AS CUIIO_VERS,
+1064 AS CUIIO_VERS,
 MAX(CAEM2) AS CAEM2 
 
 FROM CIS2.RENIM
@@ -41,17 +42,16 @@ SELECT FC.CUIIO,
                
                AND R.CAEM2 IS  NULL 
        
-               AND FC.CUIIO_VERS = 1058
+               AND FC.CUIIO_VERS = 1064
                
            
                )
                
-               AND CUIIO_VERS < 1058
+               AND CUIIO_VERS < 1064
                
                
                GROUP BY
                CUIIO
-
   
  
             

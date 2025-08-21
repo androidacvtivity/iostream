@@ -4,7 +4,7 @@
             
             WHERE
             
-            DENUMIRE LIKE 'ROT%'
+            DENUMIRE LIKE 'CREAS%'
             
             AND 
             CUIIO_VERS = 480
