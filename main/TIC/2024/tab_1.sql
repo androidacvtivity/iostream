@@ -1,0 +1,7 @@
+WHERE   D.PERIOADA IN (:pPERIOADA) AND
+       D.FORM = :pFORM AND
+       D.FORM_VERS = :pFORM_VERS  AND  
+      (:pID_MDTABLE=:pID_MDTABLE) AND
+       D.FORM = 71 AND
+       D.CAPITOL IN (1181) AND
+       C.FULL_CODE LIKE '%'||:pCOD_CUATM||'%'
