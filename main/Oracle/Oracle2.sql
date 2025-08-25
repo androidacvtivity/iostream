@@ -1,0 +1,15 @@
+SELECT 
+    SYS_CONTEXT('USERENV', 'SESSIONID') AS session_id,
+    SYS_CONTEXT('USERENV', 'IP_ADDRESS') AS ip_address,
+    SYS_CONTEXT('USERENV', 'AUTHENTICATED_IDENTITY') AS authenticated_identity,
+    SYS_CONTEXT('USERENV', 'AUTHENTICATION_METHOD') AS authentication_method,
+    SYS_CONTEXT('USERENV', 'CLIENT_IDENTIFIER') AS client_identifier,
+    SYS_CONTEXT('USERENV', 'CURRENT_USER') AS current_user,
+    SYS_CONTEXT('USERENV', 'HOST') AS host,
+    SYS_CONTEXT('USERENV', 'OS_USER') AS os_user,
+    SYS_CONTEXT('USERENV', 'SESSION_USER') AS session_user,
+    SYS_CONTEXT('USERENV', 'TERMINAL') AS terminal,
+    SYS_CONTEXT('USERENV', 'MODULE') AS module,
+    SYS_CONTEXT('USERENV', 'ACTION') AS action
+FROM 
+    dual;
