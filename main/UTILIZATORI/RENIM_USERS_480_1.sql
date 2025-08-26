@@ -7,4 +7,4 @@
             
             WHERE
             
-            USER_NAME LIKE 'zag%'
+            USER_NAME LIKE 'nica%'

@@ -4,7 +4,7 @@
             
             WHERE
             
-            DENUMIRE LIKE 'CREAS%'
+            DENUMIRE LIKE 'NICA%'
             
             AND 
             CUIIO_VERS = 480

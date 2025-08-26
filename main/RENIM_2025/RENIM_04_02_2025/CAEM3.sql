@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------
 SELECT FC.CUIIO,
-   --    FC.CUIIO_VERS,
+       FC.CUIIO_VERS,
        R.CAEM2  
               FROM(
 SELECT FC.CUIIO,
@@ -18,7 +18,7 @@ SELECT FC.CUIIO,
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
              FC.FORM IN (:pFORM) AND FC.STATUT <> '3'
-             and FC.FORM_VERS = 2009 
+             and FC.FORM_VERS = 1004 
              
              ) FC INNER JOIN CIS2.RENIM R ON R.CUIIO = FC.CUIIO  AND R.CUIIO_VERS = FC.CUIIO_VERS
              
@@ -26,7 +26,7 @@ SELECT FC.CUIIO,
              WHERE
                1=1
                
-             --  AND R.CAEM2 IS  NULL 
+               AND R.CAEM2 IS  NULL 
 --       
 --AND (FC.CUIIO_VERS < 1064 AND FC.CUIIO_VERS < 1058)        
                
