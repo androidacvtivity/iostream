@@ -22,7 +22,7 @@ WHERE
   
   
   HAVING 
-  D.RIND IN ('1')
+  D.RIND IN ('2')
   ORDER BY
   D.UNIT_CODE,
   D.RIND
