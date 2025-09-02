@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------
-SELECT FC.CUIIO,
-       FC.CUIIO_VERS,
-       R.CAEM2  
+SELECT FC.CUIIO
+--       FC.CUIIO_VERS,
+--       R.CAEM2  
               FROM(
 SELECT FC.CUIIO,
                    FC.CUIIO_VERS,
@@ -26,9 +26,11 @@ SELECT FC.CUIIO,
              WHERE
                1=1
                
-               AND R.CAEM2 IS  NOT  NULL 
+               AND FC.CUIIO_VERS  <>  2013
                
-               AND R.CUIIO = 41355519
+            --   AND R.CAEM2 IS  NOT  NULL 
+               
+--               AND R.CUIIO = 41355519
 --       
 --AND (FC.CUIIO_VERS < 1064 AND FC.CUIIO_VERS < 1058)        
                

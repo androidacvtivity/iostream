@@ -1,0 +1,205 @@
+CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_DATA_ALL_ASA_2024
+
+AS
+      SELECT DISTINCT
+             D.CUIIO,
+             D.CUIIO_VERS,
+             D.CUATM,
+             C.FULL_CODE,
+             D.CAEM2,
+             MAX (
+                 CASE
+                     WHEN D.CAPITOL IN (1129) AND D.RIND IN ('8') THEN D.COL31
+                     ELSE NULL
+                 END)
+                 caem_calc,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('1') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_1,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('2') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_2,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('3') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_3,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('4') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_4,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('5') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_5,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('6') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_6,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (100) AND D.RIND IN ('7') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 CAP_SR_7,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1127) AND D.RIND IN ('400') THEN D.COL4
+                     ELSE NULL
+                 END)
+                 RIND_400_COL2,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1124) AND D.RIND IN ('150') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_150_COL1,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1124) AND D.RIND IN ('160') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_160,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('200') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_200,
+             ----------------------------------------------------------------------------------------------
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('210') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_210,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('220') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_220,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('240') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_240,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('260') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_260,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('270') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_270,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('280') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_280,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('290') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_290,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('296') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_296,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('320') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_320_COL1,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('320') THEN D.COL2
+                     ELSE NULL
+                 END)
+                 RIND_320_COL2,
+        -------------------------------------------------------------------------------------------------
+
+
+   SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('330') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_330_COL1,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('330') THEN D.COL2
+                     ELSE NULL
+                 END)
+                 RIND_330_COL2,
+-----------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------
+
+
+   SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('340') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_340_COL1,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('340') THEN D.COL2
+                     ELSE NULL
+                 END)
+                 RIND_340_COL2,
+-----------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+
+   SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('350') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_350_COL1,
+             SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1126) AND D.RIND IN ('350') THEN D.COL2
+                     ELSE NULL
+                 END)
+                 RIND_350_COL2
+-----------------------------------------------------------------------------------------------------------
+        FROM CIS2.VW_DATA_ALL D
+             INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
+       WHERE D.FORM IN (64) AND D.PERIOADA = 2013
+    -- AND D.CUIIO = 135094
+
+
+    GROUP BY D.CUIIO,
+             D.CUIIO_VERS,
+             D.CUATM,
+             C.FULL_CODE,
+             D.CAEM2
+    ORDER BY C.FULL_CODE;

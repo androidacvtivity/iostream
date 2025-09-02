@@ -26,7 +26,7 @@ SELECT FC.CUIIO,
              WHERE
                1=1
                
-               AND R.CAEM2 IS NOT  NULL 
+               AND R.CAEM2 IS   NULL 
 --       
 --AND (FC.CUIIO_VERS < 1064 AND FC.CUIIO_VERS < 1058)        
                
