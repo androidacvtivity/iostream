@@ -1,10 +1,13 @@
 SELECT
-D.CUIIO, 
-'Rind  - ' ||D.RIND ||
-' nu exista in clasificator  = ' ||MAX( CASE WHEN D.CAPITOL IN (1127)  THEN D.COL31  ELSE NULL END) 
- 
-  AS REZULTAT
-  
+--D.CUIIO, 
+--D.RIND,
+DISTINCT D.COL31 
+
+--'Rind  - ' ||D.RIND ||
+--' nu exista in clasificator  = ' ||MAX( CASE WHEN D.CAPITOL IN (1127)  THEN D.COL31  ELSE NULL END) 
+-- 
+--  AS REZULTAT
+--  
   FROM
 
  CIS2.VW_DATA_ALL D  
@@ -21,25 +24,31 @@ WHERE
   D.CAPITOL IN (1127) AND D.RIND NOT IN ('400')
   AND D.FORM = 64
 GROUP BY 
-D.CUIIO,
-D.COL31,
-D.RIND
-HAVING
+--D.CUIIO,
+D.COL31
+--D.RIND
 
-D.COL31 NOT IN  (
-       SELECT 
+HAVING 
+D.COL31 IS NOT NULL 
 
-            SUBSTR(CODUL,2,4) AS COL3
-                
-                FROM  CIS2.VW_CL_CAEM2
-                
-                WHERE 
-                PRIM IN ('1')
+ORDER BY
+D.COL31
+--HAVING
+--
+--D.COL31 NOT IN  (
+--       SELECT 
+--
+--            SUBSTR(CODUL,2,4) AS COL3
+--                
+--                FROM  CIS2.VW_CL_CAEM2
+--                
+--                WHERE 
+--                PRIM IN ('1')
                 
                 
                 
                 
 
-)
+--)
 
 
