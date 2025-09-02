@@ -48,3 +48,11 @@ SELECT
          
          ORDER BY 
           B.CONTROL ) L
+          
+          
+          WHERE
+          
+          L.FORMULA LIKE '%=%'
+          AND 
+          L.FORMULA NOT LIKE '%>=%'
+          
