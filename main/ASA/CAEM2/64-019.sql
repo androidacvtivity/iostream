@@ -1,4 +1,5 @@
-SELECT 
+SELECT
+D.CUIIO, 
 'Rind  - ' ||D.RIND ||
 ' nu exista in clasificator  = ' ||MAX( CASE WHEN D.CAPITOL IN (1127)  THEN D.COL31  ELSE NULL END) 
  
@@ -6,11 +7,11 @@ SELECT
   
   FROM
 
- CIS2.VW_DATA_ALL_TEMP D  
+ CIS2.VW_DATA_ALL D  
  
 WHERE
   (D.PERIOADA=:PERIOADA          ) AND
-  (D.CUIIO=:CUIIO                ) AND
+ -- (D.CUIIO=:CUIIO                ) AND
   (D.CUIIO_VERS=:CUIIO_VERS     OR :CUIIO_VERS = -1) AND
   (D.FORM = :FORM               ) AND
   (D.FORM_VERS=:FORM_VERS ) AND
@@ -20,6 +21,7 @@ WHERE
   D.CAPITOL IN (1127) AND D.RIND NOT IN ('400')
   AND D.FORM = 64
 GROUP BY 
+D.CUIIO,
 D.COL31,
 D.RIND
 HAVING
