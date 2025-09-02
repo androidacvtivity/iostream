@@ -1,4 +1,5 @@
 SELECT
+D.CUIIO,
  D.RIND ||': nu ati introdus CAEM2'
 
   AS REZULTAT
@@ -8,7 +9,7 @@ FROM
          
 WHERE
   (D.PERIOADA=:PERIOADA          ) AND
-  (D.CUIIO=:CUIIO                ) AND
+ -- (D.CUIIO=:CUIIO                ) AND
   (D.CUIIO_VERS=:CUIIO_VERS     OR :CUIIO_VERS = -1) AND
   (D.FORM = :FORM               ) AND
   (D.FORM_VERS=:FORM_VERS ) AND
@@ -18,7 +19,8 @@ WHERE
   D.CAPITOL IN(1127) AND D.RIND NOT IN ('400')
 
 GROUP BY
- D.RIND
+ D.RIND,
+ D.CUIIO
 --  
   HAVING  
   
