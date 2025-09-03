@@ -73,11 +73,14 @@ SELECT
   --  RR.NMP,
     M.M3_00_T_COL2,
     L.RIND_150_COL1,
- --   RR.vz,
+    RR.RSF_010_COL3,
+    RR.RSF_010_COL4,
     P.PRDOMOLD_R10,
     R.RIND_0100,
     L.RIND_160,
     R.RIND_0180,
+    RR.RSF_040_COL3,
+    RR.RSF_040_COL4,
     L.RIND_200,
     R.RIND_0190,
     L.RIND_210,
@@ -97,14 +100,22 @@ SELECT
     L.RIND_296,
     R.RIND_1010,
     L.RIND_320_COL1,
+    RR.RSF_290_COL3,
+    RR.RSF_290_COL4,
     R.CAP_1_R_2000_1,
     L.RIND_320_COL2,
+    RR.RSF_260_COL3,
+    RR.RSF_260_COL4,
     R.CAP_1_R_2000_2,
     L.RIND_330_COL1,
+    RR.RSF_270_COL3,
+    RR.RSF_270_COL4,
     R.CAP_1_R_2300_1,
     L.RIND_330_COL2,
     R.CAP_1_R_2300_2,
     L.RIND_340_COL1,
+    RR.RSF_280_COL3,
+    RR.RSF_280_COL4,
     R.CAP_1_R_2400_1,
     L.RIND_340_COL2,
     R.CAP_1_R_2400_2,
@@ -120,7 +131,7 @@ SELECT
             LEFT jOIN VVW_KATALOG_M3_2024 M on M.CUIIO = L.CUIIO
             LEFT jOIN VVW_KATALOG_PRODMOLD_2024 p on P.CUIIO = L.CUIIO
             
-         --   LEFT jOIN  VVW_KATALOG_RSF_23 rr oN RR.CUIIO = L.CUIIO
+            LEFT jOIN  VVW_KATALOG_SF_2024 rr oN RR.CUIIO = L.CUIIO
             
             order BY
             L.FULL_CODE,
