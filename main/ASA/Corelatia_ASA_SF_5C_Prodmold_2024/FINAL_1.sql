@@ -58,7 +58,7 @@ SELECT
     L.FULL_CODE,
     L.CAEM2,
     L.caem_calc,
-  --  RR.CAEM2 CAEM2_SF,
+    RR.CAEM2 CAEM2_SF,
     R.CAEM2 CAEM2_5C, 
     M.caem2 CAEM2_m3,
     p.caem2 CAEM2_PRODMOLD,
