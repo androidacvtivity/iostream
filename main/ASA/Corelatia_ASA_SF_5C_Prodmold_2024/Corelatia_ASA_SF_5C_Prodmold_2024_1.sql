@@ -1,38 +1,38 @@
 --DROP VIEW USER_BANCU.VW_KATALOG_ASA_2023_F;
 --
 --/* Formatted on 9/2/2025 3:41:42 PM (QP5 v5.326) */
---CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_KATALOG_ASA_2023_F
---(
---    CUIIO,
---    CUIIO_VERS,
---    IDNO,
---    CUATM,
---    FULL_CODE,
---    CAEM2,
---    CAEM_CALC,
---    CAP_SR_1,
---    CAP_SR_2,
---    CAP_SR_3,
---    CAP_SR_4,
---    CAP_SR_5,
---    CAP_SR_6,
---    CAP_SR_7,
---    RIND_400_COL2,
---    RIND_150_COL1,
---    RIND_160,
---    RIND_200,
---    RIND_210,
---    RIND_220,
---    RIND_240,
---    RIND_260,
---    RIND_270,
---    RIND_280,
---    RIND_290,
---    RIND_296,
---    RIND_320_COL1,
---    RIND_320_COL2
---)
---AS
+CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_KATALOG_ASA_2024_F
+(
+    CUIIO,
+    CUIIO_VERS,
+    IDNO,
+    CUATM,
+    FULL_CODE,
+    CAEM2,
+    CAEM_CALC,
+    CAP_SR_1,
+    CAP_SR_2,
+    CAP_SR_3,
+    CAP_SR_4,
+    CAP_SR_5,
+    CAP_SR_6,
+    CAP_SR_7,
+    RIND_400_COL2,
+    RIND_150_COL1,
+    RIND_160,
+    RIND_200,
+    RIND_210,
+    RIND_220,
+    RIND_240,
+    RIND_260,
+    RIND_270,
+    RIND_280,
+    RIND_290,
+    RIND_296,
+    RIND_320_COL1,
+    RIND_320_COL2
+)
+AS
       SELECT L.CUIIO,                                         -- 15481 - 15481
              L.CUIIO_VERS,
              L.IDNO,
