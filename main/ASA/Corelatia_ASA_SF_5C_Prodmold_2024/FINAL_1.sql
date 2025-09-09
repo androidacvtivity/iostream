@@ -59,6 +59,7 @@ SELECT
     L.CAEM2,
     L.caem_calc,
     RR.CAEM2 CAEM2_SF,
+    AA.CAEM2 CAEM2_DEPOZITAR,
     R.CAEM2 CAEM2_5C, 
     M.caem2 CAEM2_m3,
     p.caem2 CAEM2_PRODMOLD,
@@ -132,6 +133,8 @@ SELECT
             LEFT jOIN VVW_KATALOG_PRODMOLD_2024 p on P.CUIIO = L.CUIIO
             
             LEFT jOIN  VVW_KATALOG_SF_2024 rr oN RR.CUIIO = L.CUIIO
+            
+            LEFT JOIN USER_BANCU.ASA_24 AA oN AA.CUIIO = L.CUIIO
             
             order BY
             L.FULL_CODE,
