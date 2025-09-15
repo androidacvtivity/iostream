@@ -1,4 +1,4 @@
-
+------------------------------------------------
 UPDATE USER_BANCU.CON_5
 SET 
     CUIIO = REPLACE(REPLACE(TRIM(CUIIO), CHR(9), ' '), '  ', ' '),
