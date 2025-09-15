@@ -1,4 +1,4 @@
-SELECT
+SELECT ------------------------------------------------
 D.CUIIO,
  D.RIND ||': nu ati introdus CAEM2'
 
