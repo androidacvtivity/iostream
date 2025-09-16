@@ -1,23 +1,23 @@
-INSERT INTO  CIS2.TABLE_OUT
-    (
-      PERIOADA,
-      FORM,
-      FORM_VERS,
-      ID_MDTABLE,
-      COD_CUATM,
-      NR_SECTIE,
-      NUME_SECTIE,
-      NR_SECTIE1,
-      NUME_SECTIE1,
-      NR_SECTIE2,
-      NUME_SECTIE2,
-      NR_ROW,
-      ORDINE,
-      DECIMAL_POS,
-      NUME_ROW,
-       
-      COL1, COL2, COL3,  COL4, COL5 , COL6
-    )
+--INSERT INTO  CIS2.TABLE_OUT
+--    (
+--      PERIOADA,
+--      FORM,
+--      FORM_VERS,
+--      ID_MDTABLE,
+--      COD_CUATM,
+--      NR_SECTIE,
+--      NUME_SECTIE,
+--      NR_SECTIE1,
+--      NUME_SECTIE1,
+--      NR_SECTIE2,
+--      NUME_SECTIE2,
+--      NR_ROW,
+--      ORDINE,
+--      DECIMAL_POS,
+--      NUME_ROW,
+--       
+--      COL1, COL2, COL3,  COL4, COL5 , COL6
+--    )
 
 SELECT 
     :pPERIOADA AS PERIOADA,
@@ -85,7 +85,7 @@ FROM
            
         ) MR     
      
-
+-- 1 EDU . 83 EUD - 2025 
 CROSS JOIN (
 SELECT 
 R.RIND,
@@ -111,7 +111,7 @@ WHERE
   (:pID_MDTABLE =:pID_MDTABLE) AND 
   (D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%') AND
   D.FORM IN (62)  AND
-  D.CAPITOL IN (1115,1118)
+  D.CAPITOL IN (1115)
    
    AND CC.PRGS IN ('2')
 
