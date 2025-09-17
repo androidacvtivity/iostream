@@ -1,9 +1,10 @@
-SELECT 
-'Ati selectat - ' ||COUNT(D.COL1)||' randuri'  AS REZULTAT
+SELECT
+D.CUIIO, 
+COUNT(D.COL1) AS CNUM
 FROM CIS2.VW_DATA_ALL D
 WHERE
   (D.PERIOADA=:PERIOADA          ) AND
-  (D.CUIIO=:CUIIO                ) AND
+--  (D.CUIIO=:CUIIO                ) AND
   (D.CUIIO_VERS=:CUIIO_VERS     OR :CUIIO_VERS = -1) AND
   (D.FORM = :FORM               ) AND
   (D.FORM_VERS=:FORM_VERS ) AND
@@ -14,9 +15,18 @@ WHERE
   D.CAPITOL IN (100) AND
   D.RIND IN('1','2','3','4','5','6','7','98')
 
-
+GROUP BY 
+D.CUIIO
 
 
 HAVING
 COUNT(D.COL1) > 1 
 
+--UNION
+--SELECT 0 AS CNUM
+--FROM DUAL
+--
+--) R
+--
+--HAVING
+--  SUM(R.CNUM)=0
