@@ -1,6 +1,8 @@
 SELECT 
      d.cuiio,   
-     SUM(CASE WHEN  D.CAPITOL IN (405)   AND REPLACE(' '||CI.ITEM_PATH,';','; ') LIKE '% '||'9.2.2'||';%'
+     SUM(CASE WHEN  D.CAPITOL IN (405)   AND REPLACE(' '||CI.ITEM_PATH,';','; ') 
+     LIKE '% '||'9.2.2'||';%'
+      
       AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL1,
            SUM(CASE WHEN  D.CAPITOL IN (405)   AND REPLACE(' '||CI.ITEM_PATH,';','; ') LIKE '% '||'9.2.1'||';%'
       AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL2,
@@ -42,7 +44,7 @@ SELECT
   
   D.FORM IN (44)
   AND D.CAPITOL IN (405) 
---  and CI.ITEM_CODE in ('9.2.2')
+ --- and CI.ITEM_CODE in ('9.2.2')
   
   
   GROUP BY 
