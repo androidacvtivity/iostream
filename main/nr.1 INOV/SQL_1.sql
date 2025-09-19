@@ -1,0 +1,34 @@
+
+SELECT 
+    CUIIO,
+    RIND,
+    SUM(COL1) AS COL1
+
+
+FROM CIS2.VW_DATA_ALL 
+
+WHERE
+
+
+PERIOADA = 2013 AND 
+
+FORM IN (48) 
+  
+  
+  --AND CUIIO IN (38735017)
+  
+  AND CAPITOL = 1042
+  
+  GROUP BY 
+    CUIIO,
+    RIND
+    
+    HAVING 
+    
+    SUM(COL1) > 1  
+    
+    
+    ORDER BY 
+    
+      CUIIO,
+      RIND
