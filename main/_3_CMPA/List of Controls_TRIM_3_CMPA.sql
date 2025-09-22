@@ -19,7 +19,7 @@
 
 SELECT 
       L.CONTROL,
-      1054 CONTROL_VERS,
+      L.CONTROL_VERS,
       L.FORM,
       L.FORM_VERS,
       L.CAPITOL,
@@ -62,7 +62,7 @@ SELECT
         
          WHERE
          1=1
-         AND A.FORM  = 62
+         AND A.FORM  = 61
                
          GROUP BY 
           A.CONTROL
@@ -75,7 +75,7 @@ SELECT
         
          WHERE
          1=1
-         AND B.FORM  = 62
+         AND B.FORM  = 61
          AND B.STATUT <> '3'
         -- AND B.FORM_VERS = 2009
                
@@ -84,6 +84,6 @@ SELECT
          ORDER BY 
           B.CONTROL ) L
           
-          
-          WHERE 
-          L.CONTROL_VERS <> 1054
+--          
+--          WHERE 
+--          L.CONTROL_VERS <> 1054
