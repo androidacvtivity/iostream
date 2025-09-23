@@ -1,5 +1,9 @@
 SELECT 
-     d.cuiio,   
+     d.cuiio, 
+  CI.ITEM_CODE,
+  CI.SHOW_ORDER,  
+  CI.NAME,
+
      SUM(CASE WHEN  D.CAPITOL IN (405)   
      
 --     AND REPLACE(' '||CI.ITEM_PATH,';','; ') 
@@ -32,13 +36,16 @@ SELECT
   
   D.FORM IN (44)
   AND D.CAPITOL IN (405,407) 
-  and CI.ITEM_CODE in ('55.1',
-'55.2',
-'55.3',
-'55.9')
+  
+  AND D.CUIIO = 1050885
+--  and CI.ITEM_CODE in ('55.1',
+--'55.2',
+--'55.3',
+--'55.9')
   
   
   GROUP BY 
-  d.cuiio
-----  CII.SHOW_ORDER,  
-----  CII.NAME
+  d.cuiio,
+  CI.ITEM_CODE,
+  CI.SHOW_ORDER,  
+  CI.NAME
