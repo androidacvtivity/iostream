@@ -42,4 +42,7 @@
                         WHERE
                         
                         C.CUIIO IS   NULL  
-                       -- AND C.CUIIO_VERS IS   NULL 
+                       -- AND C.CUIIO_VERS IS   NULL -
+                       
+                       
+--------------------------------------------------------------------------------
