@@ -1,22 +1,17 @@
 SELECT 
      d.cuiio, 
-  CI.ITEM_CODE,
-  CI.SHOW_ORDER,  
-  CI.NAME,
+--  CI.ITEM_CODE,
+--  CI.SHOW_ORDER,  
+--  CI.NAME,
 
      SUM(CASE WHEN  D.CAPITOL IN (405)   
      
---     AND REPLACE(' '||CI.ITEM_PATH,';','; ') 
---     LIKE '% '||'4.2.3'||';%'
+     AND REPLACE(' '||CI.ITEM_PATH,';','; ') 
+     LIKE '% '||'2'||';%'
       
-      AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL1,
+      AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL1
       
-        SUM(CASE WHEN  D.CAPITOL IN (407)   
-     
---     AND REPLACE(' '||CI.ITEM_PATH,';','; ') 
---     LIKE '% '||'4.2.3'||';%'
-      
-      AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL2
+
            
                
      
@@ -35,9 +30,9 @@ SELECT
   (D.FORM_VERS =:pFORM_VERS) AND 
   
   D.FORM IN (44)
-  AND D.CAPITOL IN (405,407) 
+  AND D.CAPITOL IN (405) 
   
-  AND D.CUIIO = 1050885
+ -- AND D.CUIIO = 1050885
 --  and CI.ITEM_CODE in ('55.1',
 --'55.2',
 --'55.3',
@@ -45,7 +40,7 @@ SELECT
   
   
   GROUP BY 
-  d.cuiio,
-  CI.ITEM_CODE,
-  CI.SHOW_ORDER,  
-  CI.NAME
+  d.cuiio
+--  CI.ITEM_CODE,
+--  CI.SHOW_ORDER,  
+--  CI.NAME
