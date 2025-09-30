@@ -1,4 +1,5 @@
 SELECT 
+  L.FORMID,
   L.CUIIO,
   D.DESCRIPTION,
   L.STATUS,
@@ -12,10 +13,10 @@ SELECT
           WHERE
           1=1  
           AND  DATA_REG >= TO_DATE('09/28/2025 00:00:', 'MM/DD/YYYY HH24:MI:SS')
-          AND STATUS  =  '5'  
-          AND   FORM_TYPE IN  ('21_vinz') 
+        --  AND STATUS  =  '5'  
+          AND   FORM_TYPE IN  ('24_agr') 
 
---AND CUIIO IN  (20271764,41261178)
+          AND CUIIO NOT IN  (13706)
 
 
  ORDER BY 
