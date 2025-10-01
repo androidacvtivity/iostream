@@ -18,7 +18,7 @@ SELECT
           1=1  
           AND  DATA_REG >= TO_DATE('09/28/2025 00:00:', 'MM/DD/YYYY HH24:MI:SS')
         --  AND STATUS  =  '5'  
-          AND   FORM_TYPE IN  ('24_agr') 
+          AND   FORM_TYPE IN  ('5-con_22') 
 
           AND CUIIO NOT IN  (13706)
 
