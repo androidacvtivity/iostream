@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW USER_BANCU.F_XML_FORMS_24_agr
+CREATE OR REPLACE FORCE VIEW USER_BANCU.F_XML_FORMS_29_agr
 
 AS
 
@@ -18,7 +18,7 @@ SELECT
           1=1  
           AND  DATA_REG >= TO_DATE('09/28/2025 00:00:', 'MM/DD/YYYY HH24:MI:SS')
         --  AND STATUS  =  '5'  
-          AND   FORM_TYPE IN  ('5-con_22') 
+          AND   FORM_TYPE IN  ('29_agr') 
 
           AND CUIIO NOT IN  (13706)
 
