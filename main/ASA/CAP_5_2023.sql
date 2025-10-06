@@ -1,3 +1,17 @@
+SELECT 
+CUIIO,
+DENUMIRE,
+CUATM,
+RIND,
+CUATM_CAP5,
+CAEM2_CAP5,
+COL1,
+COL2,
+COL3
+
+FROM
+
+(
 
 SELECT  DISTINCT       
                
@@ -6,7 +20,8 @@ SELECT  DISTINCT
              R.DENUMIRE,
              R.CUATM,
              C.FULL_CODE, 
-             D.COL33,
+             D.COL33 CUATM_CAP5,
+             D.COL37 CAEM2_CAP5,
              D.RIND,
              SUM(D.COL8) AS COL1,
              SUM(D.COL9) AS COL2,
@@ -30,7 +45,8 @@ SELECT  DISTINCT
              R.DENUMIRE,
              R.CUATM,
              C.FULL_CODE,
-             D.COL33, 
+             D.COL33,
+             D.COL37, 
              D.RIND
 
 
@@ -44,3 +60,4 @@ C.FULL_CODE,
 D.CUIIO,
 D.RIND
 
+)
