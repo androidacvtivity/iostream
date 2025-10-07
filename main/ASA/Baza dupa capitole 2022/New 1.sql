@@ -1,0 +1,8 @@
+CUIIO  LIKE 13706||'%'
+
+
+ AND 
+
+FORM = 26 
+
+AND PERIOADA = 1066
