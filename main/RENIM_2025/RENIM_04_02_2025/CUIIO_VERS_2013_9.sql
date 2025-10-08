@@ -32,8 +32,7 @@ SELECT FC.CUIIO,
 
 
 AND 
-
-FORM IN (43)
+FORM IN (:pFORM);
 
  ;
  
@@ -52,7 +51,7 @@ FORM IN (43)
 
 AND 
 
-FORM IN (43)
+FORM  IN (:pFORM)
 
  
 ;
@@ -73,7 +72,7 @@ select DISTINCT
 
 AND 
 
-FORM IN (43);
+FORM IN (:pFORM);
 
 -------------------------------------------ss
 select DISTINCT 
@@ -91,6 +90,6 @@ select DISTINCT
 
 AND 
 
-FORM IN (43)
+FORM IN (:pFORM);
 
  --41301386
