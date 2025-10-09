@@ -1,0 +1,15 @@
+SELECT 
+      
+      D.CUIIO,
+      D.RIND,
+      D.CAPITOL_VERS,
+      D.RIND_VERS
+    
+
+from CIS2.DATA_ALL_FR D
+    
+WHERE
+FORM = 63
+AND PERIOADA = 2013
+
+AND D.CAPITOL_VERS = 2009
