@@ -1,19 +1,10 @@
-
---Modifica daca
---CAEM2_CAP4,
---COL1,
---COL2,
---COL3
---sunt zero sa fie null 
-
- 
 SELECT 
 CUIIO,
 DENUMIRE,
 CUATM,
 RIND,
-
-CAEM2_CAP4,
+CUATM_CAP5,
+CAEM2_CAP5,
 COL1,
 COL2,
 COL3
@@ -29,12 +20,12 @@ SELECT  DISTINCT
              R.DENUMIRE,
              R.CUATM,
              C.FULL_CODE, 
-          
-             D.COL31 CAEM2_CAP4,
+             D.COL33 CUATM_CAP5,
+             D.COL37 CAEM2_CAP5,
              D.RIND,
-             SUM(D.COL3) AS COL1,
-             SUM(D.COL4) AS COL2,
-             SUM(D.COL5) AS COL3
+             SUM(D.COL8) AS COL1,
+             SUM(D.COL9) AS COL2,
+             SUM(D.COL10) AS COL3
 
              
            
@@ -45,17 +36,17 @@ SELECT  DISTINCT
                     INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
                     WHERE 
                     D.FORM IN (64)
-                    AND D.CAPITOL IN (1127)
+                    AND D.CAPITOL IN (1128)
                     AND D.PERIOADA IN (2013)
-                    AND D.CUIIO = 34275
+--                    AND D.CUIIO = 34275
 
                     GROUP BY 
                                   D.CUIIO,  
              R.DENUMIRE,
              R.CUATM,
              C.FULL_CODE,
-             D.COL31,
-         
+             D.COL33,
+             D.COL37, 
              D.RIND
 
 
