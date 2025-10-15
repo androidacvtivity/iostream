@@ -1,0 +1,74 @@
+WITH
+EREP AS (
+SELECT 
+L.CUIIO, 
+L.DATA_REG
+FROM  
+(
+SELECT DISTINCT d.CUIIO, TRUNC(MAX(d.DATA_REG)) AS DATA_REG
+  FROM USER_EREPORTING.DATA_ALL_PRIMIT d
+  JOIN CIS2.RENIM r ON r.CUIIO = d.CUIIO AND r.CUIIO_VERS = d.CUIIO_VERS
+  WHERE d.PERIOADA = :pPERIOADA
+    AND d.FORM IN (:pFORM)
+    AND d.ID_SCHEMA = '2'
+   -- AND r.CUATM LIKE '011%'
+  GROUP BY d.CUIIO ) L LEFT JOIN (
+  SELECT DISTINCT D.CUIIO,
+                          D.CUIIO_VERS,
+                        
+                          D.FORM,
+                          MAX(D.DATA_REG) DATA_REG,
+                          'CIS2' AS COL1
+                          
+            FROM CIS2.DATA_ALL D
+            
+                 
+           WHERE D.PERIOADA = :pPERIOADA AND D.FORM IN (:pFORM)
+           
+            GROUP BY 
+           
+           D.CUIIO,
+                         D.CUIIO_VERS,
+                       
+                          D.FORM
+  ) R ON R.CUIIO = L.CUIIO 
+  
+  
+  WHERE 
+  R.CUIIO IS NOT NULL 
+),
+CIS2_ONLY AS (
+  SELECT d.CUIIO, TRUNC(MAX(d.DATA_REG)) AS DATA_REG
+  FROM CIS2.VW_DATA_ALL d
+  WHERE d.PERIOADA = :pPERIOADA
+    AND d.FORM IN (:pFORM)
+  --  AND d.CUATM LIKE '011%'
+    AND NOT EXISTS (
+      SELECT 1
+      FROM USER_EREPORTING.VW_DATA_ALL_PRIMIT e
+      JOIN CIS2.RENIM r ON r.CUIIO = e.CUIIO AND r.CUIIO_VERS = e.CUIIO_VERS
+      WHERE e.PERIOADA = :pPERIOADA
+        AND e.FORM IN (:pFORM)
+        AND e.ID_SCHEMA = '2'
+      --  AND r.CUATM LIKE '011%'
+        AND e.CUIIO = d.CUIIO
+    )
+  GROUP BY d.CUIIO
+),
+UNIONED AS (
+  SELECT DATA_REG, 'EREPORTING' AS SRC, CUIIO FROM EREP
+  UNION ALL
+  SELECT DATA_REG, 'CIS2'       AS SRC, CUIIO FROM CIS2_ONLY
+)
+SELECT
+  u.DATA_REG,
+  NVL(u.EREPORTING, 0) AS EREPORTING,   -- fostul COL1
+  NVL(u.CIS2, 0)       AS CIS2,         -- fostul COL2
+  NVL(u.EREPORTING, 0) + NVL(u.CIS2, 0) AS TOTAL
+FROM (
+  SELECT DATA_REG, SRC, CUIIO FROM UNIONED
+) s
+PIVOT (
+  COUNT(CUIIO) FOR SRC IN ('EREPORTING' AS EREPORTING, 'CIS2' AS CIS2)
+) u
+ORDER BY u.DATA_REG DESC;
