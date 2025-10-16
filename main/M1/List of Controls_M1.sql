@@ -1,6 +1,7 @@
 ﻿SELECT 
       L.CONTROL,
       L.FORMULA,
+      L.SQL_TEXT,
       L.PRIORITATEA,
       L.STATUT
       
@@ -12,22 +13,23 @@
 SELECT 
       B.CONTROL,
       B.FORMULA,
+      B.SQL_TEXT,
       B.PRIORITATEA,
       B.STATUT
       
       
         
-        FROM CIS.MD_CONTROL B  INNER JOIN (
+        FROM CIS2.MD_CONTROL B  INNER JOIN (
         SELECT 
         A.CONTROL, 
         MAX(A.CONTROL_VERS) CONTROL_VERS
         
-        FROM CIS.MD_CONTROL A
+        FROM CIS2.MD_CONTROL A
         
         
          WHERE
          1=1
-         AND A.FORM  = 5
+         AND A.FORM  = 63
                
          GROUP BY 
           A.CONTROL
@@ -40,9 +42,9 @@ SELECT
         
          WHERE
          1=1
-         AND B.FORM  = 5
+         AND B.FORM  = 63
          AND B.STATUT <> '3'
-        -- AND B.FORM_VERS = 2009
+         --AND B.FORM_VERS = 2009
                
          
          

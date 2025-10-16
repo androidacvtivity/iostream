@@ -54,7 +54,7 @@ SELECT
              WHERE 
              FC.FORM IN (:pFORM) 
              AND FC.STATUT <> '3'
-             --AND FC.FORM_VERS = 2009             
+           --  AND FC.FORM_VERS = 2009             
              
              
              ) FC
