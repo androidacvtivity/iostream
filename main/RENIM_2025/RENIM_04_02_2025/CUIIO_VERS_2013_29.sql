@@ -1,0 +1,11 @@
+ SELECT 
+ 
+        TRIM(L.CUIIO) CUIIO ,
+        L.CUIIO_VERS,
+       -- TRIM(L.DENUMIRE)  DENUMIRE,
+        TRIM(L.CUATM) CUATM
+--        TRIM(L.CFP) CFP,
+--        TRIM(L.CFOJ) CFOJ,
+--        TRIM(L.CAEM2)  CAEM2,
+--        TRIM(L.IDNO)   IDNO
+        FROM   USER_BANCU.RENIM_21_VANZARI L
