@@ -1,4 +1,3 @@
-
  SELECT
     DISTINCT 
     D.CUIIO,

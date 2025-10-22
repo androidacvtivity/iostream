@@ -1,4 +1,5 @@
 -- Oracle: agregare pe ZI + ORA (ORA = HH24)
+--
 WITH
 -- 1) Ultima înregistrare per CUIIO în EREPORTING
 EREP_RAW AS (
