@@ -1,42 +1,44 @@
-﻿--INSERT INTO CIS2.TABLE_OUT 
---(
---  PERIOADA,
---  FORM,
---  FORM_VERS,
---  ID_MDTABLE,
---  COD_CUATM,
---  NR_SECTIE,
---  NUME_SECTIE,
---  NR_SECTIE1,
---  NUME_SECTIE1,
---  NR_SECTIE2,
---  NUME_SECTIE2,
---  NR_ROW,
---  ORDINE,
---  DECIMAL_POS,
---  NUME_ROW,  
---  COL1, COL2, COL3,COL4
---)
-
-
 SELECT 
 TR.ORDINE  AS NR_ROW,
 TR.ORDINE  AS ORDINE,
-'0000' AS DECIMAL_POS, 
 TR.RIND_DENUMIRE AS NUME_ROW,
-  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1) = 1 AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') ) THEN D.CUIIO END) + 
-  
-  (  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1') AND NVAL(D.COL1) = 1  AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') ) THEN D.CUIIO END) +
-  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.2') AND NVAL(D.COL1) = 1  AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') ) THEN D.CUIIO END))
-  
-  AS COL1,
-  
-  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1') AND NVAL(D.COL1) = 1 AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') )  THEN D.CUIIO END) AS COL2,
-  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.2') AND NVAL(D.COL1) = 1 AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') )  THEN D.CUIIO END) AS COL3,
-  -- Modificarea trebuie de facut nu mai aici in cou
-  --SQL Oracle - cum sa adaug conditia in count cand rind = '1.1.1' si rind = '1.1.2' 
-  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2')  AND NVAL(D.COL1) = 1 AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') )  THEN D.CUIIO END) 
-   AS COL4
+COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1') AND NVAL(D.COL1) = 1 AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') )  THEN D.CUIIO END) AS COL1,
+COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.2') AND NVAL(D.COL1) = 1 AND ( (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%') OR (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%') )  THEN D.CUIIO END) AS COL2,
+COUNT(
+  DISTINCT CASE
+    WHEN
+      /* are 1.1.1 */
+      EXISTS (
+        SELECT 1
+        FROM CIS2.VW_DATA_ALL dx
+        WHERE dx.PERIOADA = D.PERIOADA
+          AND dx.FORM     = D.FORM
+          AND dx.CUIIO    = D.CUIIO
+          AND dx.CAEM2    = D.CAEM2
+          AND dx.RIND     = '1.1.1'
+          AND NVAL(dx.COL1) = 1
+      )
+      AND
+      /* are 1.1.2 */
+      EXISTS (
+        SELECT 1
+        FROM CIS2.VW_DATA_ALL dy
+        WHERE dy.PERIOADA = D.PERIOADA
+          AND dy.FORM     = D.FORM
+          AND dy.CUIIO    = D.CUIIO
+          AND dy.CAEM2    = D.CAEM2
+          AND dy.RIND     = '1.1.2'
+          AND NVAL(dy.COL1) = 1
+      )
+      /* ?i corespunde TR.RIND */
+      AND (
+        (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,1,1) ||'%')
+        OR
+        (TR.RIND LIKE '%'|| SUBSTR(D.CAEM2,2,2) ||'%')
+      )
+    THEN D.CUIIO
+  END
+) AS COL3
    
     
 FROM 
