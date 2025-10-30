@@ -1,0 +1,116 @@
+SELECT 
+  NR_TABLE,
+  TABLE_DENUMIRE,
+  RIND_DENUMIRE,
+  ORDINE,
+  RIND,
+  COL1, COL2, COL3, COL4, COL5, COL6, COL7, COL8
+FROM
+(
+  SELECT
+    A.NR_TABLE,
+    A.TABLE_DENUMIRE,
+    A.RIND_DENUMIRE,
+    A.ORDINE,
+    A.RIND,
+    /* COL1 = TOTAL; COL2..COL8 = 1.5.1..1.5.7 */
+    ROUND((A.COL1 + A.COL2 + A.COL3 + A.COL4 + A.COL5 + A.COL6 + A.COL7),0) AS COL1,
+    ROUND(A.COL1,0) AS COL2,
+    ROUND(A.COL2,0) AS COL3,
+    ROUND(A.COL3,0) AS COL4,
+    ROUND(A.COL4,0) AS COL5,
+    ROUND(A.COL5,0) AS COL6,
+    ROUND(A.COL6,0) AS COL7,
+    ROUND(A.COL7,0) AS COL8
+  FROM
+  (
+    SELECT
+      TR.NR_TABLE,
+      TR.TABLE_DENUMIRE,
+      TR.RIND_DENUMIRE,
+      TR.ORDINE,
+      TR.RIND,
+      /* 1.5.1..1.5.7 -> COL1..COL7 (intermediate) */
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.1') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL1,
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.2') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL2,
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.3') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL3,
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.4') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL4,
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.5') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL5,
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.6') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL6,
+      COUNT(DISTINCT CASE WHEN A.RIND IN ('1.5.7') AND NVAL(A.COL1) = 1
+           AND ((ROUND(BS.PERS_IT) >= TR.PERS_INIT AND ROUND(BS.PERS_IT) <= TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+           AND ((TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,1,1) ||'%') OR (TR.RIND_C LIKE '%'|| SUBSTR(A.CAEM2,2,2) ||'%'))
+           THEN A.CUIIO END) AS COL7
+    FROM
+    (
+      SELECT
+        D.ANUL,
+        D.CUIIO,
+        D.CUATM,
+        D.CAEM2,
+        D.CAPITOL,
+        D.RIND,
+        D.COL1
+      FROM 
+        CIS2.VW_DATA_ALL D
+      WHERE
+        D.PERIOADA IN (:pPERIOADA) AND
+        D.FORM IN (:pFORM) AND 
+        D.CAPITOL = 1040 AND CAPITOL_VERS = 2013 AND 
+        D.RIND IN ('1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7') AND
+        D.CAEM2 NOT LIKE 'A%'
+    ) A
+    LEFT JOIN CIS2.X_BAZA_SONDAJ BS ON (A.CUIIO=BS.CUIIO AND BS.ANUL=2025)
+    INNER JOIN (
+      SELECT CODUL, FULL_CODE 
+      FROM CIS2.VW_CL_CAEM2
+      WHERE SUBSTR(CODUL,1,1) IN ('B','C','D','E','H','J','K') 
+         OR SUBSTR(CODUL,1,3) IN ('G46','M71','M72','M73')
+    ) C ON C.CODUL = A.CAEM2
+    CROSS JOIN 
+    (
+      SELECT 2 AS NR_TABLE, 'Clasa de marime' AS TABLE_DENUMIRE, 0 AS PERS_INIT, 999999 AS PERS_FINAL, NULL AS RIND, 'Total salariati' AS RIND_DENUMIRE, '1' AS ORDINE, 'B+C+D+E+H+J+K+G46+M71+M72+M73' AS RIND_C FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 0, 9,   NULL, '0-9 salariati',        '2',  'B+C+D+E+H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 10, 49, NULL, '10-49 salariati',       '3',  'B+C+D+E+H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 50, 249,NULL, '50-249 salariati',      '4',  'B+C+D+E+H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 250, 999999, NULL, '250 si peste salariati','5','B+C+D+E+H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 0, 999999, NULL, 'Industrie - total','6',  'B+C+D+E' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 0, 9,   NULL, '0-9 salariati',       '7',  'B+C+D+E' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 10, 49, NULL, '10-49 salariati',     '8',  'B+C+D+E' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 50, 249,NULL, '50-249 salariati',    '9',  'B+C+D+E' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 250, 999999, NULL, '250 si peste salariati', '10','B+C+D+E' FROM DUAL UNION 
+      SELECT 2, 'Clasa de marime', 0, 999999, NULL, 'Servicii - total', '11','H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 0, 9,   NULL, '0-9 salariati',       '12','H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 10, 49, NULL, '10-49 salariati',     '13','H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 50, 249,NULL, '50-249 salariati',    '14','H+J+K+G46+M71+M72+M73' FROM DUAL UNION
+      SELECT 2, 'Clasa de marime', 250, 999999, NULL, '250 si peste salariati','15','H+J+K+G46+M71+M72+M73' FROM DUAL
+    ) TR
+    GROUP BY
+      TR.NR_TABLE,
+      TR.TABLE_DENUMIRE,
+      TR.RIND_DENUMIRE,
+      TR.ORDINE,
+      TR.RIND
+  ) A
+  ORDER BY
+    TO_NUMBER(A.NR_TABLE),
+    TO_NUMBER(A.ORDINE)
+)
