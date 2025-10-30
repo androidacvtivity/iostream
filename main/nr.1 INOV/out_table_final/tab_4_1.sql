@@ -1,0 +1,21 @@
+SELECT
+  D.ANUL,
+  D.CUIIO,
+  D.CUATM,
+  D.CAEM2,
+  D.CAPITOL,
+  D.RIND,
+  D.COL1 
+
+
+FROM 
+  CIS2.VW_DATA_ALL D
+  
+  
+WHERE
+  D.PERIOADA IN (:pPERIOADA) AND
+  D.FORM IN (:pFORM) AND 
+  D.capitol=1040 AND  capitol_vers=2013 AND 
+  D.RIND IN ('1.4.1','1.4.2','1.4.3','1.4.4')
+  AND D.CAEM2 NOT LIKE 'A%'
+--  AND D.CUIIO = 458963
