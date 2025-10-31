@@ -1,0 +1,38 @@
+
+SELECT 
+CUIIO,
+has_111,
+has_112
+FROM
+
+(
+SELECT
+    CUIIO,
+    CUIIO_VERS,
+
+    MAX(CASE WHEN RIND = '1.2.1' AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_111,
+    MAX(CASE WHEN RIND = '1.2.2' AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_112,
+    SUM(COL1) AS COL1,
+    SUM(COL2) AS COL2
+
+  FROM CIS2.VW_DATA_ALL
+  WHERE PERIOADA = :pPERIOADA
+    AND FORM     = :pFORM
+    AND RIND IN ('1.2.1','1.2.2')
+    AND CAEM2 NOT LIKE 'A%'
+ --   AND CUIIO = 458963
+  GROUP BY 
+    CUIIO,
+    CUIIO_VERS
+    
+    )
+    
+    GROUP BY 
+    CUIIO,
+has_111,
+has_112
+    
+    HAVING 
+   has_111 = 1 OR  has_112 = 1 
+    
+ 
