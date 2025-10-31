@@ -6,8 +6,11 @@ SELECT
                 WHERE
                 
 
-            FORM = 57 
-AND CUIIO =  65465 
-AND PERIOADA = 2013
-capitol=1092  
-AND D.CUIIO = 
+            D.FORM = 57 
+-- AND D.CUIIO =  65465 
+AND D.PERIOADA = 2013
+AND D.capitol=1092  
+
+GROUP BY 
+                D.CUIIO,
+                D.RIND

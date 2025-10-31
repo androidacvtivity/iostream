@@ -3,11 +3,7 @@ SELECT
 CUIIO,
 has_111,
 has_112
---COUNT ( DISTINCT CASE  WHEN (has_111 = 1 AND has_112 = 0) THEN CUIIO END ) CNT1,
---COUNT ( DISTINCT CASE  WHEN (has_111 = 0 AND has_112 = 1) THEN CUIIO END ) CNT2,
---COUNT ( DISTINCT CASE  WHEN (has_111 = 1 AND has_112 = 1) THEN CUIIO END ) CNT3,
---SUM(COL1) AS COL1,
---SUM(COL2) AS COL2
+
 FROM
 
 (
@@ -38,6 +34,6 @@ has_111,
 has_112
     
     HAVING 
-   has_111 = 1 AND has_112 = 1 
+   has_111 = 1 OR  has_112 = 1 
     
  
