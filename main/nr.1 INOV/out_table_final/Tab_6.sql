@@ -4,7 +4,7 @@
 --COL3 rind 1.6.2 COL1
 --COL4 rind 1.6.3 COL1
 --COL5 rind 1.6.4 COL1
-
+--In the code, it only changes the rows and columns, but does not modify the sql structure - it leaves everything intact -
 INSERT INTO CIS2.TABLE_OUT 
 (
   PERIOADA,

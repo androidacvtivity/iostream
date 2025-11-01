@@ -1,8 +1,4 @@
---Change only 
--- SUM                 COL1  
---rind 1.8.1 COL1      COL2
---rind 1.8.2 COL1      COL3
---rind 1.8.3 COL1      COL4  (note: structure outputs 3 cols; mapping below remains COL4->COL1, COL5->COL2, COL6->COL3)
+
 
 INSERT INTO CIS2.TABLE_OUT 
 (
