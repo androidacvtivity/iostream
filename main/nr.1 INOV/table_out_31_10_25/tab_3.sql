@@ -10,6 +10,7 @@ SELECT
 -- AND D.CUIIO =  65465 
 AND D.PERIOADA = 2013
 AND D.capitol=1092  
+AND D.RIND IN ('010')
 
 GROUP BY 
                 D.CUIIO,
