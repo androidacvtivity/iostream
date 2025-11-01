@@ -1,7 +1,22 @@
--- COL1 - rind 1.7.5 COL1 + rind 1.7.6 COL1 + rind 1.7.7 COL1
--- COL2 - rind 1.7.5 COL1
--- COL3 - rind 1.7.6 COL1
--- COL4 - rind 1.7.7 COL1
+INSERT INTO CIS2.TABLE_OUT 
+(
+  PERIOADA,
+  FORM,
+  FORM_VERS,
+  ID_MDTABLE,
+  COD_CUATM,
+  NR_SECTIE,
+  NUME_SECTIE,
+  NR_SECTIE1,
+  NUME_SECTIE1,
+  NR_SECTIE2,
+  NUME_SECTIE2,
+  NR_ROW,
+  ORDINE,
+  DECIMAL_POS,
+  NUME_ROW,  
+  COL1, COL2, COL3
+)
 
 SELECT 
   :pPERIOADA   AS PERIOADA,
@@ -21,10 +36,10 @@ SELECT
   RIND_DENUMIRE AS NUME_ROW,
 
   /* Final mapping unchanged */
-  COL3 AS COL1,   -- total (1.7.5+1.7.6+1.7.7)
-  COL4 AS COL2,   -- 1.7.5
-  COL5 AS COL3,   -- 1.7.6
-  COL6 AS COL4    -- 1.7.7
+  COL4 AS COL1,   -- total (1.7.5+1.7.6+1.7.7)
+  COL5 AS COL2,   -- 1.7.5
+  COL6 AS COL3
+  
 
 FROM
 (

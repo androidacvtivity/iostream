@@ -1,6 +1,4 @@
--- Modifica in cod SQL RIND IN ('1.2.1') - >  RIND IN ('1.2.1') 
--- and RIND IN ('1.2.2')  in  RIND IN ('1.2.2') 
---And give me the modified code back.
+
 
 INSERT INTO CIS2.TABLE_OUT 
 (
