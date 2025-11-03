@@ -32,7 +32,7 @@ SELECT
   '0' AS NUME_SECTIE2, 
   COL1||'~'||ROWNUM  NR_ROW,
   ROWNUM AS ORDINE,
-  '000000' AS DECIMAL_POS, 
+  '000' AS DECIMAL_POS, 
   RIND_DENUMIRE AS NUME_ROW,
 
   /* Final mapping unchanged (3 output columns) */
