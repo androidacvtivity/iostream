@@ -152,7 +152,7 @@ FROM
   GROUP BY
     TR.NR_TABLE, TR.TABLE_DENUMIRE, TR.RIND_DENUMIRE, TR.ORDINE, TR.RIND
 
-  UNION ALL
+  UNION 
 
   /* =====================
      BLOC 2: CAEM2 (fara BS) — logica neschimbata, doar înlocuiri/adaugeri
