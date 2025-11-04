@@ -1,5 +1,5 @@
 
-CREATE OR REPLACE FORCE VIEW VW_1_INOV_24
+CREATE OR REPLACE FORCE VIEW VW_1_INOV_24_9
 AS 
 SELECT
      D.CUIIO,
@@ -12,9 +12,9 @@ SELECT
         D.PERIOADA IN (2013) AND
         D.FORM IN (48) AND 
         D.CAPITOL = 1040 AND CAPITOL_VERS = 2013 AND 
-        (D.RIND LIKE '1.10%'
-        OR
-        D.RIND LIKE '1.9%') 
+      --  D.RIND LIKE '1.10%'
+--        OR
+         D.RIND LIKE '1.9%' 
         
         AND
         D.CAEM2 NOT LIKE 'A%'
