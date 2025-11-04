@@ -36,7 +36,7 @@ SELECT
              
            
 
- COUNT(DISTINCT CASE WHEN D.RIND LIKE  '1.11%' AND C.FULL_CODE LIKE '%'||CC.CS_CUATM||'%' AND D.COL1 >=1
+ COUNT(DISTINCT CASE WHEN D.RIND IN ('1.11.1','1.11.2','1.11.3') AND C.FULL_CODE LIKE '%'||CC.CS_CUATM||'%' AND D.COL1 >=1
              AND (CC.RIND LIKE '%'||SUBSTR(D.CAEM2,1,1)||'%' OR CC.RIND LIKE '%'||SUBSTR(D.CAEM2,2,2)||'%')
              THEN D.CUIIO END) AS COL4
 
@@ -80,3 +80,6 @@ SELECT
       ORDINE,
       NUME_ROW,
       CS_CUATM
+      
+      ORDER BY
+      NR_ROW
