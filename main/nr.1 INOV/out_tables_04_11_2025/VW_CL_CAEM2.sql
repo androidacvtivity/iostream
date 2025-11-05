@@ -1,0 +1,11 @@
+SELECT
+CODUL,
+full_code 
+FROM CIS2.VW_CL_CAEM2
+WHERE 
+SUBSTR(CODUL,1,1) IN ('B','C','D','E','H','J','K') OR 
+SUBSTR(CODUL,1,3) IN ('G46','M71','M72','M73') 
+
+
+ORDER BY 
+full_code
