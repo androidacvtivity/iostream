@@ -1,0 +1,19 @@
+SELECT
+
+    COUNT (DISTINCT CASE WHEN 
+    (D.RIND IN ('1.1.1','1.1.2')  AND  NVAL(D.COL1) >=1  AND NVAL(D.COL2) = 0)  AND (D.RIND NOT IN ('1.1.1','1.1.2')  AND  NVAL(D.COL1) = 0 )    
+ THEN  D.CUIIO END ) AS COL1,
+    COUNT (DISTINCT CASE WHEN D.RIND IN ('1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')  AND  ((NVAL(D.COL1) >=1  AND NVAL(D.COL2) = 0))  THEN  D.CUIIO END ) AS COL2,
+    COUNT (DISTINCT D.CUIIO ) AS COL3
+ 
+
+  FROM CIS2.VW_DATA_ALL D
+  
+  
+  WHERE D.PERIOADA = :pPERIOADA
+    AND D.FORM     = :pFORM
+    AND D.CAPITOL = 1040 
+    AND D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')
+    AND 
+    
+    (NVAL(D.COL1) >= 1 ) 
