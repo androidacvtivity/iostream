@@ -1,0 +1,186 @@
+--INSERT INTO CIS2.TABLE_OUT 
+--(
+--  PERIOADA,
+--  FORM,
+--  FORM_VERS,
+--  ID_MDTABLE,
+--  COD_CUATM,
+--  NR_SECTIE,
+--  NUME_SECTIE,
+--  NR_SECTIE1,
+--  NUME_SECTIE1,
+--  NR_SECTIE2,
+--  NUME_SECTIE2,
+--  NR_ROW,
+--  ORDINE,
+--  DECIMAL_POS,
+--  NUME_ROW,  
+--  COL1
+--)
+----
+
+
+
+----------------------------------------------------------------------------------------------------
+
+
+
+SELECT 
+:pPERIOADA AS PERIOADA,
+:pFORM AS FORM,
+:pFORM_VERS AS FORM_VERS,
+:pID_MDTABLE AS ID_MDTABLE,
+:pCOD_CUATM AS COD_CUATM,    
+NR_TABLE AS NR_SECTIE,
+TABLE_DENUMIRE AS NUME_SECTIE,
+'0' AS NR_SECTIE1,
+'0' AS NUME_SECTIE1,
+'0' AS NR_SECTIE2,
+'0' AS NUME_SECTIE2, 
+COL1  NR_ROW,
+ROWNUM AS ORDINE,
+'000' AS DECIMAL_POS, 
+RIND_DENUMIRE AS NUME_ROW,
+COL2 AS COL1,
+COL3 AS COL2,
+COL4 AS COL3,
+COL5 AS COL4
+
+
+FROM
+(
+SELECT
+  A.NR_TABLE,
+  A.TABLE_DENUMIRE,
+  A.RIND_DENUMIRE,
+  A.ORDINE,
+ 
+  ROUND(A.COL1,0) AS COL1,
+  ROUND(A.COL2,0) AS COL2,
+  ROUND(A.COL3,0) AS COL3,
+  ROUND(A.COL4,0) AS COL4,
+  ROUND(A.COL5,0) AS COL5
+ 
+  
+  
+  
+FROM
+(
+
+
+
+SELECT 
+
+NR_TABLE,
+TABLE_DENUMIRE,
+RIND_DENUMIRE,
+ROWNUM ORDINE,
+COL1,
+COL2,
+COL3,
+COL4,
+COL5
+FROM 
+(
+SELECT 
+3 AS NR_TABLE, 
+'CAEM2' AS TABLE_DENUMIRE,
+CC.CODUL RIND_DENUMIRE,
+CC.full_code,  
+  
+  COUNT(DISTINCT CASE WHEN  D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7') AND NVAL(D.COL1) >= 1 
+     THEN D.CUIIO END) AS COL1,
+     
+      COUNT(DISTINCT CASE WHEN  D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7') AND NVAL(D.COL1) >= 1 
+      and (ROUND(BS.PERS_IT) >= 0 AND ROUND(BS.PERS_IT) <= 9) 
+     THEN D.CUIIO END) AS COL2,
+     
+          COUNT(DISTINCT CASE WHEN  D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7') AND NVAL(D.COL1) >= 1 
+      and (ROUND(BS.PERS_IT) >= 10 AND ROUND(BS.PERS_IT) <= 49) 
+     THEN D.CUIIO END) AS COL3,
+     
+       COUNT(DISTINCT CASE WHEN  D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7') AND NVAL(D.COL1) >= 1 
+      and (ROUND(BS.PERS_IT) >= 50 AND ROUND(BS.PERS_IT) <= 249) 
+     THEN D.CUIIO END) AS COL4,
+    
+  COUNT(DISTINCT CASE WHEN  D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7') AND NVAL(D.COL1) >= 1 
+      and (ROUND(BS.PERS_IT) >= 250 AND ROUND(BS.PERS_IT) <= 999999999) 
+     THEN D.CUIIO END) AS COL5
+
+FROM 
+  CIS2.VW_DATA_ALL D 
+  
+  LEFT JOIN CIS2.X_BAZA_SONDAJ BS ON (D.CUIIO=BS.CUIIO AND BS.ANUL=2025)
+            
+  
+            INNER JOIN  CIS2.VW_CL_CAEM2   C ON C.CODUL = D.CAEM2
+            
+            INNER JOIN  CIS2.VW_CL_CAEM2 CC ON C.FULL_CODE LIKE '%'||CC.CODUL||';%'
+            
+--            --(
+--            
+----SELECT
+----CODUL,
+----FULL_CODE 
+----FROM CIS2.VW_CL_CAEM2
+----WHERE 
+----CODUL IN (
+----SELECT 
+----RIND AS CODUL
+----FROM CIS2.MD_RIND_OUT
+----WHERE
+----ID_MDTABLE = 14569
+----)
+--
+--
+--
+--
+--) C ON C.CODUL = D.CAEM2
+
+
+--    inner join (
+--    SELECT
+--CODUL,
+--FULL_CODE 
+--FROM CIS2.VW_CL_CAEM2
+--WHERE 
+--CODUL IN (
+--SELECT 
+--RIND AS CODUL
+--FROM CIS2.MD_RIND_OUT
+--WHERE
+--ID_MDTABLE = 14569
+--)
+--
+--
+--    ) CC ON C.FULL_CODE LIKE '%'||CC.CODUL||';%'
+
+WHERE
+  D.PERIOADA IN (:pPERIOADA) AND
+  D.FORM IN (:pFORM) AND 
+  D.capitol=1040 AND  
+ D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')
+  AND D.CAEM2 NOT LIKE 'A%'
+  
+  AND CC.CODUL IN ('00000')
+ --AND D.CUIIO = 458963
+  GROUP BY
+CC.CODUL,
+CC.full_code  
+ORDER BY
+CC.full_code
+
+  )
+) A
+ORDER BY
+  TO_NUMBER(A.NR_TABLE),
+  TO_NUMBER(A.ORDINE)
+  
+  
+  
+  
+  
+  
+  
+)
+
