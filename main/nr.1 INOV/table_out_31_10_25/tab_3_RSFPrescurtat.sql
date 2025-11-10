@@ -6,10 +6,10 @@ SELECT
                 WHERE
                 
 
-            D.FORM = 57 
--- AND D.CUIIO =  65465 
+            D.FORM = 63 
+ AND D.CUIIO =  5523 
 AND D.PERIOADA = 2013
-AND D.capitol=1092  
+AND D.capitol= 1121  
 AND D.RIND IN ('010')
 
 GROUP BY 
