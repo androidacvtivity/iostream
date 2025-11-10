@@ -1,5 +1,10 @@
 
------------------------
+SELECT 
+CUIIO,
+COL2
+FROM 
+
+(
 SELECT 
                 D.CUIIO,
                 SUM(D.COL2) AS COL2 
@@ -38,9 +43,6 @@ AND D.ID_MD IN (61891) -- 61891
 
 GROUP BY 
                 D.CUIIO
-         
+)         
                 
-                
-                ORDER BY 
-                CUIIO 
                 
