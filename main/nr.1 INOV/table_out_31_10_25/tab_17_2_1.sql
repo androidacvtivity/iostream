@@ -106,7 +106,10 @@ FROM
             
             INNER JOIN  CIS2.VW_CL_CUATM  CU ON CU.CODUL = D.CUATM
             INNER JOIN  CIS2.MD_RIND_OUT  C ON C.RINDOUT = D.CAEM2 AND C.ID_MDTABLE = 14569 
-            INNER JOIN  CIS2.MD_RIND_OUT  CC   ON C.RIND LIKE '%'||CC.RINDOUT||';%' AND CC.ID_MDTABLE = 14569  
+            INNER JOIN  CIS2.MD_RIND_OUT  CC   
+            
+            
+  ON C.RIND LIKE '%'||CC.RINDOUT||';%' AND CC.ID_MDTABLE = 14569  
             INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
 
 
@@ -131,3 +134,22 @@ CC.RIND
 
   )
   )
+  
+  
+  
+  WHERE
+  
+  
+  COL1 <> 0
+  OR  
+  COL2 <> 0
+  OR 
+  COL3 <> 0
+  OR  
+  COL4 <> 0
+  OR 
+  COL5 <> 0
+  OR 
+  COL6 <> 0
+  
+  
