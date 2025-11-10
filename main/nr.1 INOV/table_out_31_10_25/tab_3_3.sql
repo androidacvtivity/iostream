@@ -2,18 +2,23 @@
       SELECT
     
         D.CUIIO,
+        DD.COL2 RSF,
+        SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1
+             
+             THEN NVAL(D.COL1)  END)  AS COL1_INOV,
         ROUND(DD.COL2 * SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1
-             
-             THEN NVAL(D.COL1)  END) / 100,2)  AS COL1,
-             
-       
-        ROUND(DD.COL2 * SUM(CASE WHEN D.RIND = '1.3.2' AND NVAL(D.COL1)>=1
-             
-             THEN NVAL(D.COL1)  END) / 100,2)  AS COL2,
-             
-       ROUND(DD.COL2 * SUM(CASE WHEN D.RIND = '1.3.2' AND NVAL(D.COL1)>=1
-             
-             THEN NVAL(D.COL1)  END) / 1002,2)  AS COL3
+        
+
+             THEN NVAL(D.COL1)  END) / 100,2)  AS COL1
+--             
+--       
+--        ROUND(DD.COL2 * SUM(CASE WHEN D.RIND = '1.3.2' AND NVAL(D.COL1)>=1
+--             
+--             THEN NVAL(D.COL1)  END) / 100,2)  AS COL2,
+--             
+--       ROUND(DD.COL2 * SUM(CASE WHEN D.RIND = '1.3.3' AND NVAL(D.COL1)>=1
+--             
+--             THEN NVAL(D.COL1)  END) / 1002,2)  AS COL3
         
 
       FROM 
@@ -35,7 +40,8 @@ SELECT
                 
 
             D.FORM = 57 
--- AND D.CUIIO =  5523 
+ --AND D.CUIIO =  40585950
+ 
 AND D.PERIOADA = 2013
 AND D.FORM_VERS = 2009
 --AND D.capitol=1092  
@@ -78,7 +84,8 @@ GROUP BY
         D.CAPITOL = 1040 AND D.CAPITOL_VERS = 2013 AND 
         D.RIND IN ('1.3.1','1.3.2','1.3.3') AND
         D.CAEM2 NOT LIKE 'A%'
-     
+        AND D.CUIIO = 40585950
+
 
 
 GROUP BY 
