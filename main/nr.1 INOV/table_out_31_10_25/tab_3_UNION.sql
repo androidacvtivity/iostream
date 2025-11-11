@@ -2,12 +2,12 @@
       SELECT
     
         D.CUIIO,
---        DD.COL2 RSF,
+        DD.COL2 RSF,
         SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END)  AS COL1_INOV,
         
         SUM(DD.COL2) AS COL_RSF,
         
-        ROUND(SUM(DD.COL2) / 1000 * SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END) / 100,1) AS COL_FINAL
+        ROUND(DD.COL2 / 1000 * SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END) / 100,1) AS COL_FINAL
     --    ROUND((DD.COL2 / 1000 * SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END))/100,1)  AS COL_FINAL
    
         
@@ -69,7 +69,7 @@ GROUP BY
                 
                 
 
-                  ) DD ON DD.CUIIO = D.CUIIO 
+                  ) DD  ON DD.CUIIO = D.CUIIO 
        
         
       WHERE
@@ -83,7 +83,8 @@ GROUP BY
 
 
 GROUP BY 
-D.CUIIO
+D.CUIIO,
+DD.COL2
 
 ORDER BY
 D.CUIIO
