@@ -2,9 +2,9 @@
       SELECT
     
         D.CUIIO,
-        DD.COL2 RSF,
-        SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END)  AS COL1_INOV,
-        ROUND((DD.COL2 / 1000 * SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END))/100,1)  AS COL_FINAL
+--        DD.COL2 RSF,
+--        SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END)  AS COL1_INOV,
+        ROUND((DD.COL2 / 1000 * SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  END))/100,1)  AS COL1
    
         
         
@@ -17,7 +17,7 @@
                   LEFT JOIN (
                   
 SELECT 
-CUIIO,
+DISTINCT CUIIO,
 COL2
 FROM 
 
