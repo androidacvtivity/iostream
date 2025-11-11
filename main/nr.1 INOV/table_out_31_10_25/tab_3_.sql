@@ -12,132 +12,133 @@ SELECT
   '0' AS NUME_SECTIE2, 
   COL1||'~'||ROWNUM  NR_ROW,
   ROWNUM AS ORDINE,
-  '11111' AS DECIMAL_POS, 
+  '000000' AS DECIMAL_POS, 
   RIND_DENUMIRE AS NUME_ROW,
 
  
   COL2 AS COL1,   
   COL3 AS COL2,   
-  COL4 AS COL3,
-  COL5 AS COL4    
+  COL4 AS COL3    
   
 FROM
 (
       
+      SELECT 
+      NR_TABLE,
+      TABLE_DENUMIRE,
+      RIND_DENUMIRE,
+      ORDINE,
+      RIND,
+      NVAL(COL1) + NVAL(COL2) + NVAL(COL3) COL1,
+      COL1 COL2, 
+      COL2 COL3,
+      COL3 COL4  
+      FROM (
       SELECT
         TR.NR_TABLE,
         TR.TABLE_DENUMIRE,
         TR.RIND_DENUMIRE,
         TR.ORDINE,
         TR.RIND,
-        COL4 AS COL1,
-        NVAL(COL1) + NVAL(COL2) + NVAL(COL3)  AS COL2,
-        COL1 AS COL3,
-        COL2 AS COL4,
-        COL3 AS COL5
-        FROM
-(
-SELECT
-        TR.NR_TABLE,
-        TR.TABLE_DENUMIRE,
-        TR.RIND_DENUMIRE,
-        TR.ORDINE,
-        TR.RIND,
-        SUM(CASE WHEN ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
-             AND (TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,2,2)||'%') THEN D.COL1 ELSE NULL END ) AS COL1,
-      SUM(CASE WHEN ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
-             AND (TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,2,2)||'%') THEN D.COL2 ELSE NULL END ) AS COL2,
-       SUM(CASE WHEN ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
-             AND (TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,2,2)||'%') THEN D.COL3 ELSE NULL END ) AS COL3,
-    COUNT(DISTINCT CASE WHEN ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
-             AND (TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(D.CAEM2,2,2)||'%') THEN D.CUIIO  ELSE NULL END ) AS COL4
-FROM
-(
-SELECT
-        D.CUIIO,
-        D.CAEM2,
-        ROUND(SUM(DD.COL2) / 1000 * SUM(D.COL1) / 100,1) AS COL1,
-        ROUND(SUM(DD.COL2) / 1000 * SUM(D.COL2) / 100,1) AS COL2,
-        ROUND(SUM(DD.COL2) / 1000 * SUM(D.COL3) / 100,1) AS COL3
-        
-        
-        FROM
-        
-(
-SELECT
-        D.CUIIO,
-        D.CAEM2,
-        SUM(CASE WHEN D.RIND = '1.3.1' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  ELSE NULL  END)  AS COL1,
-        SUM(CASE WHEN D.RIND = '1.3.2' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  ELSE NULL  END)  AS COL2,
-        SUM(CASE WHEN D.RIND = '1.3.3' AND NVAL(D.COL1)>=1 THEN NVAL(D.COL1)  ELSE NULL  END)  AS COL3
-     FROM 
-        CIS2.VW_DATA_ALL D
-      WHERE
-        D.PERIOADA IN (:pPERIOADA) AND
-        D.FORM     IN (:pFORM) AND 
-        D.CAPITOL = 1040 AND D.CAPITOL_VERS = 2013 AND 
-        D.RIND IN ('1.3.1','1.3.2','1.3.3') AND
-        D.CAEM2 NOT LIKE 'A%'
-      --  AND D.CUIIO = 40585950
 
-GROUP BY 
-D.CUIIO,
-D.CAEM2
+        ROUND(SUM(DD.COL2) / 1000 * SUM(CASE WHEN A.RIND = '1.3.1' AND NVAL(A.COL1)> 0
+             AND ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+             AND (TR.RIND_C LIKE '%'||SUBSTR(A.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(A.CAEM2,2,2)||'%')
+             THEN NVAL(A.COL1) END) / 100,1) AS COL1,
 
-) D  LEFT JOIN (
+        ROUND(SUM(DD.COL2) / 1000 *SUM(CASE WHEN A.RIND = '1.3.2' AND NVAL(A.COL1)> 0
+             AND ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+             AND (TR.RIND_C LIKE '%'||SUBSTR(A.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(A.CAEM2,2,2)||'%')
+             THEN NVAL(A.COL1) END)/ 100,1) AS COL2,
+
+        ROUND(SUM(DD.COL2) / 1000 *SUM(CASE WHEN A.RIND = '1.3.3' AND NVAL(A.COL1)> 0
+             AND ((ROUND(BS.PERS_IT) BETWEEN TR.PERS_INIT AND TR.PERS_FINAL) OR ROUND(BS.PERS_IT) IS NULL)
+             AND (TR.RIND_C LIKE '%'||SUBSTR(A.CAEM2,1,1)||'%' OR TR.RIND_C LIKE '%'||SUBSTR(A.CAEM2,2,2)||'%')
+             THEN NVAL(A.COL1) END)/ 100,1) AS COL3
+             
+        
+
+      FROM
+      (
+        SELECT
+          D.ANUL,
+          D.CUIIO,
+          D.CUATM,
+          D.CAEM2,
+          D.CAPITOL,
+          D.RIND,
+          D.COL1 
+        FROM CIS2.VW_DATA_ALL D
+        WHERE
+          D.PERIOADA IN (:pPERIOADA) AND
+          D.FORM IN (:pFORM) AND 
+          D.CAPITOL=1040 AND D.CAPITOL_VERS=2013 AND 
+          D.RIND IN ('1.3.1','1.3.2','1.3.3') AND
+          D.CAEM2 NOT LIKE 'A%'
+          
+           AND D.CUIIO = 40585950
+      ) A
+      LEFT JOIN CIS2.X_BAZA_SONDAJ BS ON (A.CUIIO=BS.CUIIO AND BS.ANUL=2025)
+      
+      LEFT JOIN (
+                  
 SELECT 
-DISTINCT CUIIO,
+CUIIO,
 COL2
 FROM 
+
 (
 SELECT 
-   DISTINCT D.CUIIO,
-   SUM(D.COL2) AS COL2 
-   FROM CIS2.DATA_ALL_FR D
-   WHERE
-   D.FORM = 57 
- -- AND D.CUIIO =  40585950
+                D.CUIIO,
+                SUM(D.COL2) AS COL2 
+                FROM CIS2.DATA_ALL_FR D
+                WHERE
+                
+
+            D.FORM = 57 
+ --AND D.CUIIO =  40585950
+ 
 AND D.PERIOADA = 2013
 AND D.FORM_VERS = 2009
+--AND D.capitol=1092  
 AND D.ID_MD IN (62206)   --62206
+
 GROUP BY 
-D.CUIIO
-HAVING 
-SUM(D.COL2) IS NOT NULL 
+                D.CUIIO
+               
+
+
+
 UNION 
+
 SELECT 
-DISTINCT D.CUIIO,
-SUM(D.COL2) AS COL2 
-FROM CIS2.VW_DATA_ALL_FR D
-WHERE
-D.FORM = 63 
+                D.CUIIO,
+          
+                SUM(D.COL2) AS COL2 
+                FROM CIS2.VW_DATA_ALL_FR D
+                WHERE
+                
+
+            D.FORM = 63 
 -- AND D.CUIIO =  5523 
 AND D.PERIOADA = 2013
 --AND D.capitol= 1121  
 AND D.ID_MD IN (61891) -- 61891
-GROUP BY 
-D.CUIIO
-HAVING
-SUM(D.COL2) IS NOT NULL 
-)
-) DD ON DD.CUIIO = D.CUIIO
- 
 
-GROUP BY
- D.CUIIO,
- D.CAEM2
-) D
- 
-     INNER JOIN (
+GROUP BY 
+                D.CUIIO
+)         
+                
+                
+
+                  ) DD ON DD.CUIIO = A.CUIIO 
+      INNER JOIN (
         SELECT CODUL, FULL_CODE 
         FROM CIS2.VW_CL_CAEM2
         WHERE SUBSTR(CODUL,1,1) IN ('B','C','D','E','H','J','K') 
            OR SUBSTR(CODUL,1,3) IN ('G46','M71','M72','M73')
-      ) C ON C.CODUL = D.CAEM2
-        
-       LEFT JOIN CIS2.X_BAZA_SONDAJ BS ON (D.CUIIO=BS.CUIIO AND BS.ANUL=2025)  
-       
-       CROSS JOIN 
+      ) C ON C.CODUL = A.CAEM2
+      CROSS JOIN 
       (
         SELECT 2 AS NR_TABLE, 'Clasa de marime' AS TABLE_DENUMIRE, 0 AS PERS_INIT, 999999 AS PERS_FINAL, NULL AS RIND, 'Total salariati' AS RIND_DENUMIRE, '1' AS ORDINE, 'B+C+D+E+H+J+K+G46+M71+M72+M73' AS RIND_C FROM DUAL UNION
       --  SELECT 2, 'Clasa de marime', 0, 9,   NULL, '0-9 salariati',        '2',  'B+C+D+E+H+J+K+G46+M71+M72+M73' FROM DUAL UNION
@@ -155,17 +156,16 @@ GROUP BY
         SELECT 2, 'Clasa de marime', 50, 249,NULL, '50-249 salariati',    '14','H+J+K+G46+M71+M72+M73' FROM DUAL UNION
         SELECT 2, 'Clasa de marime', 250, 999999, NULL, '250 si peste salariati','15','H+J+K+G46+M71+M72+M73' FROM DUAL
       ) TR
-      
-      
-       GROUP BY
+      GROUP BY
         TR.NR_TABLE, TR.TABLE_DENUMIRE, TR.RIND_DENUMIRE, TR.ORDINE, TR.RIND
         
-        ) TR
+        
+      )
        
       
       ORDER BY
-      TO_NUMBER(NR_TABLE),
-      TO_NUMBER(ORDINE)
+      NR_TABLE,
+      ORDINE
         
       )
  
