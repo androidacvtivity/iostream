@@ -1,16 +1,16 @@
---SELECT
---        TO_NUMBER(TR.NR_TABLE) NR_TABLE,
---        TR.TABLE_DENUMIRE,
---        TR.RIND_DENUMIRE,
---        TO_NUMBER(TR.ORDINE) ORDINE,
---        TR.RIND,
---        COL4 AS COL1,
---        NVAL(COL1) + NVAL(COL2) + NVAL(COL3)  AS COL2,
---        COL1 AS COL3,
---        COL2 AS COL4,
---        COL3 AS COL5
---        FROM
---(
+SELECT
+  3 AS NR_TABLE, 
+  ' Regiuni de dezvoltare' AS TABLE_DENUMIRE,
+  RIND_DENUMIRE,
+  ORDINE,
+  RIND,
+        COL4 AS COL1,
+        NVAL(COL1) + NVAL(COL2) + NVAL(COL3)  AS COL2,
+        COL1 AS COL3,
+        COL2 AS COL4,
+        COL3 AS COL5
+        FROM
+(
 SELECT
     NUME_ROW AS RIND_DENUMIRE,
   NR_ROW AS ORDINE,
@@ -163,5 +163,5 @@ GROUP BY
   CC.ORDINE,
   CC.CS_CUATM
         
---        ) TR
+        ) T
        
