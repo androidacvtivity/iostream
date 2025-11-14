@@ -56,35 +56,40 @@
 --
 --FROM
 --(
---SELECT
---  A.CODUL,
---  A.DENUMIRE,
---  ROUND((A.COL1 + A.COL2 + A.COL3),0) AS COL1,
---  ROUND(A.COL1,0) AS COL2,
---  ROUND(A.COL2,0) AS COL3,
---  ROUND(A.COL3,0) AS COL4,
---  
---  ROUND((A.COL4 + A.COL5 + A.COL6),0) AS COL5,
---  ROUND(A.COL4,0) AS COL6,
---  ROUND(A.COL5,0) AS COL7,
---  ROUND(A.COL6,0) AS COL8,
---  
---  
---  ROUND((A.COL7 + A.COL8 + A.COL9),0) AS COL9,
---  ROUND(A.COL7,0) AS COL10,
---  ROUND(A.COL8,0) AS COL11,
---  ROUND(A.COL9,0) AS COL12,
---  
---  
---  ROUND((A.COL10 + A.COL11 + A.COL12),0) AS COL13,
---  ROUND(A.COL10,0) AS COL14,
---  ROUND(A.COL11,0) AS COL15,
---  ROUND(A.COL12,0) AS COL16
---  
---  
--- 
---FROM
---(
+SELECT
+  A.CODUL,
+  A.DENUMIRE,
+  ROUND((A.COL1 + A.COL2 + A.COL3),0) AS COL1,
+  ROUND(A.COL1,0) AS COL2,
+  ROUND(A.COL2,0) AS COL3,
+  ROUND(A.COL3,0) AS COL4,
+  
+  ROUND((A.COL4 + A.COL5 + A.COL6),0) AS COL5,
+  ROUND(A.COL4,0) AS COL6,
+  ROUND(A.COL5,0) AS COL7,
+  ROUND(A.COL6,0) AS COL8,
+  
+  
+  ROUND((A.COL7 + A.COL8 + A.COL9),0) AS COL9,
+  ROUND(A.COL7,0) AS COL10,
+  ROUND(A.COL8,0) AS COL11,
+  ROUND(A.COL9,0) AS COL12,
+  
+  
+  ROUND((A.COL10 + A.COL11 + A.COL12),0) AS COL13,
+  ROUND(A.COL10,0) AS COL14,
+  ROUND(A.COL11,0) AS COL15,
+  ROUND(A.COL12,0) AS COL16,
+  
+  ROUND((A.COL13 + A.COL14 + A.COL15),0) AS COL17,
+  ROUND(A.COL13,0) AS COL18,
+  ROUND(A.COL14,0) AS COL19,
+  ROUND(A.COL15,0) AS COL20
+  
+  
+ 
+FROM
+(
 SELECT 
  
   CC.CODUL,
@@ -101,10 +106,87 @@ SELECT
   
   AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 > 0)  AND  (DD.has_112 + DD.has_111 > 0)
     THEN D.CUIIO END) 
-   AS COL3
+   AS COL3,
    
+   -----------------------------------------------------------------------------------
+   COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 =0    )  
+    AND CU.FULL_CODE  LIKE '%'||'0100000'||';%' THEN D.CUIIO END) AS COL4,
+    
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (DD.has_112 + DD.has_111 = 0  ) 
+     AND CU.FULL_CODE  LIKE '%'||'0100000'||';%' THEN D.CUIIO END) AS COL5,
+     
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 > 0)  AND  (DD.has_112 + DD.has_111 > 0)
+    AND CU.FULL_CODE  LIKE '%'||'0100000'||';%' THEN D.CUIIO END) 
+   AS COL6,
+   
+   -----------------------------------------------------------------------------------
+      COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 =0    )  
+    AND CU.FULL_CODE  LIKE '%'||'1111111'||';%' THEN D.CUIIO END) AS COL7,
+    
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (DD.has_112 + DD.has_111 = 0  ) 
+     AND CU.FULL_CODE  LIKE '%'||'1111111'||';%' THEN D.CUIIO END) AS COL8,
+     
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 > 0)  AND  (DD.has_112 + DD.has_111 > 0)
+    AND CU.FULL_CODE  LIKE '%'||'1111111'||';%' THEN D.CUIIO END) 
+   AS COL9,
+   
+   -----------------------------------------------------------------------------------
+
+ COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 =0    )  
+    AND CU.FULL_CODE  LIKE '%'||'2222222'||';%' THEN D.CUIIO END) AS COL10,
+    
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (DD.has_112 + DD.has_111 = 0  ) 
+     AND CU.FULL_CODE  LIKE '%'||'2222222'||';%' THEN D.CUIIO END) AS COL11,
+     
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 > 0)  AND  (DD.has_112 + DD.has_111 > 0)
+    AND CU.FULL_CODE  LIKE '%'||'2222222'||';%' THEN D.CUIIO END) 
+   AS COL12,
+   
+      
+   -----------------------------------------------------------------------------------
+   
+   
+   -----------------------------------------------------------------------------------
+
+ COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 =0    )  
+    AND CU.FULL_CODE  LIKE '%'||'3333333'||';%' THEN D.CUIIO END) AS COL13,
+    
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (DD.has_112 + DD.has_111 = 0  ) 
+     AND CU.FULL_CODE  LIKE '%'||'3333333'||';%' THEN D.CUIIO END) AS COL14,
+     
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 > 0)  AND  (DD.has_112 + DD.has_111 > 0)
+    AND CU.FULL_CODE  LIKE '%'||'3333333'||';%' THEN D.CUIIO END) 
+   AS COL15,
+   
+      
+   -----------------------------------------------------------------------------------
    
      
+      -----------------------------------------------------------------------------------
+
+ COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 =0    )  
+    AND CU.FULL_CODE  LIKE '%'||'9600000'||';%' THEN D.CUIIO END) AS COL16,
+    
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (DD.has_112 + DD.has_111 = 0  ) 
+     AND CU.FULL_CODE  LIKE '%'||'9600000'||';%' THEN D.CUIIO END) AS COL17,
+     
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (DD.has_151 + DD.has_152 + DD.has_153 + DD.has_154 + DD.has_155 + DD.has_156 + DD.has_157 > 0)  AND  (DD.has_112 + DD.has_111 > 0)
+    AND CU.FULL_CODE  LIKE '%'||'9600000'||';%' THEN D.CUIIO END) 
+   AS COL18
+   
+      
+   -----------------------------------------------------------------------------------
+   
    
     
 FROM 
@@ -177,7 +259,7 @@ WHERE
 
   ) DD ON DD.CUIIO = D.CUIIO AND DD.CUIIO_VERS = D.CUIIO_VERS  
   ------------------------------------------------------------  
-            
+             INNER JOIN  CIS2.VW_CL_CUATM  CU ON CU.CODUL = D.CUATM
   
             INNER JOIN (
             
@@ -203,7 +285,7 @@ WHERE
  (D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')) 
   AND D.CAEM2 NOT LIKE 'A%'
   AND CC.CODUL LIKE '%00'
-  AND D.CUIIO = 458963
+ -- AND D.CUIIO = 458963
   GROUP BY
   CC.CODUL,
   CC.DENUMIRE,
@@ -213,4 +295,6 @@ WHERE
   CC.FULL_CODE
   
   
--- ) A)
+ ) A
+ 
+ --)
