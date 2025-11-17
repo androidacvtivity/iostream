@@ -1,0 +1,46 @@
+SELECT 
+    D.CUIIO,
+    R.IDNO,
+    R.DENUMIRE,
+    R.CUATM,
+    D.RIND,
+    SUM(D.COL1) AS COL1,
+    SUM(D.COL2) AS COL2,
+    SUM(D.COL3) AS COL3,
+    SUM(D.COL4) AS COL4,
+    SUM(D.COL5) AS COL5,
+    SUM(D.COL6) AS COL6,
+    SUM(D.COL7) AS COL7,
+    SUM(D.COL8) AS COL8
+    
+
+FROM 
+  CIS2.VW_DATA_ALL D  
+  
+            INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
+ 
+WHERE
+  D.FORM = 54 AND 
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%'
+  AND 
+  D.capitol=1075 AND D.capitol_vers=2000
+  AND D.RIND IN ('180','181','182', '183', '184', '185', '190')
+  
+  GROUP BY 
+  
+  
+ D.CUIIO,
+    R.IDNO,
+    R.DENUMIRE,
+    D.RIND,
+    R.CUATM
+    
+    
+    ORDER BY
+    D.CUIIO,
+    D.RIND
+    
+    
