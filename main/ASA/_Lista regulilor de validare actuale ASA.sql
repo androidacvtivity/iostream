@@ -1,6 +1,7 @@
 SELECT 
       L.CONTROL,
       L.FORMULA,
+      L.SQL_TEXT,
       L.PRIORITATEA,
       L.STATUT
       
@@ -12,6 +13,7 @@ SELECT
 SELECT 
       B.CONTROL,
       B.FORMULA,
+      B.SQL_TEXT,
       B.PRIORITATEA,
       B.STATUT
       
