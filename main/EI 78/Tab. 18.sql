@@ -1,0 +1,596 @@
+--INSERT INTO TABLE_OUT
+--(
+--      PERIOADA,
+--      FORM,
+--      FORM_VERS,
+--      ID_MDTABLE,
+--      COD_CUATM,
+--      NR_SECTIE,
+--      NUME_SECTIE,
+--      NR_SECTIE1,
+--      NUME_SECTIE1,
+--      NR_SECTIE2,
+--      NUME_SECTIE2,
+--      NR_ROW,
+--      ORDINE,
+--      DECIMAL_POS,
+--      NUME_ROW,   
+--         COL1,
+--         COL2,
+--         COL3,
+--         COL4,
+--         COL5,
+--         COL6,
+--         COL7
+--)
+
+
+
+SELECT 
+--    :pPERIOADA AS PERIOADA,
+--    :pFORM AS FORM,
+--    :pFORM_VERS AS FORM_VERS,
+--    :pID_MDTABLE AS ID_MDTABLE,
+--    :pCOD_CUATM AS COD_CUATM,
+--    '0' as NR_SECTIE,
+--    '0' as NUME_SECTIE,
+--    '0' as NR_SECTIE1,
+--    '0' as NUME_SECTIE1,
+--    '0' as NR_SECTIE2,
+--    '0' as NUME_SECTIE2,
+     B.CODUL||'~'||ROWNUM AS NR_ROW,
+     ROWNUM  AS ORDINE,
+   '0000000' AS DECIMAL_POS,
+    TRIM(B.DENUMIRE)    NUME_ROW,
+    B.COL1,
+    B.COL2,
+    B.COL3,
+    B.COL4,
+    CASE WHEN B.COL5 IS NULL THEN 0 ELSE B.COL5 END COL5,
+    B.COL6,
+    B.COL7
+    
+
+FROM 
+
+
+(
+
+ SELECT 
+    ORDINE,
+--    CUATM_CODUL,
+--    CUATM_DENUMIRE,
+--    CUATM_FULL_CODE,
+    CODUL,
+    DENUMIRE,
+    COL1,
+         COL2,
+         COL3,
+         COL4,
+         COL5,
+         COL6,
+         COL7
+         
+ 
+    FROM 
+(
+SELECT 
+    '1'||'_'||CDD.CODUL ORDINE,
+--   CCU.CODUL     CUATM_CODUL,
+--   CCU.DENUMIRE  CUATM_DENUMIRE, 
+--   CCU.FULL_CODE CUATM_FULL_CODE,
+   CDD.CODUL,   
+   CDD.DENUMIRE,  
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL7)  ELSE 0 END)  AS COL1,
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END)  AS COL2,
+   
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL3,
+   
+   ROUND ((SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END) / 
+   CIS2.NOZERO(SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END))) * 100,1)  AS COL4, 
+   
+   MIN (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('010') THEN CIS2.NVAL(D.COL1)   END)  AS COL5,
+   MAX (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('020') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL6, 
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('030') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL7  
+     
+   
+
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (D.CUIIO = R.CUIIO AND D.CUIIO_VERS = R.CUIIO_VERS) 
+     INNER JOIN CIS2.MD_RIND MR ON (MR.ID_MD = D.ID_MD)
+     
+     INNER JOIN  (
+            SELECT  
+          
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            --DATA_REG,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CD ON (CD.CODUL = R.NTII) 
+      
+     
+     INNER JOIN (
+     
+     SELECT  
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CDD ON (CD.FULL_CODE LIKE '%'||CDD.CODUL||';%') 
+  ---------------------------------------------------------------------
+  
+    
+  
+  WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (49)  
+  AND D.CAPITOL IN (1049,1051)                
+ 
+  AND CDD.CODUL IN ('0') 
+  
+   AND D.CUIIO  = 2562541
+  GROUP BY 
+  CDD.CODUL,   
+  CDD.DENUMIRE,
+  CDD.ORDINE
+--  CCU.CODUL,--
+--  CCU.DENUMIRE, 
+--  CCU.FULL_CODE
+  ) 
+  
+  
+
+  
+  UNION
+  
+   
+  SELECT 
+    ORDINE,
+--    CUATM_CODUL,
+--    CUATM_DENUMIRE,
+--    CUATM_FULL_CODE,
+    CODUL,
+    DENUMIRE,
+    COL1,
+         COL2,
+         COL3,
+         COL4,
+         COL5,
+         COL6,
+         COL7
+        
+ 
+    FROM 
+(
+SELECT 
+    '3'||'_'||CDD.CODUL ORDINE,
+--   CCU.CODUL     CUATM_CODUL,
+--   CCU.DENUMIRE  CUATM_DENUMIRE, 
+--   CCU.FULL_CODE CUATM_FULL_CODE,
+   CDD.CODUL,   
+   CDD.DENUMIRE,  
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL7)  ELSE 0 END)  AS COL1,
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END)  AS COL2,
+   
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL3,
+   
+   ROUND ((SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END) / 
+   CIS2.NOZERO(SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END))) * 100,1)  AS COL4, 
+   
+   MIN (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('010') THEN CIS2.NVAL(D.COL1)   END)  AS COL5,
+   MAX (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('020') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL6, 
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('030') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL7  
+     
+   
+
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (D.CUIIO = R.CUIIO AND D.CUIIO_VERS = R.CUIIO_VERS) 
+     INNER JOIN CIS2.MD_RIND MR ON (MR.ID_MD = D.ID_MD)
+     
+     INNER JOIN  (
+            SELECT  
+          
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            --DATA_REG,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CD ON (CD.CODUL = R.NTII) 
+      
+     
+     INNER JOIN (
+     
+     SELECT  
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CDD ON (CD.FULL_CODE LIKE '%'||CDD.CODUL||';%') 
+  ---------------------------------------------------------------------
+  
+    
+  
+  WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (49)  
+  AND D.CAPITOL IN (1049,1051)                
+
+ AND D.CUIIO  = 2562541
+  AND CDD.CODUL IN ('2') 
+  GROUP BY 
+  CDD.CODUL,   
+  CDD.DENUMIRE,
+  CDD.ORDINE
+--  CCU.CODUL,--
+--  CCU.DENUMIRE, 
+--  CCU.FULL_CODE
+  ) 
+  
+  
+  UNION 
+  
+  SELECT 
+    ORDINE,
+--    CUATM_CODUL,
+--    CUATM_DENUMIRE,
+--    CUATM_FULL_CODE,
+    CODUL,
+    DENUMIRE,
+    COL1,
+         COL2,
+         COL3,
+         COL4,
+         COL5,
+         COL6,
+         COL7
+        
+FROM
+(
+SELECT 
+    '4'||'_'||TO_CHAR(D.CUIIO) ORDINE,
+  -- CCU.CODUL     CUATM_CODUL,
+--   CCU.DENUMIRE  CUATM_DENUMIRE, 
+--   CCU.FULL_CODE CUATM_FULL_CODE,
+--   CDD.CODUL,   
+--   CDD.DENUMIRE,
+   
+   TO_CHAR(D.CUIIO) CODUL,
+   R.DENUMIRE,  
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL7)  ELSE 0 END)  AS COL1,
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END)  AS COL2,
+   
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL3,
+   
+   ROUND ((SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END) / 
+   CIS2.NOZERO(SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END))) * 100,1)  AS COL4, 
+   
+   MIN (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('010') THEN CIS2.NVAL(D.COL1)   END)  AS COL5,
+   MAX (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('020') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL6, 
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('030') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL7  
+   
+     
+   
+
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (D.CUIIO = R.CUIIO AND D.CUIIO_VERS = R.CUIIO_VERS) 
+     INNER JOIN CIS2.MD_RIND MR ON (MR.ID_MD = D.ID_MD)
+     
+     INNER JOIN  (
+            SELECT  
+          
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            --DATA_REG,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CD ON (CD.CODUL = R.NTII) 
+      
+     
+     INNER JOIN (
+     
+     SELECT  
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CDD ON (CD.FULL_CODE LIKE '%'||CDD.CODUL||';%') 
+  ---------------------------------------------------------------------
+  
+     --INNER JOIN CIS2.VW_CL_CUATM CU ON (CU.CODUL=D.CUATM)  
+    -- INNER JOIN CIS2.VW_CL_CUATM CCU ON (CU.FULL_CODE LIKE '%'||CCU.CODUL||';%')
+  
+  WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (49)  
+  AND D.CAPITOL IN (1049,1051)                
+
+
+  AND CDD.CODUL IN ('2')
+  
+   AND D.CUIIO  = 2562541
+  GROUP BY
+  D.CUIIO,
+  R.DENUMIRE, 
+  CDD.CODUL,   
+  CDD.DENUMIRE,
+  CDD.ORDINE
+--  CCU.CODUL,--
+--  CCU.DENUMIRE, 
+--  CCU.FULL_CODE
+  )
+  
+ 
+  
+  UNION 
+  SELECT 
+    ORDINE,
+--    CUATM_CODUL,
+--    CUATM_DENUMIRE,
+--    CUATM_FULL_CODE,
+    CODUL,
+    DENUMIRE,
+    COL1,
+         COL2,
+         COL3,
+         COL4,
+         COL5,
+         COL6,
+         COL7
+        
+ 
+    FROM 
+(
+SELECT 
+    '5'||'_'||CDD.CODUL ORDINE,
+--   CCU.CODUL     CUATM_CODUL,
+--   CCU.DENUMIRE  CUATM_DENUMIRE, 
+--   CCU.FULL_CODE CUATM_FULL_CODE,
+   CDD.CODUL,   
+   CDD.DENUMIRE,  
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL7)  ELSE 0 END)  AS COL1,
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END)  AS COL2,
+   
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL3,
+   
+   ROUND ((SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END) / 
+   CIS2.NOZERO(SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END))) * 100,1)  AS COL4, 
+   
+   MIN (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('010') THEN CIS2.NVAL(D.COL1)   END)  AS COL5,
+   MAX (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('020') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL6, 
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('030') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL7  
+   
+     
+   
+
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (D.CUIIO = R.CUIIO AND D.CUIIO_VERS = R.CUIIO_VERS) 
+     INNER JOIN CIS2.MD_RIND MR ON (MR.ID_MD = D.ID_MD)
+     
+     INNER JOIN  (
+            SELECT  
+          
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            --DATA_REG,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CD ON (CD.CODUL = R.NTII) 
+      
+     
+     INNER JOIN (
+     
+     SELECT  
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CDD ON (CD.FULL_CODE LIKE '%'||CDD.CODUL||';%') 
+  ---------------------------------------------------------------------
+  
+--     INNER JOIN CIS2.VW_CL_CUATM CU ON (CU.CODUL=D.CUATM)  
+--     INNER JOIN CIS2.VW_CL_CUATM CCU ON (CU.FULL_CODE LIKE '%'||CCU.CODUL||';%')
+  
+  WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (49)  
+  AND D.CAPITOL IN (1049,1051)                
+--  AND CCU.PRGS IN ('2')
+--  AND CCU.CODUL NOT IN ('0000000','1111111','2222222','3333333')
+  AND CDD.CODUL IN ('1') 
+  
+   AND D.CUIIO  = 2562541
+  GROUP BY 
+  CDD.CODUL,   
+  CDD.DENUMIRE,
+  CDD.ORDINE
+--  CCU.CODUL,--
+--  CCU.DENUMIRE, 
+--  CCU.FULL_CODE
+  ) 
+  
+  
+  UNION 
+  
+  SELECT 
+  ORDINE,
+--    CUATM_CODUL,
+--    CUATM_DENUMIRE,
+--    CUATM_FULL_CODE,
+    CODUL,
+    DENUMIRE,
+    COL1,
+         COL2,
+         COL3,
+         COL4,
+         COL5,
+         COL6,
+         COL7
+         
+FROM
+(
+SELECT 
+    '6'||'_'||TO_CHAR(D.CUIIO) ORDINE,
+--   CCU.CODUL     CUATM_CODUL,
+--   CCU.DENUMIRE  CUATM_DENUMIRE, 
+--   CCU.FULL_CODE CUATM_FULL_CODE,
+--   CDD.CODUL,   
+--   CDD.DENUMIRE,
+   
+   TO_CHAR(D.CUIIO) CODUL,
+   R.DENUMIRE,  
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL7)  ELSE 0 END)  AS COL1,
+   SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END)  AS COL2,
+   
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL3,
+   
+   ROUND ((SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('040') THEN CIS2.NVAL(D.COL1)  ELSE 0 END) / 
+   CIS2.NOZERO(SUM (CASE WHEN D.CAPITOL IN (1049) AND D.RIND IN ('050') THEN CIS2.NVAL(D.COL8)  ELSE 0 END))) * 100,1)  AS COL4, 
+   
+   MIN (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('010') THEN CIS2.NVAL(D.COL1)   END)  AS COL5,
+   MAX (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('020') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL6, 
+   SUM (CASE WHEN D.CAPITOL IN (1051) AND D.RIND IN ('030') THEN CIS2.NVAL(D.COL1)  ELSE 0 END)  AS COL7  
+   
+     
+   
+
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (D.CUIIO = R.CUIIO AND D.CUIIO_VERS = R.CUIIO_VERS) 
+     INNER JOIN CIS2.MD_RIND MR ON (MR.ID_MD = D.ID_MD)
+     
+     INNER JOIN  (
+            SELECT  
+          
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            --DATA_REG,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CD ON (CD.CODUL = R.NTII) 
+      
+     
+     INNER JOIN (
+     
+     SELECT  
+            RINDOUT  FULL_CODE_ORDINE,
+            DENUMIRE,
+            STATUT CODUL,
+            ORDINE,
+            RIND  FULL_CODE
+            
+            FROM CIS2.MD_RIND_OUT
+
+            WHERE 
+            ID_MDTABLE = 8701
+     
+     ) CDD ON (CD.FULL_CODE LIKE '%'||CDD.CODUL||';%') 
+  ---------------------------------------------------------------------
+  
+--     INNER JOIN CIS2.VW_CL_CUATM CU ON (CU.CODUL=D.CUATM)  
+--     INNER JOIN CIS2.VW_CL_CUATM CCU ON (CU.FULL_CODE LIKE '%'||CCU.CODUL||';%')
+  
+  WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (49)  
+  AND D.CAPITOL IN (1049,1051)                
+--  AND CCU.PRGS IN ('2')
+--  AND CCU.CODUL NOT IN ('0000000','1111111','2222222','3333333')
+  AND CDD.CODUL IN ('1')
+  
+   AND D.CUIIO  = 2562541
+  GROUP BY
+  D.CUIIO,
+  R.DENUMIRE, 
+  CDD.CODUL,   
+  CDD.DENUMIRE,
+  CDD.ORDINE
+--  CCU.CODUL,--
+--  CCU.DENUMIRE, 
+--  CCU.FULL_CODE
+  )
+  
+  
+)  B 
