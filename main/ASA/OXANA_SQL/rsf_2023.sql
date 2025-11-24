@@ -1,13 +1,13 @@
-CREATE OR REPLACE FORCE VIEW  VVW_KATALOG_RSF_23
-(
-CUIIO,
-CAEM2,
-NMP,
-VZ
+--CREATE OR REPLACE FORCE VIEW  VVW_KATALOG_RSF_23
+--(
+--CUIIO,
+--CAEM2,
+--NMP,
+--VZ
+--
+--)
 
-)
-
-AS
+--AS
 
 
             select

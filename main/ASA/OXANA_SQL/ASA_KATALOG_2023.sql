@@ -23,7 +23,7 @@ SELECT
                                    FROM CIS2.FORM_CUIIO
                                   WHERE FORM IN (64) AND 
                                   --FORM_VERS = 2009 AND 
-                                  CUIIO_VERS <= 2012
+                                  CUIIO_VERS <= 2013
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
