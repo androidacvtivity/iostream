@@ -1,10 +1,4 @@
-
-
-
-
-
-
-                SELECT 
+             SELECT 
                 D.UNIT_CODE,
                 D.CAPITOL,
                 D.RIND,
@@ -22,4 +16,12 @@
                 
                 FROM CIS2.VW_DATA_ALL_GC D
                 
+                WHERE
+                D.FORM = 61 
+                AND D.PERIOADA = 1066
                 
+                AND D.UNIT_CODE = 791972
+                GROUP BY
+                D.UNIT_CODE,
+                D.CAPITOL,
+                D.RIND
