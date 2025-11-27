@@ -1,5 +1,11 @@
 
-SELECT *
+SELECT 
+DISTINCT RIND,
+(CASE 
+  WHEN TO_CHAR(SUBSTR(RIND, 2)) LIKE '0%' THEN REPLACE(LTRIM(TO_CHAR(SUBSTR(RIND, 2)), '0'), '.', '')
+  ELSE REPLACE(TO_CHAR(SUBSTR(RIND, 2)), '.', '')
+END) AS RIND_MOD,
+SUM(COL6) AS COL6
 FROM
 (
 
@@ -85,6 +91,10 @@ WHERE
        
        WHERE
        1=1 
+       
+       
+       GROUP BY
+       RIND
         --AND 
 --        
 --        (
