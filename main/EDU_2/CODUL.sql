@@ -1,20 +1,11 @@
 
-SELECT *
-FROM
-(
+SELECT
+   CASE WHEN ltrim(TO_NUMBER(C.codul),'0') IS NULL THEN '0' ELSE ltrim(TO_NUMBER(C.codul),'0')  END   CODUL,
+   C.DENUMIRE,
 
-SELECT 
-    D.CUIIO,
- --   D.CUIIO_VERS,
-    D.RIND  RIND,
-(CASE 
-  WHEN TO_CHAR(SUBSTR(D.RIND, 2)) LIKE '0%' THEN REPLACE(LTRIM(TO_CHAR(SUBSTR(D.RIND, 2)), '0'), '.', '')
-  ELSE REPLACE(TO_CHAR(SUBSTR(D.RIND, 2)), '.', '')
-END) AS RIND_MOD,
- --   D.ID_MD,
- --   D.RIND_VERS,
-    MR.ORDINE,
-    SUM (CASE WHEN  1=1  THEN CIS2.NVAL(D.COL1) ELSE 0 END ) COL1,
+  
+   C.ORDINE,
+   SUM (CASE WHEN  1=1  THEN CIS2.NVAL(D.COL1) ELSE 0 END ) COL1,
    SUM (CASE WHEN  1=1  THEN CIS2.NVAL(D.COL2) ELSE 0 END ) COL2,
    SUM (CASE WHEN  1=1  THEN CIS2.NVAL(D.COL1)-CIS2.NVAL(D.COL2) END)  COL3,
    SUM (CASE WHEN  1=1  THEN CIS2.NVAL(D.COL1)-CIS2.NVAL(D.COL3) END)  COL4,
@@ -29,6 +20,24 @@ END) AS RIND_MOD,
    SUM (CASE WHEN  1=1   THEN CIS2.NVAL(D.COL10)-CIS2.NVAL(D.COL11) END) COL13,
    SUM (CASE WHEN 1=1   THEN CIS2.NVAL(D.COL10)-CIS2.NVAL(D.COL12) END)  COL14,
    SUM (CASE WHEN  1=1  THEN CIS2.NVAL(D.COL12) ELSE 0 END ) COL15
+
+FROM 
+  CIS2.VW_DATA_ALL D
+
+INNER JOIN (
+
+ 
+SELECT 
+    D.CUIIO,
+    D.CUIIO_VERS,
+    D.RIND  RIND,
+(CASE 
+  WHEN TO_CHAR(SUBSTR(D.RIND, 2)) LIKE '0%' THEN REPLACE(LTRIM(TO_CHAR(SUBSTR(D.RIND, 2)), '0'), '.', '')
+  ELSE REPLACE(TO_CHAR(SUBSTR(D.RIND, 2)), '.', '')
+END) AS RIND_MOD,
+    D.ID_MD,
+    D.RIND_VERS,
+    MR.ORDINE
  FROM 
   CIS2.VW_DATA_ALL D  
   
@@ -38,7 +47,7 @@ WHERE
   D.PERIOADA IN (:pPERIOADA) AND 
   D.FORM_VERS = :pFORM_VERS     AND    
   (:pID_MDTABLE=:pID_MDTABLE) AND
---  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
   D.FORM IN (49)                 AND 
   D.CAPITOL IN (1049) AND     
     
@@ -61,37 +70,59 @@ WHERE
      
        )   
        
-       
-   --    AND D.RIND_VERS = 2014
-   
-   
-   GROUP BY
-   
-       D.CUIIO,
-    D.CUIIO_VERS,
-    D.RIND,
---(CASE 
---  WHEN TO_CHAR(SUBSTR(D.RIND, 2)) LIKE '0%' THEN REPLACE(LTRIM(TO_CHAR(SUBSTR(D.RIND, 2)), '0'), '.', '')
---  ELSE REPLACE(TO_CHAR(SUBSTR(D.RIND, 2)), '.', '')
---END) AS RIND_MOD,
-    D.ID_MD,
-    D.RIND_VERS,
-    MR.ORDINE
        ORDER BY 
        MR.ORDINE
-       
-       )
  
-       
-       WHERE
-       1=1 
-        --AND 
---        
---        (
---        RIND LIKE '%7131.307131.4%' 
---        OR
---        RIND LIKE '%7131.107133.2%' 
---        )
+  
+   ) DD ON   (DD.ID_MD = D.ID_MD AND D.CUIIO = DD.CUIIO AND D.RIND = DD.RIND AND D.RIND_VERS = DD.RIND_VERS  AND D.CUIIO_VERS = DD.CUIIO_VERS)   
+ 
+ 
+     INNER JOIN  (SELECT  
+        
+        RINDOUT CODUL,
+        DENUMIRE DENUMIRE,
+        
+        ORDINE,
+        
+         RIND FULL_CODE
+
+FROM CIS2.MD_RIND_OUT
+
+WHERE
+ ID_MDTABLE = 13915) C  ON  (ltrim(TO_NUMBER(C.codul),'0') =  DD.RIND_MOD) 
+     
+    
 
 
-       -- AND RIND_MOD
+
+
+    
+ 
+ WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (49)                 AND 
+  D.CAPITOL IN (1049) 
+
+
+
+  GROUP BY 
+
+
+  C.CODUL,
+  C.DENUMIRE,
+  C.FULL_CODE,
+  C.ORDINE
+   
+  
+  
+  ORDER BY
+  C.ORDINE
+  
+
+  
+  
+  
+
