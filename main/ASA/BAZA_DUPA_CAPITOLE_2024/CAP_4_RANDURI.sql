@@ -1,7 +1,15 @@
+SELECT *
+FROM
+
+(
 SELECT
     t.CUIIO,
     t.DENUMIRE,
     t.CUATM,
+    t.CFP,
+    t.CFOJ,
+    t.CAEM2,
+    t.IDNO,
     t.RIND,
     NULLIF(TRIM(t.CAEM2_CAP4), '0') AS CAEM2_CAP4, -- CAEM2_CAP4 e text: comparam cu '0'
     NULLIF(t.COL1, 0)                AS COL1,      -- sumele sunt numerice
@@ -12,6 +20,10 @@ FROM (
         D.CUIIO,
         R.DENUMIRE,
         R.CUATM,
+        R.CFP,
+        R.CFOJ,
+        R.CAEM2,
+        R.IDNO,
         C.FULL_CODE,
         D.RIND,
         D.COL31 AS CAEM2_CAP4,
@@ -28,9 +40,31 @@ FROM (
         D.FORM IN (64)
         AND D.CAPITOL IN (1127)
         AND D.PERIOADA IN (2013)
+        AND D.RIND NOT IN ('400')
 --        AND D.CUIIO = 34275
     GROUP BY
-        D.CUIIO, R.DENUMIRE, R.CUATM, C.FULL_CODE, D.COL31, D.RIND
+        
+    
+          D.CUIIO,
+        R.DENUMIRE,
+        R.CUATM,
+        R.CFP,
+        R.CFOJ,
+        R.CAEM2,
+        R.IDNO,
+        C.FULL_CODE,
+        D.RIND,
+        D.COL31
+    
 ) t
 ORDER BY
-    t.FULL_CODE, t.CUIIO, t.RIND;
+    t.FULL_CODE, t.CUIIO, t.RIND) L
+    
+WHERE
+1=1
+AND CAEM2_CAP4 LIKE '56%'
+--AND 
+
+--CUIIO  = 458963
+
+--AND RIND IN ('400')
