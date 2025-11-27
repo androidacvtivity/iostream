@@ -397,6 +397,6 @@ WHERE
         nval(D.COL1)+nval(D.COL2)+ nval(D.COL3)+nval(D.COL4)+nval(D.COL5)>0 )
      ORDER BY ORDINE)
      
-     ; END; 
+--     ; END; 
      
  
