@@ -1,5 +1,5 @@
-SELECT L.*,R.CUIIO CUIIO_ASA,
-           R.CUIIO_MOD,
+SELECT L.*,R.CUIIO CUIIO_RSF,
+           R.CUIIO_MOD  CUIIO_RSF_MODIFICAT,
            R.NUM_MEDIU,
            R.COL1 
 
