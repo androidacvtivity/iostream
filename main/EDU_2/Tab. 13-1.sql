@@ -1,4 +1,4 @@
---INSERT INTO TABLE_OUT
+﻿--INSERT INTO TABLE_OUT
 --(
 --
 --
@@ -153,7 +153,10 @@ WHERE
    ) DD ON   (DD.ID_MD = D.ID_MD AND D.CUIIO = DD.CUIIO AND D.RIND = DD.RIND AND D.RIND_VERS = DD.RIND_VERS  AND D.CUIIO_VERS = DD.CUIIO_VERS)   
  
  
-     INNER JOIN  (SELECT  
+     INNER JOIN  (
+     
+     
+     SELECT  
         
         RINDOUT CODUL,
         DENUMIRE DENUMIRE,
@@ -165,7 +168,11 @@ WHERE
 FROM CIS2.MD_RIND_OUT
 
 WHERE
- ID_MDTABLE = 13915) C  ON  (ltrim(TO_NUMBER(C.codul),'0') =  DD.RIND_MOD) 
+ ID_MDTABLE = 13915
+ 
+ 
+ 
+ ) C  ON  (ltrim(TO_NUMBER(C.codul),'0') =  DD.RIND_MOD) 
      
     INNER JOIN   (SELECT  
         
