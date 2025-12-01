@@ -7,13 +7,13 @@ SELECT
             ON  R.CUIIO = D.CUIIO  AND R.CUIIO_VERS = D.CUIIO_VERS 
             
             WHERE 
-            D.FORM in (50)
+            D.FORM in (49)
             AND D.PERIOADA = 2014 
-            AND D.CAPITOL IN (1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069)
+            AND D.CAPITOL IN (1049,1050,1051,1052,1053,1054,1055,1056,1057)
     --        AND D.CUIIO = 400001
             GROUP BY
              D.CUIIO
              
              
              HAVING 
-             COUNT (DISTINCT D.CAPITOL) < 12 
+             COUNT (DISTINCT D.CAPITOL) < 9 
