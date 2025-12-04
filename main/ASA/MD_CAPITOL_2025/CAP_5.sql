@@ -1,3 +1,4 @@
+-- Remove from here ROUND and give me code back
 SELECT
     ROUND(D.ANUL, 2) AS ANUL,
     ROUND(D.CUIIO, 2) AS CUIIO,
