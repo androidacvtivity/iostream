@@ -1,4 +1,4 @@
--- Rounded to 2 decimals on numeric output columns
+-- Remove from here ROUND and give me code back
 SELECT
     ROUND(D.ANUL, 2) AS ANUL,
     ROUND(D.CUIIO, 2) AS CUIIO,
@@ -81,7 +81,7 @@ SELECT
         END
     , 2) AS RIND_180
 FROM
-     CIS2.VW_DATA_ALL D
+     CIS2.VW_DATA_ALL_COEF D
 INNER JOIN
     CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS
 WHERE
@@ -97,7 +97,7 @@ WHERE
                 D.RIND,
                 SUM(D.COL1) AS COL1
             FROM CIS2.VW_DATA_ALL D
-            WHERE (D.PERIOADA = :PERIOADA)
+            WHERE (D.PERIOADA = :pPERIOADA)
               AND D.CAPITOL IN (100)
               AND D.FORM IN (64)
               AND D.RIND IN ('1','5','6')
