@@ -1,4 +1,6 @@
+CREATE OR REPLACE FORCE VIEW    VW_EDU_1_2025
 
+AS
 
 SELECT   
          L.CUIIO       
