@@ -1,0 +1,144 @@
+INSERT INTO TABLE_OUT 
+(
+  PERIOADA,
+  FORM,
+  FORM_VERS,
+  ID_MDTABLE,
+  COD_CUATM,
+  NR_SECTIE,
+  NUME_SECTIE,
+  NR_SECTIE1,
+  NUME_SECTIE1,
+  NR_SECTIE2,
+  NUME_SECTIE2,
+  NR_ROW,
+  ORDINE,
+  DECIMAL_POS,
+  NUME_ROW,  
+ COL1, COL2, COL3
+)
+
+
+SELECT
+  :pPERIOADA AS PERIOADA,
+  :pFORM AS FORM,
+  :pFORM_VERS AS FORM_VERS,
+  :pID_MDTABLE AS ID_MDTABLE,
+  :pCOD_CUATM AS COD_CUATM,
+  FULL_CODE AS NR_SECTIE,
+  DENUMIRE AS NUME_SECTIE,
+  '0' AS NR_SECTIE1,
+  '0' AS NUME_SECTIE1,
+  '0' AS NR_SECTIE2,
+  '0' AS NUME_SECTIE2,
+   ORDINE AS NR_ROW,
+   0 AS ORDINE,
+  '000' AS DECIMAL_POS,
+   NUME_ROW AS NUME_ROW,
+   COL1,
+   COL2,
+   COL3
+  
+FROM (
+
+
+SELECT  
+  CC.FULL_CODE,
+  CC.DENUMIRE,
+  B.ORDINE,
+  B.NUME_ROW,
+  SUM(CASE WHEN B.NR_ROW LIKE '%'||R.NTII||'%' AND NVAL(D.COL14) > 0 THEN 1 ELSE NULL END) AS COL1,
+  SUM(CASE WHEN B.NR_ROW LIKE '%'||R.NTII||'%' AND R.TIP_LOCAL = '1' AND NVAL(D.COL14) > 0 THEN 1 ELSE NULL END) AS COL2,
+  SUM(CASE WHEN B.NR_ROW LIKE '%'||R.NTII||'%' AND R.TIP_LOCAL = '2' AND NVAL(D.COL14) > 0 THEN 1 ELSE NULL END) AS COL3
+  
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS)
+  INNER JOIN CIS2.VW_CL_CUATM C ON (CIS2.D.CUATM=CIS2.C.CODUL)
+  INNER JOIN CIS2.VW_CL_CUATM CC ON (CIS2.C.FULL_CODE LIKE '%'||CIS2.CC.CODUL||';%' )
+  
+
+CROSS JOIN
+(
+
+SELECT '10+20+21+30+31+40+50' AS NR_ROW, 'Numarul de institutii de invatamint TOTAL' AS NUME_ROW, 1 AS ORDINE FROM DUAL UNION
+SELECT '10+20+21+30+31+40'    AS NR_ROW, 'Invatamint de zi'                          AS NUME_ROW, 2 AS ORDINE FROM DUAL UNION
+SELECT '10'                   AS NR_ROW, 'scoli primare'                             AS NUME_ROW, 3 AS ORDINE FROM DUAL UNION
+SELECT '20+21'                AS NR_ROW, 'gimnazii - total'                          AS NUME_ROW, 4 AS ORDINE FROM DUAL UNION
+SELECT '21'                   AS NR_ROW, 'din care: V-IX(clase)'                     AS NUME_ROW, 5 AS ORDINE FROM DUAL UNION
+SELECT '30+31'                AS NR_ROW, 'licee total'                               AS NUME_ROW, 6 AS ORDINE FROM DUAL UNION
+SELECT '31'                   AS NR_ROW, 'din care: X-XII(clase)'                    AS NUME_ROW, 7 AS ORDINE FROM DUAL UNION
+SELECT '40'                   AS NR_ROW, 'scoli pentru copii cu deficiente in dezvoltarea intelectuala sa' AS NUME_ROW, 8 AS ORDINE FROM DUAL UNION 
+SELECT '50'                   AS NR_ROW, 'Invatamint seral'                          AS NUME_ROW, 9 AS ORDINE FROM DUAL
+) B
+
+WHERE 
+  (D.PERIOADA =:pPERIOADA) AND
+  (D.FORM =:pFORM) AND
+  (D.FORM_VERS =:pFORM_VERS) AND 
+  (:pID_MDTABLE =:pID_MDTABLE)  AND 
+  (D.CUATM_FULL LIKE '%' ||:pCOD_CUATM||';%') AND
+  D.FORM = 40 AND 
+  R.NTII IN (10,20,21,30,31,40,50) AND
+  R.TIP_LOCAL IN ('1','2') AND
+  D.CAPITOL IN 1022 AND
+  D.RIND IN ('19') AND
+  CC.PRGS IN ('2')
+  
+GROUP BY
+  B.NUME_ROW,
+  B.ORDINE,
+  CC.FULL_CODE,
+  CC.DENUMIRE
+  
+  
+UNION
+
+SELECT
+  '0000000;9810000;' AS FULL_CODE,
+  CC.DENUMIRE ,
+  B.ORDINE, 
+  B.NUME_ROW,
+  SUM(CASE WHEN B.NR_ROW LIKE '%'|| R.NTII ||'%' AND NVAL(D.COL14) > 0 THEN 1 ELSE NULL END) AS COL1,
+  SUM(CASE WHEN B.NR_ROW LIKE '%'|| R.NTII ||'%' AND R.TIP_LOCAL = '1' AND NVAL(D.COL14) > 0 THEN 1 ELSE NULL END) AS COL2,
+  SUM(CASE WHEN B.NR_ROW LIKE '%'|| R.NTII ||'%' AND R.TIP_LOCAL = '2' AND NVAL(D.COL14) > 0 THEN 1 ELSE NULL END) AS COL3
+  
+FROM 
+  CIS2.VW_DATA_ALL D
+  INNER JOIN CIS2.RENIM R ON (R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS)
+  INNER JOIN CIS2.VW_CL_CUATM C ON (CIS2.D.CUATM=CIS2.C.CODUL)
+  INNER JOIN CIS2.VW_CL_CUATM CC ON (CIS2.C.FULL_CODE LIKE '%'||CIS2.CC.CODUL ||';%' )
+  
+
+CROSS JOIN
+(
+
+SELECT '10+20+21+30+31+40+50' AS NR_ROW, 'Numarul de institutii de invatamint TOTAL' AS NUME_ROW, 1 AS ORDINE FROM DUAL UNION
+SELECT '10+20+21+30+31+40'    AS NR_ROW, 'Invatamint de zi'                          AS NUME_ROW, 2 AS ORDINE FROM DUAL UNION
+SELECT '10'                   AS NR_ROW, 'scoli primare'                             AS NUME_ROW, 3 AS ORDINE FROM DUAL UNION
+SELECT '20+21'                AS NR_ROW, 'gimnazii - total'                          AS NUME_ROW, 4 AS ORDINE FROM DUAL UNION
+SELECT '21'                   AS NR_ROW, 'din care: V-IX(clase)'                     AS NUME_ROW, 5 AS ORDINE FROM DUAL UNION
+SELECT '30+31'                AS NR_ROW, 'licee total'                               AS NUME_ROW, 6 AS ORDINE FROM DUAL UNION
+SELECT '31'                   AS NR_ROW, 'din care: X-XII(clase)'                    AS NUME_ROW, 7 AS ORDINE FROM DUAL UNION
+SELECT '40'                   AS NR_ROW, 'scoli pentru copii cu deficiente in dezvoltarea intelectuala sa' AS NUME_ROW, 8 AS ORDINE FROM DUAL UNION 
+SELECT '50'                   AS NR_ROW, 'Invatamint seral'                          AS NUME_ROW, 9 AS ORDINE FROM DUAL
+) B
+
+WHERE 
+  (D.PERIOADA =:pPERIOADA) AND
+  (D.FORM =:pFORM) AND
+  (D.FORM_VERS =:pFORM_VERS) AND 
+  (:pID_MDTABLE =:pID_MDTABLE)  AND 
+  (D.CUATM_FULL LIKE '%' ||:pCOD_CUATM||';%') AND
+  D.FORM = 40 AND 
+  R.NTII IN (10,20,21,30,31,40,50) AND
+  R.TIP_LOCAL IN ('1','2') AND
+  D.CAPITOL IN 1022 AND
+  D.RIND IN ('19') AND
+  CC.CODUL IN ('0501000')
+  
+GROUP BY
+  CC.DENUMIRE,
+  B.ORDINE,
+  B.ORDINE, 
+  B.NUME_ROW )
