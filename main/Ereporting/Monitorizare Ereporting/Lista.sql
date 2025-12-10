@@ -1,0 +1,33 @@
+SELECT 
+ FORMID,
+  XML,
+  STATUS,
+  FORM_TYPE,
+  DATA_REG,
+  CHECK_CONFIRM,
+  MESAJ,
+  CUIIO,
+    LENGTH(CUIIO) STR_CUIIO,
+  SEND_REQUEST,
+  SEND_ATTEMPTS,
+  PROCESSING_MESSAGE 
+        
+        
+          FROM  USER_EREPORTING.F_XML_FORMS
+          
+          
+          WHERE
+
+ 
+  FORM_TYPE IN  ('29_agr24')
+-- AND STATUS <> '5' AND   STATUS <> '3'
+--
+ AND DATA_REG > TO_DATE('12/09/2025 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+-- 
+-- AND LENGTH(CUIIO) >= 8
+-- 
+ 
+
+ ORDER BY 
+ 
+ DATA_REG DESC
