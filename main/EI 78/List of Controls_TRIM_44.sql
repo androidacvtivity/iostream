@@ -23,7 +23,7 @@ SELECT
         FROM CIS2.MD_CONTROL A
          WHERE
          1=1
-         AND A.FORM  = 64
+         AND A.FORM  = 50
         GROUP BY 
           A.CONTROL
           ORDER BY 
@@ -31,7 +31,7 @@ SELECT
         )  A  ON A.CONTROL = B.CONTROL AND A.CONTROL_VERS = B.CONTROL_VERS   
           WHERE
          1=1
-         AND B.FORM  = 64
+         AND B.FORM  = 50
          AND B.STATUT <> '3'
         ORDER BY 
           B.CONTROL ) L

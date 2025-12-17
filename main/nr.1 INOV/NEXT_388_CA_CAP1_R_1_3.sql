@@ -1,0 +1,170 @@
+
+
+SELECT 
+
+L.CUIIO,
+L.CUIIO_VERS,
+L.CAEM2,
+L.COL1,
+L.COL2,
+L.COL3,
+R.CA,
+R.CA_2023,
+RR.R1_3_1,
+RR.R1_3_2 
+
+FROM 
+
+
+(
+SELECT 
+DISTINCT D.CUIIO,
+D.CUIIO_VERS,
+D.CAEM2,
+SUM(D.COL1) AS COL1,
+SUM(D.COL2) AS COL2,
+SUM(D.COL3) AS COL3 
+FROM
+(
+SELECT 
+  D.CUIIO,
+  D.CUIIO_VERS,
+  D.CAEM2,
+
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (NVAL(DD.has_151) + NVAL(DD.has_152) + NVAL(DD.has_153) + NVAL(DD.has_154) + NVAL(DD.has_155) + NVAL(DD.has_156) + NVAL(DD.has_157) = 0    ) 
+
+   
+  THEN D.CUIIO END) AS COL1,
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (NVAL(DD.has_112) + NVAL(DD.has_111) = 0  )  
+  
+    
+  
+  THEN D.CUIIO END) AS COL2,
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (NVAL(DD.has_151) + NVAL(DD.has_152) + NVAL(DD.has_153) + NVAL(DD.has_154) + NVAL(DD.has_155) + NVAL(DD.has_156) + NVAL(DD.has_157) > 0)  AND  (NVAL(DD.has_112) + NVAL(DD.has_111) > 0)
+   THEN D.CUIIO END) 
+   AS COL3
+   
+    
+FROM 
+  CIS2.VW_DATA_ALL D 
+  
+  ---------------------------------------------------------
+  INNER JOIN (
+  
+  SELECT
+  D.ANUL,
+  D.CUIIO,
+  D.CUIIO_VERS,
+  D.CUATM,
+  D.CAEM2,
+  D.CAPITOL,
+  D.RIND,
+  D.COL1, 
+  D.COL2,
+  DD.has_111,
+  DD.has_112,
+  DD.has_151,
+  DD.has_152,
+  DD.has_153,
+  DD.has_154,
+  DD.has_155,
+  DD.has_156,
+  DD.has_157
+FROM 
+  CIS2.VW_DATA_ALL D
+  
+  INNER JOIN (
+  SELECT
+    CUIIO,
+    MAX(CUIIO_VERS) CUIIO_VERS,
+
+    MAX(CASE WHEN ID_MD = 83509 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_111,
+    MAX(CASE WHEN ID_MD = 83504 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_112,
+    MAX(CASE WHEN ID_MD = 83532 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_151,
+    MAX(CASE WHEN ID_MD = 83533 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_152,
+    MAX(CASE WHEN ID_MD = 83534 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_153,
+    MAX(CASE WHEN ID_MD = 83535 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_154,
+    MAX(CASE WHEN ID_MD = 83536 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_155,
+    MAX(CASE WHEN ID_MD = 83537 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_156,
+    MAX(CASE WHEN ID_MD = 83538 AND NVAL(COL1) = 1 THEN 1 ELSE 0 END) AS has_157
+    
+
+  FROM CIS2.DATA_ALL
+  WHERE PERIOADA = :pPERIOADA
+    AND FORM     = :pFORM
+    AND 
+    ID_MD IN (83509,83504,83532,83533,83534,83535,83536,83537,83538)
+     
+    
+    
+ 
+  GROUP BY 
+    CUIIO
+  
+    
+
+  ) DD ON DD.CUIIO = D.CUIIO AND DD.CUIIO_VERS = D.CUIIO_VERS  
+WHERE
+  D.PERIOADA IN (:pPERIOADA) AND
+  D.FORM IN (:pFORM) AND 
+  D.capitol=1040 AND  D.capitol_vers=2013 AND 
+  D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')
+  AND D.CAEM2 NOT LIKE 'A%'
+ -- AND D.CUIIO = 400053
+  
+
+  ) DD ON DD.CUIIO = D.CUIIO AND DD.CUIIO_VERS = D.CUIIO_VERS  
+  ------------------------------------------------------------  
+            
+  
+            
+
+
+            
+WHERE
+  D.PERIOADA IN (:pPERIOADA) AND
+  D.FORM IN (:pFORM) --AND 
+--  AND  (D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')) 
+ -- AND D.CAEM2 NOT LIKE 'A%'
+--  AND D.CUIIO = 458963
+
+
+GROUP BY 
+D.CUIIO,
+D.CUIIO_VERS,
+D.CAEM2
+
+ORDER BY
+D.CUIIO
+
+
+) D
+  
+ 
+
+GROUP BY
+D.CUIIO,
+D.CUIIO_VERS,
+D.CAEM2
+
+HAVING 
+SUM(D.COL1) + SUM(D.COL2) + SUM(D.COL3) > 0 )   L  LEFT JOIN  
+                                                 USER_BANCU.BZ_24 R ON R.CUIIO = L.CUIIO      
+                                                   LEFT JOIN (
+                                                   SELECT
+    D.CUIIO,
+    D.CUIIO_VERS,
+    SUM(CASE WHEN D.RIND IN ('1.3.1')  THEN COL1 ELSE 0 END) AS R1_3_1,
+    SUM(CASE WHEN D.RIND IN ('1.3.2')  THEN COL1 ELSE 0 END) AS R1_3_2 
+  FROM CIS2.VW_DATA_ALL D
+  WHERE PERIOADA = :pPERIOADA
+    AND FORM     = :pFORM
+    AND 
+    D.RIND IN ('1.3.1','1.3.2')
+  GROUP BY 
+    D.CUIIO,
+    D.CUIIO_VERS
+                                                   )  RR ON RR.CUIIO = L.CUIIO
+                                                               

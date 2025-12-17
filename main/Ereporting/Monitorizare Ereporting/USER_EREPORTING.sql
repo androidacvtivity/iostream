@@ -10,7 +10,7 @@ SELECT
     AND D.FORM IN (45)
     AND D.PERIOADA  IN (1067)
     -- AND USER_NAME IN ('e-Reporting')
-    AND   D.CUIIO LIKE   40708424||'%';
+    AND   D.CUIIO LIKE   38786919||'%';
     
     
     
@@ -30,7 +30,7 @@ SELECT
     AND D.FORM IN (45)
     --AND D.CUIIO_VERS  IN (1067)
   
-    AND   D.CUIIO LIKE   4509775||'%'
+    AND   D.CUIIO LIKE    38786919||'%'
     
     GROUP BY
     D.CUIIO,
@@ -54,4 +54,4 @@ SELECT
     AND D.FORM IN (45)
     AND D.PERIOADA  IN (1067)
     -- AND USER_NAME IN ('e-Reporting')
-    AND   D.CUIIO LIKE   4509775||'%';
+    AND   D.CUIIO LIKE    38786919||'%';
