@@ -15,4 +15,25 @@ SELECT     R.CUIIO,
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE FC.FORM IN (:pFORM) AND FC.STATUT <> '3') FC
            INNER JOIN CIS2.RENIM R
-               ON (R.CUIIO = FC.CUIIO AND R.CUIIO_VERS = FC.CUIIO_VERS)
+               ON (R.CUIIO = FC.CUIIO AND R.CUIIO_VERS = FC.CUIIO_VERS) 
+               LEFT JOIN (
+               SELECT  
+DISTINCT D.CUIIO
+FROM 
+  CIS2.VW_DATA_ALL D
+WHERE 
+  (D.PERIOADA =:pPERIOADA) AND
+  (D.FORM =:pFORM) AND
+
+  D.FORM = 40 
+  AND D.CAPITOL IN 1032 
+  --AND
+  --D.RIND IN ('19') 
+GROUP BY
+D.CUIIO
+               ) L ON L.CUIIO = FC.CUIIO
+               
+               
+               WHERE 
+               L.CUIIO IS NULL  
+               
