@@ -1,0 +1,23 @@
+CREATE TABLE USER_BANCU.BZ_24_NUMBER
+(
+  CUIIO    NUMBER,
+  CA       NUMBER,
+  CA_2023  NUMBER
+)
+TABLESPACE TBS_DTI_USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
