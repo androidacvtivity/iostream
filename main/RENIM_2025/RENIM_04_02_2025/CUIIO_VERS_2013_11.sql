@@ -19,7 +19,7 @@
  
         TRIM(L.CUIIO) CUIIO ,
         --2013 CUIIO_VERS,
-        2013   CUIIO_VERS,
+        2014   CUIIO_VERS,
         TRIM(L.DENUMIRE)  DENUMIRE,
         1   EDIT_USER,
         '1' STATUT,
@@ -31,13 +31,13 @@
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.CON_5 L
+        FROM   USER_BANCU.TR_AUTO_2025 L
         
              --   CIS.RENIM  L
         
         
                         LEFT  JOIN CIS2.RENIM C ON C.CUIIO  =  TRIM(L.CUIIO)  
-                                                  AND C.CUIIO_VERS  =  2013 --  TRIM(L.CUIIO_VERS) 
+                                                  AND C.CUIIO_VERS  =     TRIM(L.CUIIO_VERS) 
                         
                         WHERE
                         
