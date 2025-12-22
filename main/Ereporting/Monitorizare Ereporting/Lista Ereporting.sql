@@ -1,10 +1,13 @@
 SELECT     
-DISTINCT CUIIO  
+DISTINCT 
+D.CUIIO,
+D.CUIIO_VERS,
+D.USER_NAME  
  
     FROM CIS2.VW_DATA_ALL D
     WHERE 
     1=1
     AND D.FORM IN (45)
     AND D.PERIOADA  IN (1067)
-    AND USER_NAME IN ('e-Reporting')
- -- R.CUIIO LIKE   40583135||'%'
+  --  AND USER_NAME IN ('e-Reporting')
+  AND D.CUIIO LIKE   :pCUIIO||'%'

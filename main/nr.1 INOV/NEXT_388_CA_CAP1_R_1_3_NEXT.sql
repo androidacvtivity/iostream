@@ -1,13 +1,11 @@
-
-
 SELECT 
 
 L.CUIIO,
 L.CUIIO_VERS,
 L.CAEM2,
 L.COL1,
---L.COL2,
---L.COL3,
+L.COL2,
+L.COL3,
 R.CA,
 R.CA_2023,
 RR.R1_3_1,
@@ -21,9 +19,9 @@ SELECT
 DISTINCT D.CUIIO,
 D.CUIIO_VERS,
 D.CAEM2,
-SUM(D.COL1) AS COL1
---SUM(D.COL2) AS COL2,
---SUM(D.COL3) AS COL3 
+SUM(D.COL1) AS COL1,
+SUM(D.COL2) AS COL2,
+SUM(D.COL3) AS COL3 
 FROM
 (
 SELECT 
@@ -34,9 +32,17 @@ SELECT
   COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2') AND NVAL(D.COL1)  >=  1  AND (NVAL(DD.has_151) + NVAL(DD.has_152) + NVAL(DD.has_153) + NVAL(DD.has_154) + NVAL(DD.has_155) + NVAL(DD.has_156) + NVAL(DD.has_157) = 0    ) 
 
    
-  THEN D.CUIIO END) AS COL1
-
-
+  THEN D.CUIIO END) AS COL1,
+  COUNT(DISTINCT CASE WHEN D.RIND LIKE ('1.5.%')  AND NVAL(D.COL1) >= 1  AND (NVAL(DD.has_112) + NVAL(DD.has_111) = 0  )  
+  
+    
+  
+  THEN D.CUIIO END) AS COL2,
+  COUNT(DISTINCT CASE WHEN D.RIND IN ('1.1.1','1.1.2','1.5.1','1.5.2','1.5.3','1.5.4','1.5.5','1.5.6','1.5.7')   AND NVAL(D.COL1) >= 1  
+  
+  AND (NVAL(DD.has_151) + NVAL(DD.has_152) + NVAL(DD.has_153) + NVAL(DD.has_154) + NVAL(DD.has_155) + NVAL(DD.has_156) + NVAL(DD.has_157) > 0)  AND  (NVAL(DD.has_112) + NVAL(DD.has_111) > 0)
+   THEN D.CUIIO END) 
+   AS COL3
    
     
 FROM 
@@ -142,7 +148,7 @@ D.CUIIO_VERS,
 D.CAEM2
 
 HAVING 
-SUM(D.COL1)  > 0 )   L  LEFT JOIN  
+SUM(D.COL1) + SUM(D.COL2) + SUM(D.COL3) > 0 )   L  LEFT JOIN  
                                                  USER_BANCU.BZ_24 R ON R.CUIIO = L.CUIIO      
                                                    LEFT JOIN (
                                                    SELECT
@@ -159,4 +165,3 @@ SUM(D.COL1)  > 0 )   L  LEFT JOIN
     D.CUIIO,
     D.CUIIO_VERS
                                                    )  RR ON RR.CUIIO = L.CUIIO
-                                                               
