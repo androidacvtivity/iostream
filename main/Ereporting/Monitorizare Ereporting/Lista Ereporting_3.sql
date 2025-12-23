@@ -78,7 +78,8 @@ FORM IN (:pFORM);
 select DISTINCT 
  CUIIO,
  CUIIO_VERS,
- CUATM 
+ CUATM,
+ USER_NAME 
  
  from CIS2.VW_DATA_ALL
  
