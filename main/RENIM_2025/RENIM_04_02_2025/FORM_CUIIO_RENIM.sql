@@ -34,13 +34,13 @@ SELECT FC.CUIIO,
              
              FC.CUIIO_VERS  = 2014
              
-           --  AND R.CAEM2 IS NULL 
+            AND R.CAEM2 IS NULL 
              
              
-             AND R.CUIIO IN (
-             
-             SELECT 
- 
-        TRIM(L.CUIIO) CUIIO 
-               FROM   USER_BANCU.TR_AUTO_2025 L
-             )
+--             AND R.CUIIO IN (
+--             
+--             SELECT 
+-- 
+--        TRIM(L.CUIIO) CUIIO 
+--               FROM   USER_BANCU.TR_AUTO_2025 L
+--             )
