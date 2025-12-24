@@ -1,5 +1,6 @@
 SELECT FC.CUIIO,
-       FC.CUIIO_VERS  
+       FC.CUIIO_VERS,
+       R.CUATM   
               FROM(
 SELECT FC.CUIIO,
                    FC.CUIIO_VERS,
@@ -18,7 +19,7 @@ SELECT FC.CUIIO,
              FC.FORM IN (:pFORM) AND FC.STATUT <> '3'
              --and FC.FORM_VERS = 1004 
              
-             ) FC
+             ) FC  INNER JOIN CIS2.RENIM R ON R.CUIIO = FC.CUIIO AND R.CUIIO_VERS = FC.CUIIO_VERS 
              
              
              WHERE
@@ -28,11 +29,11 @@ SELECT FC.CUIIO,
 
  
              
-             CUIIO LIKE :pCUIIO||'%'
+             FC.CUIIO LIKE :pCUIIO||'%'
 
 
 AND 
-FORM IN (:pFORM);
+FC.FORM IN (:pFORM);
 
  ;
  
