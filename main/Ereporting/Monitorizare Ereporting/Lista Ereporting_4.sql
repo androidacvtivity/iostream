@@ -1,6 +1,7 @@
 SELECT FC.CUIIO,
        FC.CUIIO_VERS,
-       R.CUATM   
+       R.CUATM,
+       R.IDNO   
               FROM(
 SELECT FC.CUIIO,
                    FC.CUIIO_VERS,
