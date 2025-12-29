@@ -9,5 +9,7 @@ D.USER_NAME
     1=1
     AND D.FORM IN (45)
     AND D.PERIOADA  IN (1067)
-  --  AND USER_NAME IN ('e-Reporting')
-  AND D.CUIIO LIKE   :pCUIIO||'%'
+    AND USER_NAME IN ('e-Reporting')
+ -- AND D.CUIIO LIKE   :pCUIIO||'%'
+  
+   AND D.DATA_REG > TO_DATE('12/24/2025 17:00:49', 'MM/DD/YYYY HH24:MI:SS')
