@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.TR_AUTO_2025
+UPDATE USER_BANCU.R_1_TIC_26
 SET 
     CUIIO = REPLACE(REPLACE(TRIM(CUIIO), CHR(9), ' '), '  ', ' '),
     CUIIO_VERS = REPLACE(REPLACE(TRIM(CUIIO_VERS), CHR(9), ' '), '  ', ' '),
@@ -13,7 +13,7 @@ SET
 
 
 SELECT * 
- FROM USER_BANCU.TR_AUTO_2025
+ FROM USER_BANCU.R_1_TIC_26
 
 ;
 
