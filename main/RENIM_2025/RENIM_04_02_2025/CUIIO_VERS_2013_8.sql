@@ -11,7 +11,7 @@ SELECT
   D.IDNO    
 ------------------------------------------------
 
-FROM USER_BANCU.CON_5 D
+FROM USER_BANCU.R_1_TIC_26 D
 
                                 
 --                                
@@ -26,7 +26,7 @@ FROM USER_BANCU.CON_5 D
 --------------------------------------------------------------------------------
                     --    LEFT JOIN  USER_BANCU.VW_MAX_RENIM_CIS2   DD ON DD.CUIIO = D.CUIIO    
                                 
-                       LEFT JOIN CIS.VW_CL_CUATM C ON C.CODUL =  D.CUATM
+                  --     LEFT JOIN CIS.VW_CL_CUATM C ON C.CODUL =  D.CUATM
                         
                        --LEFT JOIN CIS2.VW_CL_CAEM2 C ON C.CODUL =  D.CAEM2
                         

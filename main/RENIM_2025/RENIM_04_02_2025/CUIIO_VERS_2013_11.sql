@@ -19,7 +19,7 @@
  
         TRIM(L.CUIIO) CUIIO ,
         --2013 CUIIO_VERS,
-        2014   CUIIO_VERS,
+        L.CUIIO_VERS,
         TRIM(L.DENUMIRE)  DENUMIRE,
         1   EDIT_USER,
         '1' STATUT,
@@ -31,7 +31,7 @@
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.TR_AUTO_2025 L
+        FROM   USER_BANCU.R_1_TIC_26 L
         
              --   CIS.RENIM  L
         
@@ -41,8 +41,14 @@
                         
                         WHERE
                         
-                        C.CUIIO IS   NULL  
+                        C.CUIIO IS   NULL ; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        
 --------------------------------------------------------------------------------
+
+
+UPDATE USER_BANCU.R_1_TIC_26
+SET CUIIO_VERS = 2015;
+
+
