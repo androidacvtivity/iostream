@@ -18,13 +18,21 @@ select DISTINCT
  WHERE
  
  PERIOADA IN (:pPERIOADA)
-             and CUIIO LIKE :pCUIIO||'%'
+            and CUIIO LIKE :pCUIIO||'%'
+  
+  
+  
 
 
 AND 
 
 FORM IN (:pFORM)
 
+
+--AND CUIIO IN (40925713,
+--40443701,
+--41904759,4044370185,41150177
+--)
 
 GROUP BY
 
