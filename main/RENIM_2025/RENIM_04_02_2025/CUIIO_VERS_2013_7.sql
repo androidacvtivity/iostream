@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.R_1_TIC_26
+UPDATE USER_BANCU.TIC_1_26
 SET 
     CUIIO = REPLACE(REPLACE(TRIM(CUIIO), CHR(9), ' '), '  ', ' '),
     CUIIO_VERS = REPLACE(REPLACE(TRIM(CUIIO_VERS), CHR(9), ' '), '  ', ' '),
@@ -13,8 +13,6 @@ SET
 
 
 SELECT * 
- FROM USER_BANCU.R_1_TIC_26
-
-;
+ FROM USER_BANCU.TIC_1_26;
 
 ------------------------------------------------------------------------------------
