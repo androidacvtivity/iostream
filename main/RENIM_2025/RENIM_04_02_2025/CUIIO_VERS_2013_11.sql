@@ -31,7 +31,7 @@
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.TIC_1_26 L
+        FROM   USER_BANCU.AUTO_65_1067 L
         
              --   CIS.RENIM  L
         
@@ -41,7 +41,7 @@
                         
                         WHERE
                         
-                        C.CUIIO IS  NOT NULL; 
+                        C.CUIIO IS  NULL; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        
