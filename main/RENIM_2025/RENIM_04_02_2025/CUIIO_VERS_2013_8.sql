@@ -11,7 +11,7 @@ SELECT
   D.IDNO    
 ------------------------------------------------
 
-FROM USER_BANCU.AUTO_65_1067 D
+FROM USER_BANCU.AUTO_65_1068 D
 
                                 
 --                                

@@ -31,7 +31,7 @@
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.AUTO_65_1067 L
+        FROM   USER_BANCU.AUTO_65_1068 L
         
              --   CIS.RENIM  L
         
@@ -41,7 +41,7 @@
                         
                         WHERE
                         
-                        C.CUIIO IS  NOT NULL; 
+                        C.CUIIO IS  NULL; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        
@@ -50,5 +50,3 @@
 
 UPDATE USER_BANCU.R_1_TIC_26
 SET CUIIO_VERS = 2015;
-
-

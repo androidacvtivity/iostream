@@ -22,14 +22,14 @@ SELECT FC.CUIIO
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (5) AND CUIIO_VERS <= 1067
+                                  WHERE FORM IN (4) AND CUIIO_VERS <= 2014
                                   
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
-             FC.FORM IN (5) AND FC.STATUT <> '3'
-             AND FC.FORM_VERS = 1004
+             FC.FORM IN (4) AND FC.STATUT <> '3'
+             AND FC.FORM_VERS = 2000
              ) FC
              
              
@@ -38,16 +38,17 @@ SELECT FC.CUIIO
              FC.CUIIO IN (
             SELECT
                DISTINCT  CUIIO
-            FROM  USER_BANCU.AUTO_65_1067
+            FROM  USER_BANCU.TR_AUTO_2025
 
           ) )
 
    
 
-AND CUIIO_VERS = 1067
-AND FORM = 5
+AND CUIIO_VERS = 2014
+AND FORM = 4
 
-AND FORM_VERS = 1004
+AND FORM_VERS = 2000
+
 AND STATUT = '1'
         
              
