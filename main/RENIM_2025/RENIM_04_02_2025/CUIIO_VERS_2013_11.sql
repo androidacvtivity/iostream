@@ -41,7 +41,7 @@
                         
                         WHERE
                         
-                        C.CUIIO IS  NULL; 
+                        C.CUIIO IS  NOT NULL; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        

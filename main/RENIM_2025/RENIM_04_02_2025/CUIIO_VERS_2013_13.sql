@@ -12,7 +12,7 @@ CURSOR C IS
         TRIM(L.CFOJ) CFOJ,
         TRIM(L.CAEM2)  CAEM2,
         TRIM(L.IDNO)   IDNO
-        FROM   USER_BANCU.TIC_1_26 L
+        FROM   USER_BANCU.AUTO_65_1067 L
   
  
             
