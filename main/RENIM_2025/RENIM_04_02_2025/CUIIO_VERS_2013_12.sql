@@ -8,20 +8,20 @@
 --        FORM_VERS,
 --        STATUT 
 --)
-
+--
 
 
 ----------------------------------------------
 
 SELECT   
         L.CUIIO,
-        1068 CUIIO_VERS,
-        5 FORM,
-        1004 FORM_VERS,
+        2014 CUIIO_VERS,
+        4 FORM,
+        2014 FORM_VERS,
         '1' STATUT 
       
          
-         FROM USER_BANCU.AUTO_65_1067 L LEFT JOIN (
+         FROM USER_BANCU.TR_AUTO_2025 L LEFT JOIN (
          
          
          SELECT DISTINCT CUIIO 
@@ -34,15 +34,15 @@ CUIIO IN (
 
 SELECT 
 CUIIO
-FROM  USER_BANCU.AUTO_65_1067
+FROM  USER_BANCU.TR_AUTO_2025
 
 )
 
 AND 
 
-CUIIO_VERS IN (1068)
-AND FORM IN (5)
-AND FORM_VERS = 1004
+CUIIO_VERS IN (2014)
+AND FORM IN (4)
+AND FORM_VERS = 2000
 AND STATUT = '1'
 
 

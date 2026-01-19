@@ -8,16 +8,19 @@
 --STATUT
 --)
 -- 
-------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+
 
 
 SELECT 
 L.CUIIO,
-2015 CUIIO_VERS,
-71 FORM,
-2011 FORM_VERS,
+1068 CUIIO_VERS,
+5 FORM,
+1004 FORM_VERS,
 '1' STATUT  
-FROM USER_BANCU.R_1_TIC_26 L LEFT  JOIN (
+FROM USER_BANCU.AUTO_65_1068 L LEFT  JOIN (
 SELECT FC.CUIIO,
        FC.CUIIO_VERS  
               FROM(
@@ -29,14 +32,14 @@ SELECT FC.CUIIO,
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (71) AND CUIIO_VERS <= 2015
+                                  WHERE FORM IN (5) AND CUIIO_VERS <= 1068
                                   
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
-             FC.FORM IN (71) AND FC.STATUT <> '3'
-             and FC.FORM_VERS = 2011 
+             FC.FORM IN (5) AND FC.STATUT <> '3'
+             and FC.FORM_VERS = 1004 
              
              ) FC
              
@@ -48,4 +51,10 @@ SELECT FC.CUIIO,
 
 
 WHERE 
-R.CUIIO  IS NOT NULL 
+R.CUIIO  IS  NOT NULL ;
+
+
+
+        SELECT 
+            CUIIO
+        FROM USER_BANCU.AUTO_65_1068
