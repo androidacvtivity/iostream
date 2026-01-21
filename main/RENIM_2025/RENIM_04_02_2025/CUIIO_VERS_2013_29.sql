@@ -1,11 +1,33 @@
- SELECT 
- 
-        TRIM(L.CUIIO) CUIIO ,
-        L.CUIIO_VERS,
-       -- TRIM(L.DENUMIRE)  DENUMIRE,
-        TRIM(L.CUATM) CUATM
---        TRIM(L.CFP) CFP,
---        TRIM(L.CFOJ) CFOJ,
---        TRIM(L.CAEM2)  CAEM2,
---        TRIM(L.IDNO)   IDNO
-        FROM   USER_BANCU.RENIM_21_VANZARI L
+
+SELECT FC.CUIIO,
+                   FC.CUIIO_VERS,
+                   FC.FORM,
+                   FC.FORM_VERS,
+                   FC.STATUT,
+                   IDNO
+              FROM (
+SELECT FC.CUIIO,
+                   FC.CUIIO_VERS,
+                   FC.FORM,
+                   FC.FORM_VERS,
+                   FC.STATUT
+              FROM CIS2.FORM_CUIIO  FC
+                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
+                                   FROM CIS2.FORM_CUIIO
+                                  WHERE FORM IN (12) AND CUIIO_VERS <= 2014
+                                  
+                               GROUP BY CUIIO) BB
+                       ON (    BB.CUIIO = FC.CUIIO
+                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
+             WHERE 
+             FC.FORM IN (12) AND FC.STATUT <> '3' 
+             and FC.FORM_VERS = 2000 ) FC  INNER JOIN CIS2.RENIM R  ON R.CUIIO = FC.CUIIO AND R.CUIIO_VERS = FC.CUIIO_VERS 
+             
+             
+             WHERE 
+             
+             R.IDNO IS NULL 
+             
+             
+             ORDER BY 
+             R.CUIIO 

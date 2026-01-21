@@ -1,26 +1,10 @@
-SELECT *
-FROM INVEST_1_TRIM
-WHERE IDNO IN (
-    SELECT IDNO
-    FROM USER_BANCU.INVEST_1_TRIM
-    GROUP BY IDNO
-    HAVING COUNT(*) > 1
-)
-
-ORDER BY 
-IDNO;
-
-
-
-SELECT CUIIO
-FROM USER_BANCU.KATALOG_24_2013;
 
 
 
 
 SELECT L.CUIIO
 
-    FROM USER_BANCU.KATALOG_24_2013 L 
+    FROM USER_BANCU.CC_1_2025 L 
     
     
     LEFT JOIN (
@@ -41,7 +25,7 @@ SELECT L.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
              FC.FORM IN (:pFORM) AND FC.STATUT <> '3'
-             and FC.FORM_VERS = 1004 
+             and FC.FORM_VERS = 2000 
    
 
  ) R  ON R.CUIIO =  L.CUIIO
