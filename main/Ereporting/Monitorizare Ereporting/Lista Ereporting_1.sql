@@ -19,31 +19,19 @@ SELECT
           WHERE
 
  
-  FORM_TYPE IN  ('29_agr24')
+  -- FORM_TYPE IN  ('1-a-sc','1-tr-auto-new','asa-22','1-inf.rev')
+  FORM_TYPE IN  ('1-a-sc')
 -- AND STATUS <> '5' AND   STATUS <> '3'
 --
- -- AND DATA_REG > TO_DATE('12/11/2025 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
- AND DATA_REG > TO_DATE('12/25/2025 17:00:49', 'MM/DD/YYYY HH24:MI:SS')
- 
- --12/11/2025 5:22:49 PM
--- 
--- AND LENGTH(CUIIO) >= 8
--- 
+--  AND DATA_REG > TO_DATE('1/19/2026 12:04:15 PM', 'MM/DD/YYYY HH24:MI:SS')
+ --AND DATA_REG > TO_DATE('1/19/2026 18:00:49', 'MM/DD/YYYY HH24:MI:SS')
+ AND DATA_REG >= TO_DATE('01/19/2026 08:00:49', 'MM/DD/YYYY HH24:MI:SS')
  
 
---AND CUIIO IN (
---SELECT     
---DISTINCT CUIIO  
--- 
---    FROM CIS2.VW_DATA_ALL D
---    WHERE 
---    1=1
---    AND D.FORM IN (45)
---    AND D.PERIOADA  IN (1067)
---    -- AND USER_NAME IN ('e-Reporting')
---    AND R.CUIIO LIKE   40583135||'%'
---)
 
  ORDER BY 
  
- DATA_REG DESC
+ DATA_REG DESC;
+ 
+ 
+ 
