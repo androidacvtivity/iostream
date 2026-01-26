@@ -6,13 +6,13 @@ CURSOR C IS
  
         TRIM(L.CUIIO) CUIIO ,
         L.CUIIO_VERS,
-        TRIM(L.DENUMIRE)  DENUMIRE,
-        TRIM(L.CUATM) CUATM,
-        TRIM(L.CFP) CFP,
-        TRIM(L.CFOJ) CFOJ,
-        TRIM(L.CAEM2)  CAEM2,
-        TRIM(L.IDNO)   IDNO
-        FROM   USER_BANCU.AUTO_65_1068 L
+       -- TRIM(L.DENUMIRE)  DENUMIRE,
+        TRIM(L.CUATM) CUATM
+--        TRIM(L.CFP) CFP,
+--        TRIM(L.CFOJ) CFOJ,
+--        TRIM(L.CAEM2)  CAEM2,
+--        TRIM(L.IDNO)   IDNO
+        FROM   USER_BANCU.CUATM_CIS L
   
  
             
@@ -22,14 +22,15 @@ CURSOR C IS
 BEGIN -- ======================================================================
 FOR CR IN C
 LOOP
-UPDATE CIS2.RENIM SET
+UPDATE CIS.RENIM SET
 --
-DENUMIRE = CR.DENUMIRE,
- CUATM = CR.CUATM,
-CFP = CR.CFP,
-CFOJ = CR.CFOJ,
-  CAEM2 = CR.CAEM2,
-IDNO = CR.IDNO
+--DENUMIRE = CR.DENUMIRE,
+ CUATM = CR.CUATM
+ --,
+--CFP = CR.CFP,
+--CFOJ = CR.CFOJ,
+--  CAEM2 = CR.CAEM2,
+--IDNO = CR.IDNO
 
 WHERE
 CUIIO = CR.CUIIO 
