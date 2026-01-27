@@ -31,7 +31,7 @@
         TRIM(TRIM(C.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.CC_1_2025 L
+        FROM   USER_BANCU.CUATM_CIS L
         
              --   CIS.RENIM  L
         
@@ -41,7 +41,7 @@
                         
                         WHERE
                         
-                        C.CUIIO IS NOT  NULL; 
+                        C.CUIIO IS   NULL; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        
@@ -128,7 +128,29 @@ SET CUIIO_VERS = 2015;
 41940318,
 41941312,
 41950860
-)                
+)      ;          
 
 
---AND CUIIO_VERS =  2014
+--AND CUIIO_VERS =  2014;
+
+
+
+
+
+
+SELECT 
+ 
+        TRIM(L.CUIIO) CUIIO
+       
+
+        FROM   USER_BANCU.CUATM_CIS2 L
+        
+             --   CIS.RENIM  L
+        
+        
+                        LEFT  JOIN CIS2.RENIM C ON C.CUIIO  =  TRIM(L.CUIIO)  
+                                                  AND C.CUIIO_VERS  =     TRIM(L.CUIIO_VERS) 
+                        
+                        WHERE
+                        
+                        C.CUIIO IS  NULL

@@ -1,41 +1,41 @@
---INSERT INTO CIS2.RENIM (
---    CUIIO,
---    CUIIO_VERS,
---    DENUMIRE,
---    EDIT_USER,
---    STATUT,
---    CUATM,
---    CFP,
---    CFOJ,
---    COCM,
---    CAEM,
---    BUGET,
---    TIP,
---    PROD,
---    FOR_CUB,
---    GENMUZEE,
---    TIPMUZEE,
---    TIP_LOCAL,
---    TIP_INST,
---    CAEM2,
---    N85_NTL,
---    N85_NTIIP,
---    N85_NDIIP,
---    N85_NPDS,
---    N85_NRIIP,
---    N85_NSIIP,
---    GENMUZEE2,
---    NFI,
---    NTII,
---    NPDS,
---    ORGANE,
---    TIP_INV,
---    RENIM_PERS,
---    ORGANE_COND,
---    GEN_INSTITUTIE,
---    IDNO
---)
--- 
+INSERT INTO CIS2.RENIM (
+    CUIIO,
+    CUIIO_VERS,
+    DENUMIRE,
+    EDIT_USER,
+    STATUT,
+    CUATM,
+    CFP,
+    CFOJ,
+    COCM,
+    CAEM,
+    BUGET,
+    TIP,
+    PROD,
+    FOR_CUB,
+    GENMUZEE,
+    TIPMUZEE,
+    TIP_LOCAL,
+    TIP_INST,
+    CAEM2,
+    N85_NTL,
+    N85_NTIIP,
+    N85_NDIIP,
+    N85_NPDS,
+    N85_NRIIP,
+    N85_NSIIP,
+    GENMUZEE2,
+    NFI,
+    NTII,
+    NPDS,
+    ORGANE,
+    TIP_INV,
+    RENIM_PERS,
+    ORGANE_COND,
+    GEN_INSTITUTIE,
+    IDNO
+)
+ 
 
 
 
@@ -77,113 +77,140 @@ SELECT
  IDNO
 
    
-                    FROM --  USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+                    FROM  -- USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
-                        USER_BANCU.VW_MAX_RENIM_CIS2
-                    --USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                         USER_BANCU.VW_MAX_RENIM_CIS2
+                  --   USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                  --  USER_BANCU.VW_MAX_RENIM_299_CIS2
                 ----------------------------------------------------------------    
                     WHERE 
-         CUIIO IN (
-                41575824,
-41586710,
-41624439,
-41624899,
-41769540,
-41769570,
-41773406,
-41778929,
-41800876,
-41801976,
-41806005,
-41810295,
-41648842,
-41656729,
-41673389,
-41689864,
-41700465,
-41714421,
-41715260,
-40824219,
-40972210,
-41836147,
-41846803,
-41847317,
-41847760,
-41847955,
-41848877,
-41848908,
-41849782,
-41852146,
-41855280,
-41855392,
-41855892,
-41857853,
-41858060,
-41862201,
-41863894,
-41866875,
-41868265,
-41868650,
-41869201,
-41870109,
-41871586,
-41872427,
-41874412,
-41875093,
-41875650,
-41877330,
-41880792,
-41883201,
-41883448,
-41883862,
-41884755,
-41888138,
-41888552,
-41888670,
-41890336,
-41891726,
-41892526,
-41892938,
-41893599,
-41895813,
-41897189,
-41898237,
-41899024,
-41899372,
-41900974,
-41906578,
-41906965,
-41914522,
-41918218,
-41919206,
-41921137,
-41921893,
-41922585,
-41923001,
-41924443,
-41932419,
-41934051,
-41939093,
-41940318,
-41941312,
-41950860,
-38857536
+        ( CUIIO IN (
+                
+         
+        SELECT CUIIO    
+             FROM USER_BANCU.VW_2_INVEST_NOT_2014
  
 )                
 
---CUIIO IN (
---
---
---SELECT DISTINCT CUIIO 
---
---FROM USER_BANCU.CC_1_2025
---
---
---)
+
+AND CUIIO_VERS <>  2014 )
+
+
+
+
+
+AND CUIIO NOT  IN (
+
+SELECT CUIIO-- ,
+     --  CUIIO_VERS 
+
+        FROM USER_BANCU.VW_MAX_RENIM_CIS2_2014
+        
+        WHERE 
+         CUIIO IN (
+                
+             SELECT CUIIO    
+             FROM USER_BANCU.VW_2_INVEST_NOT_2014
+        )
+             
+             
+             
+             AND 
+             
+             CUIIO_VERS =  2014
+        
+
+);
+
+
+-- ;
 
 
 
 
 
 
---AND CUIIO_VERS <> 2014
+
+
+SELECT CUIIO,
+       CUIIO_VERS 
+
+        FROM USER_BANCU.VW_MAX_RENIM_CIS2_2014
+        
+        WHERE 
+         CUIIO IN (
+                
+         
+        SELECT FC.CUIIO --,
+              -- FC.CUIIO_VERS
+      
+
+              FROM
+              ( 
+              SELECT FC.CUIIO,
+                   FC.CUIIO_VERS,
+                   FC.FORM,
+                   FC.FORM_VERS,
+                   FC.STATUT
+              FROM CIS2.FORM_CUIIO  FC
+                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
+                                   FROM CIS2.FORM_CUIIO
+                                  WHERE FORM IN (:pFORM) AND CUIIO_VERS <= :pPERIOADA
+                                  
+                               GROUP BY CUIIO) BB
+                       ON (    BB.CUIIO = FC.CUIIO
+                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
+             WHERE 
+             FC.FORM IN (:pFORM) 
+             AND FC.STATUT <> '3'
+             AND FC.FORM_VERS = 2000
+             ) FC )
+             
+             
+             
+             AND 
+             
+             CUIIO_VERS =  2014;
+             
+             
+             
+             
+             
+             
+             
+     CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_2_INVEST_NOT_2014
+
+AS
+        
+          SELECT FC.CUIIO,
+                    FC.CUIIO_VERS
+      
+
+              FROM
+              ( 
+              SELECT FC.CUIIO,
+                   FC.CUIIO_VERS,
+                   FC.FORM,
+                   FC.FORM_VERS,
+                   FC.STATUT
+              FROM CIS2.FORM_CUIIO  FC
+                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
+                                   FROM CIS2.FORM_CUIIO
+                                  WHERE FORM IN (8) AND CUIIO_VERS <= 2014
+                                  
+                               GROUP BY CUIIO) BB
+                       ON (    BB.CUIIO = FC.CUIIO
+                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
+             WHERE 
+             FC.FORM IN (8) 
+             AND FC.STATUT <> '3'
+             AND FC.FORM_VERS = 2000
+             ) FC
+             
+             WHERE
+             FC.CUIIO_VERS <>  2014;
+             
+             
+             
+             SELECT CUIIO    
+             FROM USER_BANCU.VW_2_INVEST_NOT_2014;
