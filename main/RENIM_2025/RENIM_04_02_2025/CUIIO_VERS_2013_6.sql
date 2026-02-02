@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.CC_1_2025 ----------------------
+UPDATE USER_BANCU.INV_2_TRIM ----------------------
 SET CUATM = 
     CASE 
         -- Ruleaza prima verificare: înlocuie?te 'O' cu '0'
@@ -14,18 +14,18 @@ SET CUATM =
     END;
     
     --------------------------------------------------------------------------------
-            UPDATE USER_BANCU.CUATM_CIS
+            UPDATE USER_BANCU.INV_2_TRIM
         SET
          CUATM = CASE WHEN (LENGTH(CUATM) = 6 AND (SUBSTR(CUATM,1,1) = 1  OR SUBSTR(CUATM,1,1) = 3 )) THEN '0'||CUATM ELSE CUATM END,
-         CUIIO_VERS =  491;
+         CUIIO_VERS =  1068;
         -- CFOJ = '420'
         --CUATM = '0'||REPLACE(CUATM,'O','0')
 --        ,
 --          CUATM  = '0'||CUATM
         ;
         
-        SELECT 
-            DISTINCT CUIIO
-        FROM USER_BANCU.CC_1_2025;
+        SELECT * 
+          
+        FROM USER_BANCU.CUATM_CIS2;
         
         ----------------------------------------------

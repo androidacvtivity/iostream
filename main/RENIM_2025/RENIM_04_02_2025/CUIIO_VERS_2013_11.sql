@@ -19,29 +19,29 @@
  
         TRIM(L.CUIIO) CUIIO ,
         --2013 CUIIO_VERS,
-        L.CUIIO_VERS,
-        TRIM(L.DENUMIRE)  DENUMIRE,
-        1   EDIT_USER,
-        '1' STATUT,
-        TRIM(L.CUATM) CUATM,
-        TRIM(L.CFP) CFP,
-        TRIM(L.CFOJ) CFOJ,
-        TRIM(L.CAEM2)  CAEM2,
- 
-        TRIM(TRIM(C.IDNO))  IDNO
+        L.CUIIO_VERS
+--        TRIM(L.DENUMIRE)  DENUMIRE,
+--        1   EDIT_USER,
+--        '1' STATUT,
+--        TRIM(L.CUATM) CUATM,
+--        TRIM(L.CFP) CFP,
+--        TRIM(L.CFOJ) CFOJ,
+--        TRIM(L.CAEM2)  CAEM2,
+-- 
+--        TRIM(TRIM(C.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.CUATM_CIS L
+        FROM   USER_BANCU.VW_2_IN_NOT_2014_FORM_CUIIO L
         
              --   CIS.RENIM  L
         
         
                         LEFT  JOIN CIS2.RENIM C ON C.CUIIO  =  TRIM(L.CUIIO)  
-                                                  AND C.CUIIO_VERS  =     TRIM(L.CUIIO_VERS) 
+                                                  AND C.CUIIO_VERS  =   2014 --   TRIM(L.CUIIO_VERS) 
                         
                         WHERE
                         
-                        C.CUIIO IS   NULL; 
+                        C.CUIIO IS  NULL; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        

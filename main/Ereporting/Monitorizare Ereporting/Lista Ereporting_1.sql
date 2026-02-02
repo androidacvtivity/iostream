@@ -1,11 +1,8 @@
 SELECT 
  FORMID,
-  XML,
   STATUS,
   FORM_TYPE,
   DATA_REG,
-  CHECK_CONFIRM,
-  MESAJ,
   CUIIO,
     LENGTH(CUIIO) STR_CUIIO,
   SEND_REQUEST,
@@ -17,15 +14,20 @@ SELECT
           
           
           WHERE
-
+-- in USER_EREPORTING.F_XML_FORMS in total  10.00 - 11.00  -- 276 
+-- doar statut 2 -- 146 
+-- doar statut 5 - 126 
  
-  -- FORM_TYPE IN  ('1-a-sc','1-tr-auto-new','asa-22','1-inf.rev')
-  FORM_TYPE IN  ('1-a-sc')
--- AND STATUS <> '5' AND   STATUS <> '3'
---
---  AND DATA_REG > TO_DATE('1/19/2026 12:04:15 PM', 'MM/DD/YYYY HH24:MI:SS')
- --AND DATA_REG > TO_DATE('1/19/2026 18:00:49', 'MM/DD/YYYY HH24:MI:SS')
- AND DATA_REG >= TO_DATE('01/19/2026 08:00:49', 'MM/DD/YYYY HH24:MI:SS')
+-- FORM_TYPE NOT IN  ('2-inv-anual','ind-ts','1-cc','consts','1-b-sc')
+--FORM_TYPE IN  ('1-a-sc')
+-- AND 
+STATUS =   '5' AND  
+
+  
+ 
+( DATA_REG >= TO_DATE('01/29/2026 13:00:00', 'MM/DD/YYYY HH24:MI:SS')
+ AND  DATA_REG <= TO_DATE('01/29/2026 14:00:00', 'MM/DD/YYYY HH24:MI:SS'))
+  
  
 
 
@@ -34,4 +36,13 @@ SELECT
  DATA_REG DESC;
  
  
+       SELECT
+ DISTINCT CUIIO         
+ -- FORMID
+          FROM  USER_EREPORTING.F_XML_FORMS
+          WHERE
+FORM_TYPE IN  ('1-turism_23')
+ AND DATA_REG >= TO_DATE('01/01/2026 08:00:49', 'MM/DD/YYYY HH24:MI:SS')
+ 
+ AND STATUS =  '5' 
  
