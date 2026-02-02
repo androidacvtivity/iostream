@@ -28,8 +28,9 @@
  FORMID
           FROM  USER_EREPORTING.F_XML_FORMS
           WHERE
-FORM_TYPE IN  ('1-a-sc')
- AND DATA_REG >= TO_DATE('01/19/2026 08:00:49', 'MM/DD/YYYY HH24:MI:SS')
+FORM_TYPE IN  -- ('1-turism_23',
+('m1')
+ AND DATA_REG >= TO_DATE('01/01/2026 08:00:49', 'MM/DD/YYYY HH24:MI:SS')
            ) 
            
            

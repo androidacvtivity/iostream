@@ -11,7 +11,7 @@ SELECT
   D.IDNO    
 ------------------------------------------------
 
-FROM  USER_BANCU.CUATM_CIS D
+FROM  USER_BANCU.INV_2_TRIM D
 
 -- WHERE 
 --
@@ -30,11 +30,11 @@ FROM  USER_BANCU.CUATM_CIS D
 --------------------------------------------------------------------------------
                      --   LEFT JOIN  USER_BANCU.VW_MAX_RENIM_CIS2   DD ON DD.CUIIO = D.CUIIO    
                                 
-                        LEFT JOIN CIS.VW_CL_CUATM C ON TRIM(C.CODUL) =  TRIM(D.CUATM)
+                         LEFT JOIN CIS.VW_CL_CUATM C ON TRIM(C.CODUL) =  TRIM(D.CUATM)
                         
-                       --LEFT JOIN CIS2.VW_CL_CAEM2 C ON C.CODUL =  D.CAEM2
+                       -- LEFT JOIN CIS2.VW_CL_CAEM2 C ON C.CODUL =  D.CAEM2
                         
-                     --  LEFT JOIN CIS2.VW_CL_CFP C ON C.CODUL =  D.CFP
+                     --   LEFT JOIN CIS.VW_CL_CFP C ON C.CODUL =  D.CFP
                        
                         WHERE 
                         
