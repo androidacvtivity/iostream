@@ -3,16 +3,15 @@ DECLARE -- ====================================================================
 CURSOR C IS
 
  SELECT 
- 
-        TRIM(L.CUIIO) CUIIO ,
+         TRIM(L.CUIIO) CUIIO ,
         L.CUIIO_VERS,
-       -- TRIM(L.DENUMIRE)  DENUMIRE
-        TRIM(L.CUATM) CUATM
+       TRIM(L.DENUMIRE)  DENUMIRE
+        --TRIM(L.CUATM) CUATM
 --        TRIM(L.CFP) CFP,
 --        TRIM(L.CFOJ) CFOJ,
 --        TRIM(L.CAEM2)  CAEM2,
 --        TRIM(L.IDNO)   IDNO
-        FROM   USER_BANCU.CUATM_CIS L
+        FROM   USER_BANCU.P_491_CIS L
   
  
             
@@ -24,8 +23,8 @@ FOR CR IN C
 LOOP
 UPDATE CIS.RENIM SET
 --
---DENUMIRE = CR.DENUMIRE
-CUATM = CR.CUATM
+DENUMIRE = CR.DENUMIRE
+--CUATM = CR.CUATM
 --CFP = CR.CFP
 --CFOJ = CR.CFOJ,
 --CAEM2 = CR.CAEM2,

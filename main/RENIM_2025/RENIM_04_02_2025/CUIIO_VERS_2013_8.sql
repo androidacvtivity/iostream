@@ -11,7 +11,7 @@ SELECT
   D.IDNO    
 ------------------------------------------------
 
-FROM  USER_BANCU.TUR_1 D
+FROM  USER_BANCU.CON_5 D
 
 -- WHERE 
 --
