@@ -1,26 +1,20 @@
---INSERT INTO CIS2.FORM_CUIIO 
---(
+--UPDATE CIS2.FORM_CUIIO
 --
---CUIIO,
---CUIIO_VERS,
---FORM,
---FORM_VERS,
---STATUT
---)
--- 
-----------------------------------------------------------------------------------
+--SET STATUT = '3'
 
 
+SELECT *
 
-
-
+    FROM CIS2.FORM_CUIIO 
+    
+    WHERE 
+    
+CUIIO IN (   
 SELECT 
-L.CUIIO,
-2014 CUIIO_VERS,
-12 FORM,
-2000 FORM_VERS,
-'1' STATUT  
-FROM  USER_BANCU.INV_2_2025  L LEFT  JOIN (
+R.CUIIO
+
+ 
+FROM USER_BANCU.TUR_1 L RIGHT  JOIN (
 SELECT FC.CUIIO,
        FC.CUIIO_VERS  
               FROM(
@@ -32,14 +26,14 @@ SELECT FC.CUIIO,
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (8) AND CUIIO_VERS <= 2014
+                                  WHERE FORM IN (6) AND CUIIO_VERS <= 1068
                                   
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
-             FC.FORM IN (8) AND FC.STATUT <> '3'
-             and FC.FORM_VERS = 2000 
+             FC.FORM IN (6) AND FC.STATUT <> '3'
+             and FC.FORM_VERS = 1004 
              
              ) FC
              
@@ -51,10 +45,11 @@ SELECT FC.CUIIO,
 
 
 WHERE 
-R.CUIIO  IS  NULL ;
+L.CUIIO  IS  NULL
+)
+
+AND FORM = 6  AND CUIIO_VERS = 1068
+AND STATUT = '1';
 
 
-
-        SELECT 
-            CUIIO
-        FROM USER_BANCU.AUTO_65_1068
+ 

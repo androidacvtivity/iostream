@@ -1,22 +1,14 @@
-INSERT INTO CIS2.FORM_CUIIO  (
-        CUIIO,
-        CUIIO_VERS,
-        FORM,
-        FORM_VERS,
-        STATUT 
-)
+--CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_8_2013
+--AS
 
 
-SELECT 
-L.CUIIO,
-  1068 CUIIO_VERS,
-  18 FORM,
-  1004 FORM_VERS,
-   '1' STATUT
-FROM USER_BANCU.CON_5 L LEFT  JOIN (
 SELECT FC.CUIIO,
-       FC.CUIIO_VERS  
-              FROM(
+                   FC.CUIIO_VERS,
+                   FC.FORM,
+                   FC.FORM_VERS,
+                   FC.STATUT
+              FROM( 
+
 SELECT FC.CUIIO,
                    FC.CUIIO_VERS,
                    FC.FORM,
@@ -25,26 +17,17 @@ SELECT FC.CUIIO,
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (18) AND CUIIO_VERS <= 1068
+                                  WHERE FORM IN (8) AND CUIIO_VERS <= 2014
                                   
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
-             FC.FORM IN (18) AND FC.STATUT <> '3'
-             and FC.FORM_VERS = 1004 
+             FC.FORM IN (8) AND FC.STATUT <> '3'
+             AND FC.FORM_VERS = 2000
              
              ) FC
              
+             WHERE 
              
-             WHERE
-               1=1
-
-) R  ON R.CUIIO = L.CUIIO
-
-
-WHERE 
-R.CUIIO  IS  NULL;
-
-
- 
+             FC.CUIIO_VERS <>   2014

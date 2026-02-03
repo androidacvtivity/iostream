@@ -19,14 +19,18 @@ SELECT
 -- doar statut 5 - 126 
  
 -- FORM_TYPE NOT IN  ('2-inv-anual','ind-ts','1-cc','consts','1-b-sc')
---FORM_TYPE IN  ('1-a-sc')
+FORM_TYPE IN  ('1-a-sc')
 -- AND 
-STATUS =   '5' AND  
+--STATUS =   '2' AND  
 
   
  
-( DATA_REG >= TO_DATE('01/29/2026 13:00:00', 'MM/DD/YYYY HH24:MI:SS')
- AND  DATA_REG <= TO_DATE('01/29/2026 14:00:00', 'MM/DD/YYYY HH24:MI:SS'))
+--(---- 
+
+AND DATA_REG >= TO_DATE('01/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+
+
+--  AND  DATA_REG <= TO_DATE('01/29/2026 14:00:00', 'MM/DD/YYYY HH24:MI:SS'))
   
  
 

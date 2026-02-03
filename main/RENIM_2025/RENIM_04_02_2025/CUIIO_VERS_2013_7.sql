@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.INV_2_TRIM
+UPDATE USER_BANCU.INV_2_2025
 SET 
     CUIIO = REPLACE(REPLACE(TRIM(CUIIO), CHR(9), ' '), '  ', ' '),
     CUIIO_VERS = REPLACE(REPLACE(TRIM(CUIIO_VERS), CHR(9), ' '), '  ', ' '),

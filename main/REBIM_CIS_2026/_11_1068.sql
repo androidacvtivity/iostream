@@ -5,13 +5,13 @@ SELECT
   D.CUATM, 
   D.CFP,
   D.CFOJ,
-  D.COCM,
-  D.CAEM2,
-  D.CAEM, ----------------------
-  D.IDNO    
+--  D.COCM,
+  D.CAEM2
+--  D.CAEM, ----------------------
+--  D.IDNO    
 ------------------------------------------------
 
-FROM  USER_BANCU.TUR_1 D
+FROM  USER_BANCU.RENIM_CIS_5C_1068 D
 
 -- WHERE 
 --
