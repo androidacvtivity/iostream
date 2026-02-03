@@ -1,12 +1,12 @@
- INSERT INTO CIS.FORM_CUIIO  (
-        CUIIO,
-        CUIIO_VERS,
-        FORM,
-        FORM_VERS,
-        STATUT 
-)
-
- 
+-- INSERT INTO CIS.FORM_CUIIO  (
+--        CUIIO,
+--        CUIIO_VERS,
+--        FORM,
+--        FORM_VERS,
+--        STATUT 
+--)
+--
+-- 
  
  SELECT            DISTINCT 
                    FC.CUIIO,
@@ -36,6 +36,6 @@
              
              WHERE 
              
-              FC.CUIIO_VERS <> 1068
+              FC.CUIIO_VERS =  1068
                   
                   

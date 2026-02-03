@@ -11,3 +11,16 @@ SET CUATM =
         ELSE 
             CUATM
     END;
+    
+    
+    
+    UPDATE USER_BANCU.RENIM_CIS_5C_1068
+
+  SET CUIIO_VERS = 1068;
+  
+  
+  SELECT 
+    DISTINCT CUIIO   
+  
+  FROM USER_BANCU.RENIM_CIS_5C_1068;
+  

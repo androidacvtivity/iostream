@@ -1,19 +1,19 @@
-INSERT INTO CIS.RENIM  (
-        CUIIO,
-        CUIIO_VERS,
-        DENUMIRE,
- 
-        EDIT_USER,
-        STATUT,
-        CUATM,
-        CFP,
-TIP,
-        CAEM2
-      
-        
-        
-)
-
+--INSERT INTO CIS.RENIM  (
+--        CUIIO,
+--        CUIIO_VERS,
+--        DENUMIRE,
+-- 
+--        EDIT_USER,
+--        STATUT,
+--        CUATM,
+--        CFP,
+--TIP,
+--        CAEM2
+--      
+--        
+--        
+--)
+--
 
 
  SELECT 
@@ -37,5 +37,5 @@ TIP,
                         
                         WHERE
                         
-                        C.CUIIO IS      NULL ; 
+                        C.CUIIO IS   NOT    NULL ; 
                       --   AND C.CUIIO_VERS IS     NULL; 

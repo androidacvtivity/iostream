@@ -45,7 +45,7 @@ SELECT     R.CUIIO,
         FROM USER_BANCU.RENIM_CIS_5C_1068
                ) L ON L.CUIIO = R.CUIIO
                WHERE 
-               R.CUIIO IS NULL               
+               R.CUIIO IS NULL;               
                
                
                

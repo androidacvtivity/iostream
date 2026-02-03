@@ -26,8 +26,8 @@
              WHERE 
              FC.FORM IN (:pFORM) AND FC.STATUT <> '3' ) FC
              
-             WHERE 
-             
-              FC.CUIIO_VERS <> 1068
+--             WHERE 
+--             
+--              FC.CUIIO_VERS <> 1068
                   
                   

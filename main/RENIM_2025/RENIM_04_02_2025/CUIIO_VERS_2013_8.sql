@@ -11,7 +11,7 @@ SELECT
   D.IDNO    
 ------------------------------------------------
 
-FROM  USER_BANCU.INV_2_TRIM D
+FROM  USER_BANCU.TUR_1 D
 
 -- WHERE 
 --

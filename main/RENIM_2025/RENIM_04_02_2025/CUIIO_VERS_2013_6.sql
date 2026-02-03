@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.INV_2_TRIM ----------------------
+UPDATE USER_BANCU.R_67 ----------------------
 SET CUATM = 
     CASE 
         -- Ruleaza prima verificare: înlocuie?te 'O' cu '0'
@@ -14,18 +14,40 @@ SET CUATM =
     END;
     
     --------------------------------------------------------------------------------
-            UPDATE USER_BANCU.INV_2_TRIM
+            UPDATE USER_BANCU.R_67
         SET
          CUATM = CASE WHEN (LENGTH(CUATM) = 6 AND (SUBSTR(CUATM,1,1) = 1  OR SUBSTR(CUATM,1,1) = 3 )) THEN '0'||CUATM ELSE CUATM END,
-         CUIIO_VERS =  1068;
+         CUIIO_VERS =  2014;
         -- CFOJ = '420'
         --CUATM = '0'||REPLACE(CUATM,'O','0')
 --        ,
 --          CUATM  = '0'||CUATM
         ;
         
-        SELECT * 
+        SELECT  CUIIO 
           
-        FROM USER_BANCU.CUATM_CIS2;
+        FROM USER_BANCU.R_67;
         
         ----------------------------------------------
+        
+       
+INSERT INTO CIS2.FORM_CUIIO 
+
+(
+     CUIIO,
+     CUIIO_VERS,
+     FORM,
+     FORM_VERS,
+     STATUT 
+)
+
+ 
+        
+    SELECT  
+     CUIIO,
+     1068 CUIIO_VERS,
+     13 FORM,
+     1004  FORM_VERS,
+     '1'  STATUT 
+          
+        FROM USER_BANCU.R_67;

@@ -30,7 +30,7 @@
   D.CAEM,
   D.IDNO    
 
-FROM USER_BANCU.KAT_112 D
+FROM USER_BANCU.RE D
 
                                 
 --                                
