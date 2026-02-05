@@ -1,12 +1,16 @@
 SELECT 
-D.RIND ||
-' Ati completat eronat Col3. COLB = ' ||MAX( CASE WHEN D.CAPITOL IN (1127)  THEN D.COL31  ELSE NULL END) 
- 
-  AS REZULTAT
-  
+'CAEM2 - ' ||MAX(L.COL31)||'  dar r. 100 si r. 120  si r.200 = ' ||R.COL1  AS REZULTAT
+
+FROM
+(
+SELECT 
+D.CUIIO,
+D.RIND,
+D.COL31
+
   FROM
 
- CIS2.VW_DATA_ALL_TEMP D  
+ CIS2.VW_DATA_ALL D  
  
 WHERE
   (D.PERIOADA=:PERIOADA          ) AND
@@ -14,19 +18,18 @@ WHERE
   (D.CUIIO_VERS=:CUIIO_VERS     OR :CUIIO_VERS = -1) AND
   (D.FORM = :FORM               ) AND
   (D.FORM_VERS=:FORM_VERS ) AND
-  (D.CAPITOL=:CAPITOL           OR :CAPITOL = -1) AND
-  (D.CAPITOL_VERS=:CAPITOL_VERS OR :CAPITOL_VERS = -1) AND
+  (:CAPITOL=:CAPITOL           OR  :CAPITOL <> :CAPITOL) AND
+  (:CAPITOL_VERS=:CAPITOL_VERS OR  :CAPITOL_VERS<>:CAPITOL_VERS) AND
   (D.ID_MD=:ID_MD               OR :ID_MD = -1) AND
   D.CAPITOL IN (1127) AND D.RIND NOT IN ('400')
   AND D.FORM = 64
 GROUP BY 
 D.COL31,
-D.RIND
-HAVING
-CIS2.NVAL(SUM( CASE WHEN D.CAPITOL IN (1127)  THEN D.COL5  ELSE NULL END)) > 0
+D.RIND,
+D.CUIIO
 
-AND 
-D.COL31 NOT IN  (
+HAVING
+D.COL31  IN  (
        SELECT 
 
             SUBSTR(CODUL,2,4) AS COL3
@@ -38,15 +41,54 @@ D.COL31 NOT IN  (
                 
                 AND 
                 (
-                SUBSTR(CODUL,2,2)  IN ('47','56')
-                OR 
-                SUBSTR(CODUL,2,3) IN ('451','453','454','462','463','464','465','466','467','468','469')
-                 OR 
-                SUBSTR(CODUL,2,4) IN ('3514','3523','3530')
-                )
+                SUBSTR(CODUL,2,2)  IN ('56')
+                ) 
                 
+ 
+) )L LEFT JOIN (
+
+SELECT 
+D.CUIIO,
+SUM(CASE WHEN CAPITOL IN (1124) AND D.RIND IN ('100')  THEN  NVAL(D.COL1)  ELSE 0 END) +
+SUM(CASE WHEN CAPITOL IN (1124) AND D.RIND IN ('120')  THEN  NVAL(D.COL1)  ELSE 0 END) + 
+SUM(CASE WHEN CAPITOL IN (1125) AND D.RIND IN ('200')  THEN  NVAL(D.COL1)  ELSE 0 END) AS COL1
+
+
+  FROM
+
+ CIS2.VW_DATA_ALL D  
+ 
+WHERE
+  (D.PERIOADA=:PERIOADA          ) AND
+  (D.CUIIO=:CUIIO                ) AND
+  (D.CUIIO_VERS=:CUIIO_VERS     OR :CUIIO_VERS = -1) AND
+  (D.FORM = :FORM               ) AND
+  (D.FORM_VERS=:FORM_VERS ) AND
+  (:CAPITOL=:CAPITOL           OR  :CAPITOL <> :CAPITOL) AND
+  (:CAPITOL_VERS=:CAPITOL_VERS OR  :CAPITOL_VERS<>:CAPITOL_VERS) AND
+  (D.ID_MD=:ID_MD               OR :ID_MD = -1) AND
+  D.FORM = 64
+GROUP BY 
+D.CUIIO
+
                 
 
-)
 
 
+
+
+) R ON R.CUIIO = L.CUIIO 
+
+
+GROUP BY 
+--L.CUIIO,
+--L.RIND,
+--L.COL31,
+R.COL1
+
+HAVING 
+MAX(L.COL31) IS NOT NULL 
+
+AND 
+
+R.COL1 = 0
