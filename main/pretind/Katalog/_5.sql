@@ -8,8 +8,8 @@
 --)
 --   
 SELECT
-R.CUIIO,
-R.CUIIO_VERS,
+L.CUIIO,
+L.CUIIO_VERS,
 139 FORM,
 299   FORM_VERS,
 '1' STATUT,
@@ -46,7 +46,7 @@ SELECT FC.CUIIO,
              ) L 
              
              
-             RIGHT JOIN (
+             LEFT  JOIN (
 
 
 SELECT
@@ -70,15 +70,15 @@ FROM USER_BANCU.KAT_139 D
              
              
              WHERE 
-             L.CUIIO IS  NOT NULL
+             R.CUIIO IS NOT NULL
              
-             AND L.CUIIO NOT IN (
-             41799535,
-41847116,
-38974963,
-41754550
-
-             )    
+--             AND L.CUIIO NOT IN (
+--             41799535,
+--41847116,
+--38974963,
+--41754550
+--
+--             )    
  ;
              
              --AND R.CUIIO_VERS <> 2013;

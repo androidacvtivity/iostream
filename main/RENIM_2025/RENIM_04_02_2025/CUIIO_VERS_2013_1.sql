@@ -134,4 +134,23 @@ SELECT FC.CUIIO,
              
              WHERE 
              
-             FC.CUIIO_VERS <> 1068
+             FC.CUIIO_VERS <> 1068;
+             
+             
+             
+             
+             --SQL Oracle
+             --Adauga having sa gaseasca in col denumirea - randurile care sunt mai mari de 250 caractere
+             SELECT  
+             CUIIO,
+             DENUMIRE
+               
+              FROM  USER_BANCU.P_2014;
+              
+              
+              SELECT
+  CUIIO,
+  DENUMIRE
+FROM USER_BANCU.P_2014
+WHERE LENGTH(DENUMIRE) > 250
+ORDER BY LENGTH(DENUMIRE) DESC;
