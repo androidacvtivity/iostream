@@ -1,0 +1,11 @@
+  
+  SELECT
+
+  RIND,
+  MAX(RIND_VERS) RIND_VERS
+FROM CIS.MD_RIND
+
+WHERE capitol = 94
+  AND capitol_vers = 384
+GROUP BY 
+RIND

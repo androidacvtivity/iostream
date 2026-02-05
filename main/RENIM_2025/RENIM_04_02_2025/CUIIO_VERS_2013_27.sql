@@ -48,4 +48,68 @@ SELECT FC.CUIIO,
 
 
 WHERE 
-L.CUIIO  IS NOT NULL 
+L.CUIIO  IS NOT NULL ;
+
+
+
+
+--
+--
+--
+----INSERT INTO CIS2.FORM_CUIIO 
+--(
+--
+--CUIIO,
+--CUIIO_VERS,
+--FORM,
+--FORM_VERS,
+--STATUT
+--)
+ 
+    
+
+       SELECT 
+       R.CUIIO,
+       R.CUIIO_VERS,
+       54 FORM,
+       2000 FORM_VERS,
+       '1' STATUT  
+       
+       FROM CIS2.RENIM R 
+       
+            WHERE 
+            
+            R.CUIIO IN (
+819384,
+2933598,
+38930262,
+40109250,
+40151111,
+40347311,
+40547754,
+40856515,
+41011895,
+41084983,
+41181441,
+41245660,
+41616322
+
+
+)
+
+ AND R.CUIIO_VERS BETWEEN 2014 AND 2014
+ 
+ 
+ AND CUIIO NOT IN (
+819384,
+2933598,
+38930262,
+40151111,
+40347311,
+40547754
+
+
+ )
+ 
+ 
+ 

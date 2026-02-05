@@ -20,12 +20,12 @@ SELECT
   4 ID_SCHEMA   
 
 
-                   FROM USER_BANCU.KAT_114  L
+                   FROM USER_BANCU.KAT_139  L
 
                     LEFT JOIN USER_EREPORTING.RENIM_EXTRA R ON R.CUIIO = L.CUIIO AND R.CUIIO_VERS = L.CUIIO_VERS 
                     
                     WHERE
-                    R.CUIIO IS  NOT  NULL 
+                    R.CUIIO IS   NOT NULL 
                     
 --                    AND length(TRIM(L.CFP)) =  3 
                     

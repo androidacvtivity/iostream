@@ -41,7 +41,7 @@ INSERT INTO CIS2.RENIM (
 
 SELECT 
  CUIIO,
- 1068 CUIIO_VERS,
+ 2014 CUIIO_VERS,
  DENUMIRE,
  EDIT_USER,
  STATUT,
@@ -77,12 +77,12 @@ SELECT
  IDNO
 
    
-                    FROM  --  USER_BANCU.VW_MAX_RENIM_CIS2_1067  
-                      USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+                    FROM  --USER_BANCU.VW_MAX_RENIM_CIS2_1067  
+                      -- USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
                       --   USER_BANCU.VW_MAX_RENIM_CIS2
-                     -- USER_BANCU.VW_MAX_RENIM_CIS2_2014
-                  --  USER_BANCU.VW_MAX_RENIM_299_CIS2
+                       USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                   --  USER_BANCU.VW_MAX_RENIM_299_CIS2
                 ----------------------------------------------------------------    
                     WHERE 
          CUIIO IN (
@@ -90,13 +90,13 @@ SELECT
          
 SELECT  CUIIO
                
-              FROM  TUR_1
+              FROM  USER_BANCU.P_2014
 
 
 
 )       AND 
 
-      CUIIO_VERS <> 1068                
+      CUIIO_VERS <> 2014               
 
 
 
@@ -134,4 +134,23 @@ SELECT FC.CUIIO,
              
              WHERE 
              
-             FC.CUIIO_VERS <> 1068
+             FC.CUIIO_VERS <> 1068;
+             
+             
+             
+             
+             --SQL Oracle
+             --Adauga having sa gaseasca in col denumirea - randurile care sunt mai mari de 250 caractere
+             SELECT  
+             CUIIO,
+             DENUMIRE
+               
+              FROM  USER_BANCU.P_2014;
+              
+              
+              SELECT
+  CUIIO,
+  DENUMIRE
+FROM USER_BANCU.P_2014
+WHERE LENGTH(DENUMIRE) > 250
+ORDER BY LENGTH(DENUMIRE) DESC;
