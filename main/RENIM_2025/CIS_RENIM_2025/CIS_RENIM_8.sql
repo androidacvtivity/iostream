@@ -2,16 +2,27 @@ DECLARE -- ====================================================================
 
 CURSOR C IS
 
- SELECT 
-         TRIM(L.CUIIO) CUIIO ,
-        L.CUIIO_VERS,
-       TRIM(L.DENUMIRE)  DENUMIRE
-        --TRIM(L.CUATM) CUATM
---        TRIM(L.CFP) CFP,
---        TRIM(L.CFOJ) CFOJ,
---        TRIM(L.CAEM2)  CAEM2,
---        TRIM(L.IDNO)   IDNO
-        FROM   USER_BANCU.P_491_CIS L
+SELECT
+               FC.CUIIO,
+               FC.CUIIO_VERS,
+               R.PROD
+               FROM
+             (  
+               
+              SELECT FC.CUIIO,
+                   FC.CUIIO_VERS,
+                   FC.FORM,
+                   FC.FORM_VERS,
+                   FC.STATUT
+              FROM CIS.FORM_CUIIO  FC
+                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
+                                   FROM CIS.FORM_CUIIO
+                                  WHERE FORM IN (3) AND CUIIO_VERS <= 492
+                               GROUP BY CUIIO) BB
+                       ON (    BB.CUIIO = FC.CUIIO
+                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
+             WHERE FC.FORM IN (3) 
+             AND FC.STATUT <> '3' ) FC INNER JOIN USER_BANCU.IDN_TS_PROD R ON R.CUIIO = FC.CUIIO
   
  
             
@@ -23,7 +34,9 @@ FOR CR IN C
 LOOP
 UPDATE CIS.RENIM SET
 --
-DENUMIRE = CR.DENUMIRE
+
+PROD = CR.PROD
+--DENUMIRE = CR.DENUMIRE
 --CUATM = CR.CUATM
 --CFP = CR.CFP
 --CFOJ = CR.CFOJ,

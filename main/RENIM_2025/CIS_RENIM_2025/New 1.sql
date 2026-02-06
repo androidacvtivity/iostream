@@ -1,67 +1,31 @@
---INSERT INTO CIS.RENIM 
---
---(
---
---    CUIIO,
---    CUIIO_VERS,
---    DENUMIRE,
---    EDIT_USER,
---    STATUT,
---    CUATM,
---    CFP,
---    CFOJ,
---    COCM,
---    CAEM,
---    BUGET,
---    TIP,
---    PROD,
---    FOR_CUB,
---    ETAPA_PROD,
---    RENIM_PERS,
---    CAEM2
---    
---)
-
-SELECT
-
-    CUIIO,
-    485 CUIIO_VERS, 
-    DENUMIRE,
-    EDIT_USER,
-    STATUT,
-    CUATM,
-    CFP,
-    CFOJ,
-    COCM,
-    CAEM,
-    BUGET,
-    TIP,
-    PROD,
-    FOR_CUB,
-    ETAPA_PROD,
-    RENIM_PERS,
-    CAEM2
-    
-    
-   FROM  --USER_BANCU.VW_MAX_RENIM_TRIM_CIS
-                     VW_MAX_RENIM_299_CIS  
-   
-   WHERE 
-   
-   CUIIO IN (
-   
-   SELECT 
-    CUIIO
-    
-    FROM CUATM_CIS
-   )
-   
-   AND CUIIO_VERS <> 485
-   
-   
---   SELECT *
---   FROM USER_BANCU.CFP_1064;
---   
---      
---   DELETE
---   FROM USER_BANCU.CFP_1064;
+CREATE TABLE USER_BANCU.IDN_TS_PROD
+(
+  CUIIO       NUMBER,
+  CUIIO_VERS  NUMBER,
+  DENUMIRE    VARCHAR2(1024 BYTE),
+  CUATM       VARCHAR2(1024 BYTE),
+  CFP         VARCHAR2(1024 BYTE),
+  CFOJ        VARCHAR2(1024 BYTE),
+  COCM        VARCHAR2(1024 BYTE),
+  CAEM2       VARCHAR2(1024 BYTE),
+  CAEM        VARCHAR2(1024 BYTE),
+  IDNO        VARCHAR2(1024 BYTE),
+  PROD        VARCHAR2(1024 BYTE)
+)
+TABLESPACE TBS_DTI_USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
