@@ -1,8 +1,9 @@
+--Create SQL code to delete duplicates in Oracle by column CUIIO - which is number
 SELECT *
-FROM USER_BANCU.CUATM_CIS_2014 ----------------------------------------------------
+FROM USER_BANCU.R_2014_LIPS ----------------------------------------------------
 WHERE CUIIO IN (
     SELECT CUIIO
-    FROM USER_BANCU.CUATM_CIS_2014 --------------------
+    FROM USER_BANCU.R_2014_LIPS --------------------
     GROUP BY CUIIO
     HAVING COUNT(*) > 1
 )
