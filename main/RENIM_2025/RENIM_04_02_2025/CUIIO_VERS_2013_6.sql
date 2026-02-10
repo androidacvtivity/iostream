@@ -26,7 +26,7 @@ SET CUATM =
         
         SELECT  *
           
-        FROM USER_BANCU.CUATM_CIS_2014;
+        FROM USER_BANCU.CUATM_CIS_491;
         
         ----------------------------------------------
         
