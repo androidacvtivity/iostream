@@ -11,7 +11,7 @@ SELECT
   D.IDNO    
 ------------------------------------------------
 
-FROM  USER_BANCU.CON_5 D
+FROM  CUATM_CIS_491 D
 
 -- WHERE 
 --
