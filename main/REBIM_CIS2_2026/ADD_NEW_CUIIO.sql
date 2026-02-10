@@ -1,0 +1,11 @@
+SELECT L.CUIIO,
+       R.CUIIO R_CUIIO,
+       R.CUIIO_VERS R_CUIIO_VERS  
+   FROM USER_BANCU.CALINCU L  LEFT JOIN USER_BANCU.VW_MAX_RENIM_CIS2 R ON R.CUIIO = L.CUIIO 
+   
+        WHERE 
+        
+            R.CUIIO IS NOT NULL
+            AND  
+            R.CUIIO_VERS <>   2014;
+            

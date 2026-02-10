@@ -85,40 +85,21 @@ SELECT
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
                         -- USER_BANCU.VW_MAX_RENIM_CIS2_2014
                       USER_BANCU.VW_MAX_RENIM_CIS2
-                  --  USER_BANCU.VW_MAX_RENIM_299_CIS2
+            
                 ----------------------------------------------------------------    
                     WHERE 
          
          
-        ( CUIIO IN (
-        
-   SELECT CUIIO  
-   FROM USER_BANCU.CALINCU_63
---
-         )
-         
-------         
-         AND  
-         
-         (CUIIO_VERS <> 2014 OR CUIIO_VERS <> 2015) )
---         
---         
-         
-         AND  CUIIO NOT IN (
-         
-         
-         SELECT CUIIO    
-         FROM USER_BANCU.VW_MAX_RENIM_CIS2_2014
-         
-         WHERE 
          CUIIO IN (
         
-   SELECT CUIIO  
-   FROM USER_BANCU.CALINCU_63
---
-         )
-         
-         
-         AND CUIIO_VERS = 2014) 
-
---            ; --------------------------
+SELECT L.CUIIO
+      
+   FROM USER_BANCU.CALINCU L  LEFT JOIN USER_BANCU.VW_MAX_RENIM_CIS2 R ON R.CUIIO = L.CUIIO 
+   
+        WHERE 
+        
+            R.CUIIO IS NOT NULL
+            AND  
+            R.CUIIO_VERS <>   2014
+            
+)
