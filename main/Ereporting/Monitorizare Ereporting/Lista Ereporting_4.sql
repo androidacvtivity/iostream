@@ -38,6 +38,9 @@ FC.FORM IN (:pFORM);
 
  ;
  
+ 
+ --- 1847603
+ 
  select DISTINCT 
  CUIIO,
  CUIIO_VERS,
