@@ -1,0 +1,39 @@
+ SELECT 
+ D.CUIIO,
+ D.RIND,
+ SUM(D.COL8) AS COL8,
+ SUM(D.COL9) AS COL9,
+ SUM(D.COL10) AS COL10,
+ SUM(D.COL11) AS COL11
+ 
+ FROM CIS2.VW_DATA_ALL D 
+ WHERE
+  D.PERIOADA IN (:pPERIOADA) AND 
+  D.FORM_VERS = :pFORM_VERS     AND    
+  (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%' AND
+  D.FORM IN (50)                 AND 
+  D.CAPITOL IN (1058) 
+ -- AND D.CUIIO =  390607450120
+  AND D.RIND IN ('10112.1.1','10112.1.2','10113.1.1','10114.1.2','10912.1.2','10912.1.3','10913.2.1','10914.1.4')
+  
+  
+  GROUP BY 
+  D.CUIIO,
+  D.RIND
+  
+  ORDER BY 
+   D.CUIIO,
+   D.RIND
+   
+   
+   -- Modifica SQL Oracle sa faca order by dupa asa rand cum este acici 
+   -- 10112.1.1 
+--   D.RIND
+--10112.1.2 
+--10113.1.1 
+--10114.1.2 
+--10912.1.2 
+--10912.1.3 
+--10913.2.1 
+--10914.1.4 
