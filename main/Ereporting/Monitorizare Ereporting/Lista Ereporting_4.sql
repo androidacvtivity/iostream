@@ -34,7 +34,11 @@ SELECT FC.CUIIO,
 
 
 AND 
-FC.FORM IN (:pFORM);
+FC.FORM IN (:pFORM)
+
+ORDER BY 
+FC.CUIIO
+
 
  ;
  
@@ -71,6 +75,9 @@ FORM  IN (:pFORM)
 GROUP BY
  CUIIO,
  CUIIO_VERS
+ 
+ ORDER BY 
+ CUIIO
 
 ;
 

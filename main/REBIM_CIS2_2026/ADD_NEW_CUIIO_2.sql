@@ -17,62 +17,49 @@ FROM
 SELECT L.CUIIO,
        R.CUIIO R_CUIIO,
        R.CUIIO_VERS CUIIO_VERS  
-   FROM USER_BANCU.CALINCU_63 L  LEFT JOIN USER_BANCU.VW_MAX_RENIM_CIS2 R ON R.CUIIO = L.CUIIO 
+   FROM USER_BANCU.CALINCU_59 L  LEFT JOIN USER_BANCU.VW_MAX_RENIM_CIS2 R ON R.CUIIO = L.CUIIO 
    
         WHERE 
         
-            R.CUIIO IS NOT NULL
-            AND  
-            R.CUIIO_VERS = 2014 ) L LEFT JOIN (
-            SELECT FC.CUIIO,
-                   FC.CUIIO_VERS,
-                   FC.FORM,
-                   FC.FORM_VERS,
-                   FC.STATUT
-              FROM CIS2.FORM_CUIIO  FC
-                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
-                                   FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (63) AND CUIIO_VERS <= 2014
-                                  
-                               GROUP BY CUIIO) BB
-                       ON (    BB.CUIIO = FC.CUIIO
-                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
-             WHERE 
-             FC.FORM IN (63) AND FC.STATUT <> '3'
-             AND FC.FORM_VERS = 2000
-            )  R ON R.CUIIO = L.CUIIO 
-            
-            
-            WHERE 
-            
-            R.CUIIO IS NULL;
-            
-            
-            
-            
-            
-            
-            
-            ;
-            
-            
-            
-            
-            
-            SELECT FC.CUIIO,
-                   FC.CUIIO_VERS,
-                   FC.FORM,
-                   FC.FORM_VERS,
-                   FC.STATUT
-              FROM CIS2.FORM_CUIIO  FC
-                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
-                                   FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (57) AND CUIIO_VERS <= 2014
-                                  
-                               GROUP BY CUIIO) BB
-                       ON (    BB.CUIIO = FC.CUIIO
-                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
-             WHERE 
-             FC.FORM IN (57) AND FC.STATUT <> '3'
-             AND FC.FORM_VERS = 2009;
-            
+            R.CUIIO IS  NOT NULL
+            AND 
+            R.CUIIO_VERS = 2014        
+ ) L ;
+ 
+ 
+ 
+ 
+ 
+ ----------------------------------------------------------------------------------
+ 
+ 
+ INSERT INTO CIS2.FORM_CUIIO  (
+        CUIIO,
+        CUIIO_VERS,
+        FORM,
+        FORM_VERS,
+        STATUT 
+)
+ 
+
+ 
+SELECT 
+L.CUIIO,
+L.CUIIO_VERS,
+63 FORM,
+2000 FORM_VERS,
+'1' STATUT
+      
+      --  L.KAT_112
+        FROM   USER_BANCU.F_57_new L
+        
+             --   CIS.RENIM  L
+        
+        
+                        LEFT  JOIN CIS2.RENIM C ON C.CUIIO  =  TRIM(L.CUIIO)  
+                                                  AND C.CUIIO_VERS  =  TRIM(L.CUIIO_VERS)
+                        
+                        WHERE
+                        
+                        C.CUIIO IS NOT  NULL; 
+       

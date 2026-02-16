@@ -43,7 +43,7 @@
 
 SELECT 
  CUIIO,
- 1066 CUIIO_VERS,
+ 1068 CUIIO_VERS,
  DENUMIRE,
  EDIT_USER,
  STATUT,
@@ -59,7 +59,7 @@ SELECT
  GENMUZEE,
  TIPMUZEE,
  TIP_LOCAL,
- TIP_INST,-------------------------------------------------------------
+ TIP_INST,
  CAEM2,
  N85_NTL,
  N85_NTIIP,
@@ -86,14 +86,14 @@ SELECT
                   
 CUIIO IN (
 
-40440594,
-29908610,
-53404
+SELECT 
+    CUIIO 
+    FROM   USER_BANCU.F_13
 
 
 )
 
-AND CUIIO_VERS  NOT  IN (1066 )
+AND CUIIO_VERS  NOT  IN (1068 )
 
 --SELECT FC.CUIIO
 --              FROM

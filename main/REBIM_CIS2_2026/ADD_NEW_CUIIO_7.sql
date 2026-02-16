@@ -13,7 +13,7 @@ INSERT INTO CIS2.RENIM  (
         
 )
 
-----------------------------------------------
+------------------------------------------------
 
  SELECT 
  
@@ -31,7 +31,7 @@ INSERT INTO CIS2.RENIM  (
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.RENIM_2014 L
+        FROM   USER_BANCU.F_57_new L
         
              --   CIS.RENIM  L
         
