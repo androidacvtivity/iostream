@@ -1,47 +1,80 @@
-INSERT INTO CIS2.RENIM  (
-        CUIIO,
-        CUIIO_VERS,
-        DENUMIRE,
-        EDIT_USER,
-        STATUT,
-        CUATM,
-        CFP,
-        CFOJ,
-        CAEM2,
-        IDNO
-        
-        
-)
+--INSERT INTO CIS2.RENIM  (
+--        CUIIO,
+--        CUIIO_VERS,
+--        DENUMIRE,
+--        EDIT_USER,
+--        STATUT,
+--        CUATM,
+--        CFP,
+--        CFOJ,
+--        CAEM2,
+--        IDNO
+--        
+--        
+--)
 
 ------------------------------------------------
 
- SELECT 
- 
-        TRIM(L.CUIIO) CUIIO ,
-        --2013 CUIIO_VERS,
-        L.CUIIO_VERS,
-        TRIM(L.DENUMIRE)  DENUMIRE,
-        1   EDIT_USER,
-        '1' STATUT,
-        TRIM(L.CUATM) CUATM,
-        TRIM(L.CFP) CFP,
-        TRIM(L.CFOJ) CFOJ,
-        TRIM(L.CAEM2)  CAEM2,
- 
-        TRIM(TRIM(L.IDNO))  IDNO
-      
+
+INSERT INTO CIS2.FORM_CUIIO  (
+        CUIIO,
+        CUIIO_VERS,
+        FORM,
+        FORM_VERS,
+        STATUT 
+)
+
+SELECT 
+L.CUIIO,
+L.CUIIO_VERS,
+59 FORM,
+2000 FORM_VERS,
+'1' STATUT
+
+
+
+
+
+
+
+
+-- SELECT 
+-- 
+--        TRIM(L.CUIIO) CUIIO ,
+--        --2013 CUIIO_VERS,
+--        1068 CUIIO_VERS,
+--        TRIM(L.DENUMIRE)  DENUMIRE,
+--        1   EDIT_USER,
+--        '1' STATUT,
+--        TRIM(L.CUATM) CUATM,
+--        TRIM(L.CFP) CFP,
+--        TRIM(L.CFOJ) CFOJ,
+--        TRIM(L.CAEM2)  CAEM2,
+-- 
+--        TRIM(TRIM(L.IDNO))  IDNO
+--      
       --  L.KAT_112
-        FROM   USER_BANCU.F_57_new L
+        FROM   USER_BANCU.F_18 L
         
              --   CIS.RENIM  L
         
         
                         LEFT  JOIN CIS2.RENIM C ON C.CUIIO  =  TRIM(L.CUIIO)  
-                                                  AND C.CUIIO_VERS  =  TRIM(L.CUIIO_VERS)
+                                                  AND C.CUIIO_VERS  =   TRIM(L.CUIIO_VERS)
                         
                         WHERE
                         
-                        C.CUIIO IS  NULL; 
+                        C.CUIIO IS NOT  NULL
+                        
+                        AND C.CUIIO NOT IN (
+                        40214455,
+41834680,
+41835389,
+41835892,
+41914315
+
+                        )
+                        ; 
                        -- AND C.CUIIO_VERS IS   NULL -
                        
                        
@@ -148,7 +181,7 @@ SELECT
         TRIM(L.CUIIO) CUIIO
        
 
-        FROM   USER_BANCU.RENIM_2014 L
+        FROM   USER_BANCU.F_18 L
         
              --   CIS.RENIM  L
         

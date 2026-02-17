@@ -17,7 +17,7 @@ FROM
 SELECT L.CUIIO,
        R.CUIIO R_CUIIO,
        R.CUIIO_VERS CUIIO_VERS  
-   FROM USER_BANCU.CALINCU_59 L  LEFT JOIN USER_BANCU.VW_MAX_RENIM_CIS2 R ON R.CUIIO = L.CUIIO 
+   FROM USER_BANCU.F_18 L  LEFT JOIN USER_BANCU.VW_MAX_RENIM_CIS2 R ON R.CUIIO = L.CUIIO 
    
         WHERE 
         
@@ -33,14 +33,14 @@ SELECT L.CUIIO,
  ----------------------------------------------------------------------------------
  
  
- INSERT INTO CIS2.FORM_CUIIO  (
-        CUIIO,
-        CUIIO_VERS,
-        FORM,
-        FORM_VERS,
-        STATUT 
-)
- 
+-- INSERT INTO CIS2.FORM_CUIIO  (
+--        CUIIO,
+--        CUIIO_VERS,
+--        FORM,
+--        FORM_VERS,
+--        STATUT 
+--)
+-- 
 
  
 SELECT 
