@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.P_2014
+UPDATE USER_BANCU.F_18
 SET 
     CUIIO = REPLACE(REPLACE(TRIM(CUIIO), CHR(9), ' '), '  ', ' '),
     CUIIO_VERS = REPLACE(REPLACE(TRIM(CUIIO_VERS), CHR(9), ' '), '  ', ' '),
@@ -13,4 +13,4 @@ SET
 
 
 SELECT * 
- FROM USER_BANCU.P_2014;
+ FROM USER_BANCU.F_18;

@@ -23,7 +23,7 @@
                         INNER JOIN CIS2.MD_CAPITOL MR ON MR.CAPITOL = D.CAPITOL AND MR.CAPITOL_VERS = D.CAPITOL_VERS  
             
                     WHERE 
-                    D.PERIOADA IN (1066)
+                    D.PERIOADA IN (:pPERIOADA)
                     AND D.FORM IN (45)
                  --   AND MR.DEN_SHORT IN ('Cap.I')
                     

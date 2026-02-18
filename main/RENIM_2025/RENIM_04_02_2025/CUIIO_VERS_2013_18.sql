@@ -1,11 +1,11 @@
-INSERT INTO CIS2.FORM_CUIIO  (
-        CUIIO,
-        CUIIO_VERS,
-        FORM,
-        FORM_VERS,
-        STATUT 
-)
-
+--INSERT INTO CIS2.FORM_CUIIO  (
+--        CUIIO,
+--        CUIIO_VERS,
+--        FORM,
+--        FORM_VERS,
+--        STATUT 
+--)
+--
 
 SELECT 
   DISTINCT L.CUIIO,
@@ -44,7 +44,7 @@ SELECT FC.CUIIO,
 
 
 WHERE 
-R.CUIIO  IS  NULL 
+R.CUIIO IS NOT  NULL 
 
 --AND L.CUIIO IN (
 --

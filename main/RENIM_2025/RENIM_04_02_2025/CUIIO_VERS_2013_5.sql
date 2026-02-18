@@ -1,8 +1,8 @@
 SELECT *
-FROM USER_BANCU.CUATM_CIS_491 ----------------------------------------------------
+FROM USER_BANCU.R_57 ----------------------------------------------------
 WHERE CUIIO IN (
     SELECT CUIIO
-    FROM USER_BANCU.CUATM_CIS_491 --------------------
+    FROM USER_BANCU.R_57 --------------------
     GROUP BY CUIIO
     HAVING COUNT(*) > 1
 )

@@ -117,6 +117,11 @@ select DISTINCT
 
 AND 
 
-FORM IN (:pFORM);
+FORM IN (:pFORM)
 
- --41301386
+
+
+order by
+CUIIO
+
+;
