@@ -94,9 +94,11 @@ SELECT  CUIIO
 
 
 
-)       AND 
+)       
 
-      CUIIO_VERS <> 2014               
+ 
+    
+--    AND  CUIIO_VERS <> 2014               
 
 
 
