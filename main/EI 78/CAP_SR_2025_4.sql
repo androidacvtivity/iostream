@@ -10,4 +10,4 @@
                         R ON R.CUIIO = L.CUIIO    
                         
                         WHERE 
-                        R.CUIIO IS NULL
+                        R.CUIIO IS NOT NULL
