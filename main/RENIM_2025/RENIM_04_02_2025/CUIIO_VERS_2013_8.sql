@@ -4,14 +4,14 @@ SELECT
   D.DENUMIRE,
   D.CUATM, 
   D.CFP,
-  D.CFOJ,
-  D.COCM,
-  D.CAEM2,
-  D.CAEM, ----------------------
-  D.IDNO    
+--  D.CFOJ,
+  D.COCM
+--  D.CAEM2,
+--  D.CAEM, ----------------------
+--  D.IDNO    
 ------------------------------------------------
 
-FROM  CUATM_CIS_491 D
+FROM  USER_BANCU.AGRO_16 D
 
 -- WHERE 
 --
@@ -30,7 +30,7 @@ FROM  CUATM_CIS_491 D
 --------------------------------------------------------------------------------
                      --   LEFT JOIN  USER_BANCU.VW_MAX_RENIM_CIS2   DD ON DD.CUIIO = D.CUIIO    
                                 
-                         LEFT JOIN CIS.VW_CL_CUATM C ON TRIM(C.CODUL) =  TRIM(D.CUATM)
+                         LEFT JOIN CIS2.VW_CL_CUATM C ON TRIM(C.CODUL) =  TRIM(D.CUATM)
                         
                        -- LEFT JOIN CIS2.VW_CL_CAEM2 C ON C.CODUL =  D.CAEM2
                         

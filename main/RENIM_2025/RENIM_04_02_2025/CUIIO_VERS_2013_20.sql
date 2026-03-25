@@ -15,7 +15,7 @@ WHERE
 CUIIO IN (
 
 SELECT R.CUIIO
-FROM USER_BANCU.TUR_1 L INNER  JOIN (
+FROM USER_BANCU.KATALOG_EI_78_1068 L INNER  JOIN (
 SELECT FC.CUIIO,
        FC.CUIIO_VERS  
               FROM(
@@ -27,14 +27,14 @@ SELECT FC.CUIIO,
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (8) AND CUIIO_VERS <= 2014
+                                  WHERE FORM IN (44) AND CUIIO_VERS <= 1068
                                   
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
-             FC.FORM IN (8) AND FC.STATUT <> '3'
-             and FC.FORM_VERS = 2000 
+             FC.FORM IN (44) AND FC.STATUT <> '3'
+             and FC.FORM_VERS = 1004
              
              ) FC
              
@@ -46,12 +46,12 @@ SELECT FC.CUIIO,
 
 
 WHERE 
-L.CUIIO  IS NULL 
+R.CUIIO  IS NULL 
 )
 )
 
-AND FORM = 8 AND CUIIO_VERS = 2014
+AND FORM = 44 AND CUIIO_VERS = 1068
 
-AND FORM_VERS = 2000
+AND FORM_VERS = 1004
 
 AND STATUT = '1';

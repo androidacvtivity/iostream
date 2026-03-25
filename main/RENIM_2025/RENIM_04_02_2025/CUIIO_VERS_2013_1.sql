@@ -35,7 +35,7 @@
 --    GEN_INSTITUTIE,
 --    IDNO
 --)
--- 
+
 
 
 
@@ -78,156 +78,84 @@ SELECT
 
    
                     FROM  --USER_BANCU.VW_MAX_RENIM_CIS2_1067  
-                      -- USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+             --           USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
-                      --   USER_BANCU.VW_MAX_RENIM_CIS2
+                       --   USER_BANCU.VW_MAX_RENIM_CIS2
                        USER_BANCU.VW_MAX_RENIM_CIS2_2014
                    --  USER_BANCU.VW_MAX_RENIM_299_CIS2
                 ----------------------------------------------------------------    
                     WHERE 
         
                 
+
 CUIIO IN (
-38912330,
-38800737,
-38916960,
-38884792,
-41776468,
-41730160,
-41832675,
-41832540,
-41833114,
-41833427,
-41832379,
-41833580,
-41833723,
-41832345,
-37743931,
-41833462,
-39082043,
-6808157,
-41832451,
-41832868,
-41832534,
-41589720,
-41834071,
-41832994,
-39077195,
-41726967,
-41774854,
-41833108,
-41833611,
-41833930,
-41730638,
-41727518,
-41832818,
-38903164,
-40021006,
-38422519,
-38325940,
-37687523,
-38983710,
-40130184,
-38971054,
-38954558,
-40052426,
-38403812,
-38644800,
-38898721,
-37958100,
-37826025,
-38585492,
-3943676,
-38951873,
-37702398,
-38395314,
-38343808,
-38644088,
-38403901,
-3944121,
-37421334,
-38912100,
-38470599,
-37439898,
-2741485,
-37368628,
-38918338,
-40572835,
-20280556,
-37477435,
-38546687,
-37522408,
-40067497,
-5915052,
-38973834,
-38968614,
-37364062,
-38865197,
-38900344,
-38937011,
-38934260,
-40971452,
-41021540,
-41587655
+3184303,
+37798375,
+40449158,
+40770972,
+41173379,
+41234715,
+41260894,
+41264426,
+41392331,
+41449485,
+41450318,
+41534222,
+41558234,
+41561472,
+41838169
+
 )
 
-AND CUIIO_VERS =  2014
+--AND CUIIO_VERS =   2014
 
-            
-
-
-
+ORDER BY 
+CUIIO 
 ;
-
-
-
-
-
-SELECT FC.CUIIO,
-                   FC.CUIIO_VERS,
-                   FC.FORM,
-                   FC.FORM_VERS,
-                   FC.STATUT
-              FROM 
-
-(
-
-SELECT FC.CUIIO,
-                   FC.CUIIO_VERS,
-                   FC.FORM,
-                   FC.FORM_VERS,
-                   FC.STATUT
-              FROM CIS2.FORM_CUIIO  FC
-                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
-                                   FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (:pFORM) AND CUIIO_VERS <= :pPERIOADA
-                                  
-                               GROUP BY CUIIO) BB
-                       ON (    BB.CUIIO = FC.CUIIO
-                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
-             WHERE 
-             FC.FORM IN (:pFORM) AND FC.STATUT <> '3') FC
-             
-             
-             WHERE 
-             
-             FC.CUIIO_VERS <> 1068;
-             
-             
-             
-             
-             --SQL Oracle
-             --Adauga having sa gaseasca in col denumirea - randurile care sunt mai mari de 250 caractere
-             SELECT  
-             CUIIO,
-             DENUMIRE
-               
-              FROM  USER_BANCU.P_2014;
-              
-              
-              SELECT
-  CUIIO,
-  DENUMIRE
-FROM USER_BANCU.P_2014
-WHERE LENGTH(DENUMIRE) > 250
-ORDER BY LENGTH(DENUMIRE) DESC;
+--
+--
+--INSERT INTO CIS2.FORM_CUIIO
+--
+-- (
+--               CUIIO,
+--               CUIIO_VERS,
+--               FORM,
+--               FORM_VERS,
+--                STATUT
+-- 
+-- )
+--
+--
+--        SELECT FC.CUIIO,
+--               1068 CUIIO_VERS,
+--               44 FORM,
+--               1004 FORM_VERS,
+--               '1' STATUT  
+--              FROM ( 
+--              
+--              SELECT FC.CUIIO,
+--                   FC.CUIIO_VERS,
+--                   FC.FORM,
+--                   FC.FORM_VERS,
+--                   FC.STATUT
+--              FROM CIS2.FORM_CUIIO  FC
+--                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
+--                                   FROM CIS2.FORM_CUIIO
+--                                  WHERE FORM IN (44) AND CUIIO_VERS <= 1068
+--                                  
+--                               GROUP BY CUIIO) BB
+--                       ON (    BB.CUIIO = FC.CUIIO
+--                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
+--             WHERE 
+--             FC.FORM IN (44) AND FC.STATUT <> '3'
+--             AND FC.FORM_VERS = 1004) FC
+--             
+--             
+--             WHERE
+--             
+--             FC.CUIIO_VERS <> 1068
+--             
+--             ORDER BY
+--             
+--             FC.CUIIO,
+--               FC.CUIIO_VERS

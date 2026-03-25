@@ -112,7 +112,12 @@
              
             ) D
             
-            
-            
+
+
+WHERE 
+CUATM LIKE '92%'            
+AND COL1 LIKE  '%EREPORTING%'           
+
+
             ORDER BY
             D.DATA_REG DESC 
