@@ -1,3 +1,5 @@
+       
+--Modifica SQL Oracle - daca COL1 - COL7 este egal cu zero sa fie null 
  SELECT
                 D.CUIIO,
                 R.DENUMIRE,
@@ -22,7 +24,7 @@
             
                     WHERE 
                     D.PERIOADA IN (:pPERIOADA)
-                    AND D.FORM IN (45)
+                    AND D.FORM IN (26)
                  --   AND MR.DEN_SHORT IN ('Cap.I')
                     
                    
@@ -48,7 +50,6 @@
 --1056
 --1060
 --1064
-
 
                 
                

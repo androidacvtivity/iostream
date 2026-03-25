@@ -3,15 +3,19 @@ DECLARE -- ====================================================================
 CURSOR C IS
 
  SELECT 
-         TRIM(L.CUIIO) CUIIO,
-        L.CUIIO_VERS,
-     --   TRIM(L.DENUMIRE)  DENUMIRE
-         TRIM(L.CUATM) CUATM
---        TRIM(L.CFP) CFP,
---        TRIM(L.CFOJ) CFOJ,
---        TRIM(L.CAEM2)  CAEM2,
---        TRIM(L.IDNO)   IDNO
-        FROM   USER_BANCU.CUATM_CIS_10 L
+         CUIIO,
+         CUIIO_VERS,
+         DENUMIRE,
+         CUATM,
+         CFP,
+         COCM,
+         N85_NTL,
+         N85_NTIIP,
+         N85_NDIIP,
+         N85_NPDS,
+         N85_NRIIP,
+         N85_NSIIP  
+        FROM   USER_BANCU.RENIM_85 L
   
  
             
@@ -21,19 +25,23 @@ CURSOR C IS
 BEGIN -- ======================================================================
 FOR CR IN C
 LOOP
---UPDATE CIS2.RENIM SET
+UPDATE CIS2.RENIM SET
 --
---DENUMIRE = CR.DENUMIRE -- Din care tabel este CR  
-CUATM = CR.CUATM
---CFP = CR.CFP,
---CFOJ = CR.CFOJ,
---CAEM2 = CR.CAEM2,
---IDNO = CR.IDNO
+DENUMIRE = CR.DENUMIRE,  
+CUATM = CR.CUATM,
+CFP = CR.CFP,
+COCM = CR.COCM,
+N85_NTL = CR.N85_NTL,
+N85_NTIIP  =  CR.N85_NTIIP,
+         N85_NDIIP = CR.N85_NDIIP,
+         N85_NPDS =  CR.N85_NPDS,
+         N85_NRIIP = CR.N85_NRIIP,
+         N85_NSIIP = CR.N85_NSIIP 
 
 WHERE
 CUIIO = CR.CUIIO 
 AND 
-CUIIO_VERS IN (1067,1068); 
+CUIIO_VERS =  CR.CUIIO_VERS; 
 END LOOP;
 END;
 

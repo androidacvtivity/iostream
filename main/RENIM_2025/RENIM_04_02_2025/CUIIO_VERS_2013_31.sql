@@ -1,0 +1,20 @@
+ SELECT 
+ 
+  L.CUIIO,
+  L.CUIIO_VERS,
+  L.DENUMIRE,
+  L.CUATM, 
+  L.CFP,
+  L.COCM,     
+  L.N85_NTL,
+  L.N85_NTIIP,
+  L.N85_NDIIP,
+  L.N85_NPDS,
+  L.N85_NRIIP,
+  L.N85_NSIIP 
+        FROM   USER_BANCU.RENIM_85 L;
+        
+        
+        UPDATE  USER_BANCU.RENIM_85
+        
+       SET CUIIO_VERS = 2014;
