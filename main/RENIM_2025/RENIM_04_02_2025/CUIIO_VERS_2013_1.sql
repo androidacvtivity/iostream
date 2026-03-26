@@ -1,40 +1,40 @@
---INSERT INTO CIS2.RENIM (
---    CUIIO,
---    CUIIO_VERS,
---    DENUMIRE,
---    EDIT_USER,
---    STATUT,
---    CUATM,
---    CFP,
---    CFOJ,
---    COCM,
---    CAEM,
---    BUGET,
---    TIP,
---    PROD,
---    FOR_CUB,
---    GENMUZEE,
---    TIPMUZEE,
---    TIP_LOCAL,
---    TIP_INST,
---    CAEM2,
---    N85_NTL,
---    N85_NTIIP,
---    N85_NDIIP,
---    N85_NPDS,
---    N85_NRIIP,
---    N85_NSIIP,
---    GENMUZEE2,
---    NFI,
---    NTII,
---    NPDS,
---    ORGANE,
---    TIP_INV,
---    RENIM_PERS,
---    ORGANE_COND,
---    GEN_INSTITUTIE,
---    IDNO
---)
+INSERT INTO CIS2.RENIM (
+    CUIIO,
+    CUIIO_VERS,
+    DENUMIRE,
+    EDIT_USER,
+    STATUT,
+    CUATM,
+    CFP,
+    CFOJ,
+    COCM,
+    CAEM,
+    BUGET,
+    TIP,
+    PROD,
+    FOR_CUB,
+    GENMUZEE,
+    TIPMUZEE,
+    TIP_LOCAL,
+    TIP_INST,
+    CAEM2,
+    N85_NTL,
+    N85_NTIIP,
+    N85_NDIIP,
+    N85_NPDS,
+    N85_NRIIP,
+    N85_NSIIP,
+    GENMUZEE2,
+    NFI,
+    NTII,
+    NPDS,
+    ORGANE,
+    TIP_INV,
+    RENIM_PERS,
+    ORGANE_COND,
+    GEN_INSTITUTIE,
+    IDNO
+)
 
 
 
@@ -89,29 +89,13 @@ SELECT
                 
 
 CUIIO IN (
-3184303,
-37798375,
-40449158,
-40770972,
-41173379,
-41234715,
-41260894,
-41264426,
-41392331,
-41449485,
-41450318,
-41534222,
-41558234,
-41561472,
-41838169
-
+37726016,
+40516340,
+40780887,
+41570169
 )
 
---AND CUIIO_VERS =   2014
-
-ORDER BY 
-CUIIO 
-;
+AND CUIIO_VERS <>  2014;
 --
 --
 --INSERT INTO CIS2.FORM_CUIIO
