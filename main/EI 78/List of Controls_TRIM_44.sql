@@ -5,7 +5,7 @@ SELECT
       L.CONTROL,
       L.CONTROL_VERS, ---------------------------
       L.FORMULA,
-      L.SQL_TEXT,
+    --  L.SQL_TEXT,
       L.PRIORITATEA,
       L.STATUT
  FROM( 
@@ -23,7 +23,7 @@ SELECT
         FROM CIS2.MD_CONTROL A
          WHERE
          1=1
-         AND A.FORM  = 8
+         AND A.FORM  = 19
         GROUP BY 
           A.CONTROL
           ORDER BY 
@@ -31,17 +31,19 @@ SELECT
         )  A  ON A.CONTROL = B.CONTROL AND A.CONTROL_VERS = B.CONTROL_VERS   
           WHERE
          1=1
-         AND B.FORM  = 8
+         AND B.FORM  = 19
          AND B.STATUT <> '3'
         ORDER BY 
           B.CONTROL ) L
           WHERE 
           1=1 
-          
+    
           
         --  AND FORMULA LIKE '%perioada%'
      -- AND     
 ----       
 --       (DBMS_LOB.INSTR(L.SQL_TEXT, 'VW_DATA_ALL_TEMP') > 0
 --                   AND DBMS_LOB.INSTR(L.SQL_TEXT, 'VW_DATA_ALL') >  0)
+
+
 
