@@ -4,9 +4,9 @@
       D.CUIIO,
       D.CAPITOL,
       D.RIND,
-      SUM(D.COL1) COL1,
-      SUM(D.COL2) COL2,
-      SUM(D.COL3) COL3,
+    NULLIF(SUM(D.COL1), 0) AS COL1,
+NULLIF(SUM(D.COL2), 0) AS COL2,
+NULLIF(SUM(D.COL3), 0) AS COL3,
       MAX(D.COL31) COL31
       FROM   STAT.VW_DATA_ALL D --INNER JOIN CIS2.MD_RIND MR ON MR.ID_MD = D.ID_MD 
       
@@ -26,7 +26,7 @@
       
       
       HAVING 
-      
+      -- Sa afiseze daca este cel putin o coloana cu date - in 31 este varchar 
       SUM(D.COL1)||SUM(D.COL2)||SUM(D.COL3)||MAX(D.COL31) IS NOT NULL 
       OR 
       SUM(D.COL1)||SUM(D.COL2)||SUM(D.COL3)||MAX(D.COL31) <> 0
