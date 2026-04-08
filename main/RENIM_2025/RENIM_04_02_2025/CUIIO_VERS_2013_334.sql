@@ -27,4 +27,13 @@ SELECT FC.CUIIO,
              
              
              ORDER BY 
-             R.CUIIO
+             R.CUIIO;
+             
+             
+             
+             
+              SELECT TRIM(CUIIO) CUIIO,
+                   TRIM(CUIIO_VERS) CUIIO_VERS,
+                  
+                   TRIM(CFP) CFP
+              FROM     CFP 

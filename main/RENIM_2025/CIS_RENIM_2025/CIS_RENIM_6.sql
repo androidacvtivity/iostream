@@ -1,9 +1,12 @@
-UPDATE USER_BANCU.P_491_CIS
+UPDATE USER_BANCU.CFP
 
-SET CUIIO_VERS = 491;
-
-
+SET CUIIO_VERS = 492;
 
 
-        SELECT *
-            FROM USER_BANCU.P_491_CIS;
+
+
+        SELECT 
+             CUIIO,
+             CUIIO_VERS,
+             CFP   
+            FROM USER_BANCU.CFP;
