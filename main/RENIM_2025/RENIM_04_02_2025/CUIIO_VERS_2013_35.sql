@@ -5,8 +5,8 @@ CURSOR C IS
  SELECT TRIM(CUIIO) CUIIO,
                    TRIM(CUIIO_VERS) CUIIO_VERS,
                   
-                   TRIM(CAEM2) CAEM2
-              FROM     KATALOG_45_1065 
+                   TRIM(CFP) CFP
+              FROM     CFP 
             ;
 
 BEGIN -- ======================================================================
@@ -16,9 +16,9 @@ UPDATE CIS2.RENIM SET
 --
 --DENUMIRE = CR.DENUMIRE,
 --CUATM = CR.CUATM
----CFP = CR.CFP
+CFP = CR.CFP
 --CFOJ = CR.CFOJ,
-CAEM2 = CR.CAEM2
+--CAEM2 = CR.CAEM2
 --IDNO = CR.IDNO
 
 WHERE
@@ -29,3 +29,12 @@ END LOOP;
 END;
 
 ---------------------------
+
+
+
+
+ SELECT TRIM(CUIIO) CUIIO,
+                   TRIM(CUIIO_VERS) CUIIO_VERS,
+                  
+                   TRIM(CFP) CFP
+              FROM     CFP ;

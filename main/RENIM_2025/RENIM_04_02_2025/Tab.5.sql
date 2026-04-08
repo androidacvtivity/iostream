@@ -1,0 +1,59 @@
+
+SELECT
+  :pPERIOADA AS PERIOADA,
+  :pFORM AS FORM,
+  :pFORM_VERS AS FORM_VERS,
+  :pID_MDTABLE AS ID_MDTABLE,
+  :pCOD_CUATM AS COD_CUATM,
+  '0' AS NR_SECTIE,
+  '0' AS NUME_SECTIE,
+  '0' AS NR_SECTIE1,
+  '0' AS NUME_SECTIE1,
+  '0' AS NR_SECTIE2,
+  '0' AS NUME_SECTIE2,
+
+
+NR_ROW,
+ROWNUM ORDINE,
+'10' AS DECIMAL_POS,
+NUME_ROW,
+COL1,
+COL2 
+
+FROM
+(
+
+SELECT
+   RD.RIND AS NR_ROW,
+   RD.DENUMIRE AS NUME_ROW, 
+   NVAL(SUM(D.COL1)) AS COL1,
+   NVAL(SUM(D.COL2)) AS COL2
+ 
+  
+ 
+
+ FROM
+              VW_DATA_ALL D
+                INNER JOIN RENIM R ON (R.CUIIO= D.CUIIO AND R.CUIIO_VERS=D.CUIIO_VERS)
+                INNER JOIN VW_CL_CUATM  C ON (C.CODUL = R.CUATM AND C.FULL_CODE LIKE '%'||:pCOD_CUATM||';%')                  
+                INNER JOIN MD_RIND RD ON D.ID_MD = RD.ID_MD 
+               
+WHERE
+  D.FORM IN (5)                              AND 
+  D.FORM_VERS = :pFORM_VERS                  AND    
+  D.CAPITOL IN (312)                         AND 
+  D.PERIOADA=:pPERIOADA AND 
+  C.FULL_CODE LIKE '%'||:pCOD_CUATM||';%'
+      
+       
+GROUP BY 
+RD.RIND, 
+RD.DENUMIRE,
+RD.ORDINE
+
+ORDER BY 
+
+RD.ORDINE
+
+
+)
