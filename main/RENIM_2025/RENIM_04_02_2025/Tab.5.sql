@@ -44,8 +44,8 @@ WHERE
   D.CAPITOL IN (312)                         AND 
   D.PERIOADA=:pPERIOADA AND 
   C.FULL_CODE LIKE '%'||:pCOD_CUATM||';%'
-      
-       
+  AND RD.RIND_VERS >= :pPERIOADA     
+  AND RD.RIND NOT IN ('999')     
 GROUP BY 
 RD.RIND, 
 RD.DENUMIRE,

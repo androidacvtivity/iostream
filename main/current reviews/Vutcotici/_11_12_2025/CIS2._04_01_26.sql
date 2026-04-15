@@ -97,7 +97,7 @@ SELECT
              
                   INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
            WHERE D.PERIOADA = :pPERIOADA_LUNA AND D.FORM IN (:pFORM)
-            AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS') 
+            AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS') 
            
              AND D.FORM_VERS IN (:pFORM_VERS)      
            
@@ -142,7 +142,7 @@ UNION
              AND D.ID_SCHEMA = 2
               AND D.FORM_VERS IN (:pFORM_VERS)  
               
-              AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')  
+              AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')  
               
               
               AND D.CUIIO IN (
@@ -154,7 +154,7 @@ UNION
                  
            WHERE D.PERIOADA = :pPERIOADA AND D.FORM IN (:pFORM)
             
-            AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+            AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
               )
          ) D
          INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
@@ -350,7 +350,7 @@ D.FORM IN (:pFORM)
            WHERE D.PERIOADA = :pPERIOADA AND D.FORM IN (:pFORM)
               )
               
-               AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS') 
+               AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS') 
 
 
 GROUP BY
@@ -553,7 +553,7 @@ D.PERIOADA = :pPERIOADA_LUNA AND
 D.FORM IN (:pFORM)
  AND D.FORM_VERS IN (:pFORM_VERS)   
  
-  AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+  AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
   
   
   AND D.CUIIO NOT IN (
@@ -566,7 +566,7 @@ D.FORM IN (:pFORM)
            WHERE 
              D.PERIOADA  = :pPERIOADA   AND D.FORM IN (:pFORM)
              AND D.ID_SCHEMA = '2'
-AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')             
+AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')             
  )
 
 GROUP BY
@@ -757,7 +757,7 @@ D.PERIOADA = :pPERIOADA_LUNA AND
 D.FORM IN (:pFORM)
  AND D.FORM_VERS IN (:pFORM_VERS)   
  
-  AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+  AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
 
 GROUP BY
 --F.DEN_SHORT,
@@ -820,7 +820,7 @@ SELECT
              
                   INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
            WHERE D.PERIOADA = :pPERIOADA_LUNA AND D.FORM IN (:pFORM)
-            AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+            AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
              AND D.FORM_VERS IN (:pFORM_VERS)  
              
              AND D.CUIIO NOT IN (
@@ -833,7 +833,7 @@ SELECT
            WHERE 
              D.PERIOADA  = :pPERIOADA   AND D.FORM IN (:pFORM)
              AND D.ID_SCHEMA = '2'
-             AND D.DATA_REG  < TO_DATE('04/13/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
+             AND D.DATA_REG  < TO_DATE('04/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
            )    
            
            ) D
