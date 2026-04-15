@@ -78,10 +78,10 @@ SELECT
 
    
                     FROM  --USER_BANCU.VW_MAX_RENIM_CIS2_1067  
-                         USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+--                         USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
                         --  USER_BANCU.VW_MAX_RENIM_CIS2
-                --       USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                       USER_BANCU.VW_MAX_RENIM_CIS2_2014
                    --  USER_BANCU.VW_MAX_RENIM_299_CIS2
                 ----------------------------------------------------------------    
                     WHERE 
@@ -89,20 +89,14 @@ SELECT
                 
 
 CUIIO IN (
-40008649,
-40575785,
-41264225,
-41297687,
-41373730,
-41414096,
-41415183,
-41472952,
-41592366,
-41609204,
-41714349,
-41750440,
-41858002
-
+5917766,
+41154637,
+20215228,
+41007770,
+41193413,
+38893845,
+40540551,
+2735987
 )
 
 AND CUIIO_VERS <> 2014;
