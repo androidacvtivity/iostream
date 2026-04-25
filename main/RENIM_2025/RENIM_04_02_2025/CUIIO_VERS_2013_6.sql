@@ -1,5 +1,5 @@
 ------------------------------------------------
-UPDATE USER_BANCU.BE_1 ----------------------
+UPDATE USER_BANCU.RSF2 ----------------------
 SET CUATM = 
     CASE 
         -- Ruleaza prima verificare: înlocuie?te 'O' cu '0'
@@ -14,7 +14,7 @@ SET CUATM =
     END;
     
     --------------------------------------------------------------------------------
-            UPDATE USER_BANCU.BE_1
+            UPDATE USER_BANCU.RSF2
         SET
          CUATM = CASE WHEN (LENGTH(CUATM) = 6 AND (SUBSTR(CUATM,1,1) = 1  OR SUBSTR(CUATM,1,1) = 3 )) THEN '0'||CUATM ELSE CUATM END,
          CUIIO_VERS = 2014;
@@ -26,7 +26,7 @@ SET CUATM =
         
         SELECT  *
           
-        FROM USER_BANCU.CFP;
+        FROM USER_BANCU.RSF2;
         
         ----------------------------------------------
         
@@ -46,8 +46,11 @@ SET CUATM =
     SELECT  
      CUIIO,
      1068 CUIIO_VERS,
-     13 FORM,
+     18 FORM,
      1004  FORM_VERS,
      '1'  STATUT 
           
-        FROM USER_BANCU.R_67;
+        FROM USER_BANCU.CON_5
+        
+        WHERE 
+        CUIIO <> 15802320
