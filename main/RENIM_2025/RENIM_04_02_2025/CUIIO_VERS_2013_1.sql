@@ -78,7 +78,7 @@ SELECT
 
    
                     FROM  --USER_BANCU.VW_MAX_RENIM_CIS2_1067  
---                         USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+                        -- USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
                         --  USER_BANCU.VW_MAX_RENIM_CIS2
                        USER_BANCU.VW_MAX_RENIM_CIS2_2014
@@ -89,17 +89,11 @@ SELECT
                 
 
 CUIIO IN (
-5917766,
-41154637,
-20215228,
-41007770,
-41193413,
-38893845,
-40540551,
-2735987
-)
 
-AND CUIIO_VERS <> 2014;
+SELECT CUIIO
+    FROM RSF2
+)
+AND CUIIO_VERS <> 2014 ;
 --
 --
 --INSERT INTO CIS2.FORM_CUIIO
@@ -147,3 +141,24 @@ AND CUIIO_VERS <> 2014;
 --             
 --             FC.CUIIO,
 --               FC.CUIIO_VERS
+
+INSERT INTO CIS2.FORM_CUIIO
+(
+ CUIIO,
+ CUIIO_VERS,
+ FORM,
+ FORM_VERS,
+ STATUT 
+)
+
+ SELECT 
+ CUIIO,
+ 2014 CUIIO_VERS,
+ 59 FORM,
+ 2000 FORM_VERS,
+ '1' STATUT 
+ FROM RSF2
+ 
+ WHERE 
+ CUIIO <> 38985286;
+
