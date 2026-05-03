@@ -31,13 +31,13 @@
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.RSF2 L
+        FROM   USER_BANCU.CON_5 L
         
              --   CIS.RENIM  L
         
         
                         LEFT  JOIN CIS2.RENIM C ON C.CUIIO  =  TRIM(L.CUIIO)  
-                                                  AND C.CUIIO_VERS  =  2014
+                                                  AND C.CUIIO_VERS  =  L.CUIIO_VERS
                         
                         WHERE
                         
