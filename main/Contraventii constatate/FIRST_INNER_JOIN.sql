@@ -1,8 +1,11 @@
 SELECT
-                  CI.ITEM_CODE,
-                   CII.NAME,
+                  CII.ITEM_CODE,
+                  CII.ITEM_PARENT,
+                  CII.NAME,
                   CII.ITEM_PATH,
-                  CI.ITEM_CODE_VERS
+                 
+                  CII.ITEM_CODE_VERS,
+                  CII.SHOW_ORDER
                 FROM
                 (
                 SELECT
@@ -24,4 +27,6 @@ SELECT
         
         
         ORDER BY
+--        CII.SHOW_ORDER,
+     --   CII.ITEM_PARENT,
         CII.ITEM_PATH

@@ -11,7 +11,7 @@ SELECT
 --  D.IDNO    
 ------------------------------------------------
 
-FROM  USER_BANCU.AGRO_16 D
+FROM  USER_BANCU.CON_5
 
 -- WHERE 
 --
