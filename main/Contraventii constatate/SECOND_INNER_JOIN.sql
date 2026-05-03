@@ -1,5 +1,4 @@
-                
-                INSERT INTO CIS2.MD_RIND_OUT (
+                 INSERT INTO CIS2.MD_RIND_OUT (
                 
                  ID_MDTABLE,
                  RINDOUT_VERS,
@@ -16,7 +15,7 @@
 
                 
                 SELECT
-                  13039 ID_MDTABLE,
+                  14904 ID_MDTABLE,
                   ITEM_CODE_VERS RINDOUT_VERS, 
                   ITEM_CODE RINDOUT,
                   ITEM_PATH DENUMIRE,
@@ -53,6 +52,15 @@ SELECT
         ) CI
         INNER JOIN CIS2.VW_CLS_CLASS_ITEM CII ON (CI.CLASS_CODE=CII.CLASS_CODE AND CI.ITEM_CODE=CII.ITEM_CODE AND CI.ITEM_CODE_VERS=CII.ITEM_CODE_VERS)
         
+        WHERE
+        1=1
+        --CII.STATUS = '1'
                ORDER BY
         CII.ITEM_PATH )
         
+        
+       WHERE
+       1=1 
+     --   AND TRIM(ITEM_CODE)  LIKE '0480%'
+     
+   --  AND TRIM(ITEM_CODE)  LIKE '%2000109%'

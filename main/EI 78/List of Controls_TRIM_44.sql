@@ -5,7 +5,7 @@ SELECT
       L.CONTROL,
       L.CONTROL_VERS, ---------------------------
       L.FORMULA,
-      L.SQL_TEXT,
+    --  L.SQL_TEXT,
       L.PRIORITATEA,
       L.STATUT
  FROM( 
