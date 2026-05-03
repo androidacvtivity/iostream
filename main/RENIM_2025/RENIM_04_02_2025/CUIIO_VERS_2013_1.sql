@@ -41,7 +41,7 @@
 
 SELECT 
  CUIIO,
- 1068 CUIIO_VERS,
+ 2014 CUIIO_VERS,
  DENUMIRE,
  EDIT_USER,
  STATUT,
@@ -78,10 +78,10 @@ SELECT
 
    
                     FROM  --USER_BANCU.VW_MAX_RENIM_CIS2_1067  
-                         USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+--                         USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
                         --  USER_BANCU.VW_MAX_RENIM_CIS2
-                     --  USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                       USER_BANCU.VW_MAX_RENIM_CIS2_2014
                    --  USER_BANCU.VW_MAX_RENIM_299_CIS2
                 ----------------------------------------------------------------    
                     WHERE 
@@ -93,7 +93,7 @@ CUIIO IN (
 SELECT CUIIO
     FROM CON_5
 )
-AND CUIIO_VERS <> 1068 ;
+AND CUIIO_VERS <> 2014 ;
 --
 --
 --INSERT INTO CIS2.FORM_CUIIO
@@ -142,15 +142,15 @@ AND CUIIO_VERS <> 1068 ;
 --             FC.CUIIO,
 --               FC.CUIIO_VERS
 --
-INSERT INTO CIS2.FORM_CUIIO
-(
- CUIIO,
- CUIIO_VERS,
- FORM,
- FORM_VERS,
- STATUT 
-)
-
+--INSERT INTO CIS2.FORM_CUIIO
+--(
+-- CUIIO,
+-- CUIIO_VERS,
+-- FORM,
+-- FORM_VERS,
+-- STATUT 
+--)
+--
  SELECT 
  CUIIO,
  1068 CUIIO_VERS,
