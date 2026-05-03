@@ -1,40 +1,40 @@
-INSERT INTO CIS2.RENIM (
-    CUIIO,
-    CUIIO_VERS,
-    DENUMIRE,
-    EDIT_USER,
-    STATUT,
-    CUATM,
-    CFP,
-    CFOJ,
-    COCM,
-    CAEM,
-    BUGET,
-    TIP,
-    PROD,
-    FOR_CUB,
-    GENMUZEE,
-    TIPMUZEE,
-    TIP_LOCAL,
-    TIP_INST,
-    CAEM2,
-    N85_NTL,
-    N85_NTIIP,
-    N85_NDIIP,
-    N85_NPDS,
-    N85_NRIIP,
-    N85_NSIIP,
-    GENMUZEE2,
-    NFI,
-    NTII,
-    NPDS,
-    ORGANE,
-    TIP_INV,
-    RENIM_PERS,
-    ORGANE_COND,
-    GEN_INSTITUTIE,
-    IDNO
-)
+--INSERT INTO CIS2.RENIM (
+--    CUIIO,
+--    CUIIO_VERS,
+--    DENUMIRE,
+--    EDIT_USER,
+--    STATUT,
+--    CUATM,
+--    CFP,
+--    CFOJ,
+--    COCM,
+--    CAEM,
+--    BUGET,
+--    TIP,
+--    PROD,
+--    FOR_CUB,
+--    GENMUZEE,
+--    TIPMUZEE,
+--    TIP_LOCAL,
+--    TIP_INST,
+--    CAEM2,
+--    N85_NTL,
+--    N85_NTIIP,
+--    N85_NDIIP,
+--    N85_NPDS,
+--    N85_NRIIP,
+--    N85_NSIIP,
+--    GENMUZEE2,
+--    NFI,
+--    NTII,
+--    NPDS,
+--    ORGANE,
+--    TIP_INV,
+--    RENIM_PERS,
+--    ORGANE_COND,
+--    GEN_INSTITUTIE,
+--    IDNO
+--)
 
 
 
@@ -141,7 +141,7 @@ AND CUIIO_VERS <> 1068 ;
 --             
 --             FC.CUIIO,
 --               FC.CUIIO_VERS
-
+--
 INSERT INTO CIS2.FORM_CUIIO
 (
  CUIIO,
@@ -153,12 +153,12 @@ INSERT INTO CIS2.FORM_CUIIO
 
  SELECT 
  CUIIO,
- 2014 CUIIO_VERS,
- 59 FORM,
- 2000 FORM_VERS,
+ 1068 CUIIO_VERS,
+ 18 FORM,
+ 1004 FORM_VERS,
  '1' STATUT 
- FROM RSF2
+ FROM CON_5
  
  WHERE 
- CUIIO <> 38985286;
+ CUIIO <> 41603905;
 
