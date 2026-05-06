@@ -3,6 +3,8 @@ SELECT
     R.IDNO,
     R.CUATM,
     R.DENUMIRE,
+    BS.CIF_IT CIF_IT,
+    BS.PERS_IT PERS_IT,
     SUM(CASE WHEN D.RIND IN ('1.7.1')  THEN COL1 ELSE 0 END) AS R_1_7_1_C1,
     SUM(CASE WHEN D.RIND IN ('1.7.1')  THEN COL2 ELSE 0 END) AS R_1_7_1_C2,
     
@@ -36,7 +38,8 @@ SELECT
     
       
   FROM CIS2.VW_DATA_ALL D inner join CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
-                          inner join CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM   
+                          inner join CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM 
+                          LEFT JOIN CIS2.X_BAZA_SONDAJ BS ON (D.CUIIO=BS.CUIIO AND BS.ANUL=2025)  
                             
   WHERE PERIOADA = :pPERIOADA
     AND FORM     = :pFORM
@@ -47,7 +50,10 @@ SELECT
   D.CUIIO,
     R.IDNO,
     R.CUATM,
-    R.DENUMIRE
+    R.DENUMIRE,
+    BS.CIF_IT,
+    BS.PERS_IT
+   
     
     ORDER BY 
     R.CUATM
