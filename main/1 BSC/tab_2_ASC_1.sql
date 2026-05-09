@@ -1,0 +1,26 @@
+SELECT
+      D.CUIIO,
+      D.CUATM,
+      D.RIND,
+      D.ID_MD,
+      D.CAPITOL,
+      CIS2.NVAL(D.COL1) AS COL1
+    FROM
+     CIS2.VW_DATA_ALL D
+      
+         INNER JOIN
+         (
+ 
+   
+           SELECT P.PERIOADA - 1  PERIOADA FROM CIS2.VW_MD_PERIOADA P INNER JOIN CIS2.VW_MD_PERIOADA T ON(P.ANUL=T.ANUL AND P.TIP_PERIOADA=7) 
+           WHERE T.PERIOADA = :pPERIOADA
+   
+        ) P ON(D.PERIOADA=P.PERIOADA)
+      
+    WHERE
+      D.FORM IN (20) AND
+      D.CAPITOL IN (1010) AND
+      D.RIND IN ('1','2','3','4','5','6')
+      AND (D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%') 
+        AND 
+      D.CUIIO IN (5921029)
