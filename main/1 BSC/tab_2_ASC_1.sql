@@ -1,13 +1,13 @@
 SELECT
       D.CUIIO,
-      D.CUATM,
-      D.RIND,
-      D.ID_MD,
-      D.CAPITOL,
+      R.CUATM,
+      MR.RIND,
+      MR.ID_MD,
+      MR.CAPITOL,
       CIS2.NVAL(D.COL1) AS COL1
     FROM
-     CIS2.VW_DATA_ALL D
-      
+     CIS2.DATA_ALL D
+        
          INNER JOIN
          (
  
@@ -16,11 +16,11 @@ SELECT
            WHERE T.PERIOADA = :pPERIOADA
    
         ) P ON(D.PERIOADA=P.PERIOADA)
+        INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
+        INNER JOIN CIS2.MD_RIND MR ON MR.ID_MD = D.ID_MD
       
     WHERE
       D.FORM IN (20) AND
-      D.CAPITOL IN (1010) AND
-      D.RIND IN ('1','2','3','4','5','6')
-      AND (D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%') 
-        AND 
-      D.CUIIO IN (5921029)
+      MR.CAPITOL IN (1010) AND
+      MR.RIND IN ('1','2','3','4','5','6')
+      AND  D.CUIIO IN (5921029)
