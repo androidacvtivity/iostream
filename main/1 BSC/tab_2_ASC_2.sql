@@ -22,5 +22,5 @@ SELECT
     WHERE
       D.FORM IN (20) AND
       MR.CAPITOL IN (1010) AND
-      MR.RIND IN ('1','2','3','4','5','6')
+      MR.RIND NOT IN ('00','--','1','2','3','4','5','6')
       AND  D.CUIIO IN (5921029)
