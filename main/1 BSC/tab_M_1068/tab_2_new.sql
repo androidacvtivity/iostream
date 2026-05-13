@@ -1,9 +1,9 @@
 SELECT
-  :pPERIOADA AS PERIOADA,                                                    
-  :pFORM AS FORM,                                                            
-  :pFORM_VERS AS FORM_VERS,                                                  
-  :pID_MDTABLE AS ID_MDTABLE,                                                
-  :pCOD_CUATM AS COD_CUATM,   
+--  :pPERIOADA AS PERIOADA,                                                    
+--  :pFORM AS FORM,                                                            
+--  :pFORM_VERS AS FORM_VERS,                                                  
+--  :pID_MDTABLE AS ID_MDTABLE,                                                
+--  :pCOD_CUATM AS COD_CUATM,   
   
   FF.FULL_CODE AS NR_SECTIE,                                                         
   FF.CUATM_DENUMIRE AS NUME_SECTIE, 
@@ -89,7 +89,7 @@ FROM
       AND D.FORM_VERS = 2000
       AND MR.CAPITOL IN (1010)
       AND MR.RIND IN ('1','2','3','4','5','6')
-      -- AND D.CUIIO IN (5921029)
+     and D.CUIIO = 37561058
       AND CIS2.NVAL(D.COL1) <> 0
 ) A
 INNER JOIN
@@ -114,7 +114,7 @@ INNER JOIN
       AND D.FORM_VERS = 2000
       AND MR.CAPITOL IN (1010)
       AND MR.RIND NOT IN ('00','--','1','2','3','4','5','6')
-      -- AND D.CUIIO IN (5921029)
+  and D.CUIIO = 37561058
       AND CIS2.NVAL(D.COL1) <> 0
 ) B 
   ON A.CUIIO = B.CUIIO
@@ -175,7 +175,7 @@ WHERE
   -- C.FULL_CODE LIKE '%' ||:pCOD_CUATM|| ';%' AND 
   D.FORM IN (19) AND
   MR.CAPITOL IN (1017)
-  -- AND  D.CUIIO IN (5921029)
+and D.CUIIO = 37561058
     
 GROUP BY
   D.CUIIO,
@@ -355,7 +355,7 @@ FROM
       AND D.FORM_VERS = 2000
       AND MR.CAPITOL IN (1010)
       AND MR.RIND IN ('1','2','3','4','5','6')
-     --  AND D.CUIIO IN (5921029)
+and D.CUIIO = 37561058
       AND CIS2.NVAL(D.COL1) <> 0
 ) A
 INNER JOIN
@@ -380,12 +380,12 @@ INNER JOIN
       AND D.FORM_VERS = 2000
       AND MR.CAPITOL IN (1010)
       AND MR.RIND NOT IN ('00','--','1','2','3','4','5','6')
-      -- AND D.CUIIO IN (5921029)
+  and D.CUIIO = 37561058
       AND CIS2.NVAL(D.COL1) <> 0
 ) B 
   ON A.CUIIO = B.CUIIO
- AND A.CUATM = B.CUATM
- AND A.CAPITOL = B.CAPITOL
+-- AND A.CUATM = B.CUATM
+-- AND A.CAPITOL = B.CAPITOL
 
 INNER JOIN CIS2.VW_CL_CUATM C 
   ON A.CUATM = C.CODUL 
@@ -442,7 +442,7 @@ WHERE
   -- C.FULL_CODE LIKE '%' ||:pCOD_CUATM|| ';%' AND 
   D.FORM IN (19) AND
   MR.CAPITOL IN (1017)
-  -- AND  D.CUIIO IN (5921029)
+and D.CUIIO = 37561058
     
 GROUP BY
   D.CUIIO,
