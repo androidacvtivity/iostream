@@ -16,11 +16,11 @@ SELECT
     FROM  USER_EREPORTING.F_XML_FORMS L INNER JOIN USER_EREPORTING.F_XML_FORMS_STATUS D  ON L.STATUS = D.COD_STATUS
           WHERE
           1=1  
-          AND  DATA_REG >= TO_DATE('09/28/2025 00:00:', 'MM/DD/YYYY HH24:MI:SS')
-        --  AND STATUS  =  '5'  
-          AND   FORM_TYPE IN  ('21_vinz') 
+          AND  DATA_REG >= TO_DATE('05/01/2026 00:00:', 'MM/DD/YYYY HH24:MI:SS')
+          AND STATUS  =  '2'  
+          AND   FORM_TYPE IN  ('3-agr') 
 
-          AND CUIIO NOT IN  (13706)
+    --      AND CUIIO NOT IN  (13706)
 
 
  ORDER BY 
