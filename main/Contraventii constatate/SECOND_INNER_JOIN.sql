@@ -1,15 +1,15 @@
-                 INSERT INTO CIS2.MD_RIND_OUT (
-                
-                 ID_MDTABLE,
-                 RINDOUT_VERS,
-                 RINDOUT,
-                 DENUMIRE,
-                 STATUT,
-                 ORDINE,
-                 DATA_REG,
-                 RIND 
-
-                )
+--                 INSERT INTO CIS2.MD_RIND_OUT (
+--                
+--                 ID_MDTABLE,
+--                 RINDOUT_VERS,
+--                 RINDOUT,
+--                 DENUMIRE,
+--                 STATUT,
+--                 ORDINE,
+--                 DATA_REG,
+--                 RIND 
+--
+--                )
 
 
 
@@ -54,7 +54,7 @@ SELECT
         
         WHERE
         1=1
-        --CII.STATUS = '1'
+        AND  CII.STATUS = '1'
                ORDER BY
         CII.ITEM_PATH )
         

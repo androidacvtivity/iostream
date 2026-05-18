@@ -1,7 +1,30 @@
+--CREATE OR REPLACE FORCE VIEW USER_BANCU.F_XML_FORMS_21_vanz
+--
+--AS
+
+SELECT 
+  L.FORMID,
+  L.CUIIO,
+  D.DESCRIPTION,
+  L.STATUS,
+  L.FORM_TYPE,
+  L.DATA_REG,
+  L.CHECK_CONFIRM,
+  L.MESAJ,
+  L.PROCESSING_MESSAGE 
+ 
+    FROM  USER_EREPORTING.F_XML_FORMS L INNER JOIN USER_EREPORTING.F_XML_FORMS_STATUS D  ON L.STATUS = D.COD_STATUS
+          WHERE
+          1=1  
+          AND  DATA_REG >= TO_DATE('05/01/2026 00:00:', 'MM/DD/YYYY HH24:MI:SS')
+         -- AND STATUS  =  '2'  
+          AND   FORM_TYPE IN  ('3-agr') 
+
+          AND CUIIO  IN  (
  SELECT FC.CUIIO 
               FROM ( 
               
-              SELECT FC.CUIIO,
+              SELECT FC.CUIIO,   --4497457
                    FC.CUIIO_VERS,
                    FC.FORM,
                    FC.FORM_VERS,
@@ -26,6 +49,12 @@
              
              AND FC.CUIIO IN (
 
-3355554
+4500656, 4500644, 5693947, 4500478, 4500573, 4500627
 
 )
+  )
+
+
+ ORDER BY 
+-- 
+DATA_REG DESC 

@@ -21,5 +21,10 @@ WHERE f.DATA_REG >= TO_DATE('05/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS')
         )
   )
   
+  and f.cuiio IN (
+4493689, 4493666
+
+)
+  
   ORDER BY 
   f.DATA_REG DESC 

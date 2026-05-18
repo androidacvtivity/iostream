@@ -1,7 +1,3 @@
---CREATE OR REPLACE FORCE VIEW USER_BANCU.F_XML_FORMS_21_vanz
---
---AS
-
 SELECT 
   L.FORMID,
   L.CUIIO,
@@ -18,13 +14,8 @@ SELECT
           1=1  
           AND  DATA_REG >= TO_DATE('05/01/2026 00:00:', 'MM/DD/YYYY HH24:MI:SS')
          -- AND STATUS  =  '2'  
-          AND   FORM_TYPE IN  ('3-agr') 
-
-          AND CUIIO  IN  (
-20176681
+          AND   FORM_TYPE IN  ('3-agr')
+          
+          AND L.CUIIO IN (
+          4498267, 355554
           )
-
-
- ORDER BY 
--- 
-DATA_REG DESC 
