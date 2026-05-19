@@ -18,13 +18,13 @@ WHERE
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (63) AND CUIIO_VERS <= 2014
+                                  WHERE FORM IN (4) AND CUIIO_VERS <= 2015
                                   
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
              WHERE 
-             FC.FORM IN (63) AND FC.STATUT <> '3'
+             FC.FORM IN (4) AND FC.STATUT <> '3'
              AND FC.FORM_VERS = 2000
              ) FC
              
@@ -37,15 +37,15 @@ WHERE
 
 SELECT 
     CUIIO 
-FROM  USER_BANCU.R_63
+FROM  USER_BANCU.TR_AUTO_1
 )
- AND FC.CUIIO_VERS =  2014 )
+ AND FC.CUIIO_VERS =  2015 )
  
  
- AND FORM IN (63)
+ AND FORM IN (4)
  AND FORM_VERS IN (2000)
  AND STATUT = '1'
- AND CUIIO_VERS = 2014;
+ AND CUIIO_VERS = 2015;
  
  
  
@@ -56,7 +56,7 @@ FROM  USER_BANCU.R_63
  
  
  
- UPDATE CIS2.FORM_CUIIO
+ --UPDATE CIS2.FORM_CUIIO
 -- 
  SET STATUT = '3'
  
