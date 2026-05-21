@@ -1,0 +1,36 @@
+SELECT 
+     d.cuiio,   
+     CI.ITEM_CODE,
+     SUM(CASE WHEN  D.CAPITOL IN (405)   
+     AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL1,
+     
+     SUM(CASE WHEN  D.CAPITOL IN (407)  
+     AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END) AS COL2
+   
+     
+
+     FROM CIS2.VW_DATA_ALL D
+         INNER JOIN CIS2.VW_CLS_CLASS_ITEM CI ON (CI.CLASS_CODE IN ('CSPM2') AND TRIM(D.COL31)=TRIM(CI.ITEM_CODE)) 
+         
+         
+                 
+       
+   WHERE 
+ 
+  (D.PERIOADA BETWEEN 1064 AND 1067) AND 
+  (D.FORM = 44) AND
+  (D.FORM_VERS = 1004) AND 
+  
+  D.FORM IN (44)
+  AND D.CAPITOL IN (405,407) 
+  and CI.ITEM_CODE in ('72.11.1','72.19.1','72.19.2','72.19.3','72.19.4','72.20.1','72.20.2','74.10.12','72.11.2','72.19.5','72.20.3','74.10.20'
+  ,'71.20.11','71.20.12','71.20.13','71.20.14','71.20.19')
+  
+  
+  GROUP BY 
+  CI.ITEM_CODE,
+  d.cuiio
+  
+  ORDER BY
+  D.CUIIO,
+  CI.ITEM_CODE 
