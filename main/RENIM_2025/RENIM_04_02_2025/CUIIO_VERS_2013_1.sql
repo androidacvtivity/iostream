@@ -41,7 +41,7 @@
 
 SELECT 
  CUIIO,
- 2015 CUIIO_VERS,
+ 1069 CUIIO_VERS,
  DENUMIRE,
  EDIT_USER,
  STATUT,
@@ -78,91 +78,30 @@ SELECT
 
    
                     FROM  --USER_BANCU.VW_MAX_RENIM_CIS2_1067  
-                       --    USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+                      --     USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
                           USER_BANCU.VW_MAX_RENIM_CIS2
-                  --     USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                      --  USER_BANCU.VW_MAX_RENIM_CIS2_2014
                    --  USER_BANCU.VW_MAX_RENIM_299_CIS2
                 ----------------------------------------------------------------    
                     WHERE 
+                    1=1 
         
-                
 
-CUIIO IN (
+and CUIIO IN (
+41722024,
+41267850,
+41703920,
+41744652,
+37867194,
+41892269,
+41721958,
+41191779
 
-SELECT CUIIO
-    FROM TR_AUTO_1
+
 )
 
-
-AND CUIIO_VERS <> 2015 
+AND CUIIO_VERS = 2015 
 
 ;
---
---
---INSERT INTO CIS2.FORM_CUIIO
---
--- (
---               CUIIO,
---               CUIIO_VERS,
---               FORM,
---               FORM_VERS,
---                STATUT
--- 
--- )
---
---
---        SELECT FC.CUIIO,
---               1068 CUIIO_VERS,
---               44 FORM,
---               1004 FORM_VERS,
---               '1' STATUT  
---              FROM ( 
---              
---              SELECT FC.CUIIO,
---                   FC.CUIIO_VERS,
---                   FC.FORM,
---                   FC.FORM_VERS,
---                   FC.STATUT
---              FROM CIS2.FORM_CUIIO  FC
---                   INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
---                                   FROM CIS2.FORM_CUIIO
---                                  WHERE FORM IN (44) AND CUIIO_VERS <= 1068
---                                  
---                               GROUP BY CUIIO) BB
---                       ON (    BB.CUIIO = FC.CUIIO
---                           AND BB.CUIIO_VERS = FC.CUIIO_VERS)
---             WHERE 
---             FC.FORM IN (44) AND FC.STATUT <> '3'
---             AND FC.FORM_VERS = 1004) FC
---             
---             
---             WHERE
---             
---             FC.CUIIO_VERS <> 1068
---             
---             ORDER BY
---             
---             FC.CUIIO,
---               FC.CUIIO_VERS
---
---INSERT INTO CIS2.FORM_CUIIO
---(
--- CUIIO,
--- CUIIO_VERS,
--- FORM,
--- FORM_VERS,
--- STATUT 
---)
---
- SELECT 
- CUIIO,
- 1068 CUIIO_VERS,
- 18 FORM,
- 1004 FORM_VERS,
- '1' STATUT 
- FROM CON_5
- 
- WHERE 
- CUIIO <> 41603905;
 
