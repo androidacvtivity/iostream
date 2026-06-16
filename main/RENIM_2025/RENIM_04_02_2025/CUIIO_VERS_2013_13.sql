@@ -5,17 +5,8 @@ CURSOR C IS
  SELECT 
          CUIIO,
          CUIIO_VERS,
-         DENUMIRE,
-         CUATM,
-         CFP,
-         COCM,
-         N85_NTL,
-         N85_NTIIP,
-         N85_NDIIP,
-         N85_NPDS,
-         N85_NRIIP,
-         N85_NSIIP  
-        FROM   USER_BANCU.RENIM_85 L
+        
+        FROM   USER_BANCU.RENIMRR L
   
  
             

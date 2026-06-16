@@ -31,7 +31,7 @@
         TRIM(TRIM(L.IDNO))  IDNO
       
       --  L.KAT_112
-        FROM   USER_BANCU.CON_5 L
+        FROM   USER_BANCU.RENIM_AGR L
         
              --   CIS.RENIM  L
         
@@ -41,7 +41,7 @@
                         
                         WHERE
                         
-                        C.CUIIO IS  NULL;
+                        C.CUIIO IS NULL;
                         
                         
 --                        AND L.CUIIO IN (
@@ -58,9 +58,30 @@
 
 
 
+INSERT INTO CIS2.FORM_CUIIO R (
+        CUIIO,
+        CUIIO_VERS,
+        FORM,
+        FORM_VERS,
+        STATUT 
+)
 
 
 
+----------------------------------------------
+
+SELECT   
+        L.CUIIO,
+        2015 CUIIO_VERS,
+        43 FORM,
+        2000 FORM_VERS,
+        '1' STATUT 
+
+         
+        FROM USER_BANCU.RENIM L  
+
+            WHERE 
+            CUIIO <> 41153773
 
 
 
