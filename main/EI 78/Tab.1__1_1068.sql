@@ -1,6 +1,4 @@
 SELECT
-
-
    (CASE WHEN NR_ROW = '98' THEN '99' ELSE NR_ROW END)||'~'||ROWNUM  NR_ROW,
    ROWNUM AS ORDINE,
   '1111' AS DECIMAL_POS,
@@ -73,28 +71,11 @@ SELECT
      
       
       FROM CIS2.VW_DATA_ALL D 
-        
---        INNER JOIN CIS2.RENIM R ON R.CUIIO=D.CUIIO AND R.CUIIO_VERS=D.CUIIO_VERS
---        INNER JOIN CIS2.VW_CL_CUATM C ON R.CUATM = C.CODUL
---        INNER JOIN CIS2.MD_RIND MR ON MR.ID_MD = D.ID_MD
---        INNER  JOIN MD_CAPITOL MC ON MR.CAPITOL = MC.CAPITOL AND MR.CAPITOL_VERS = MC.CAPITOL_VERS
-        
-        
-        INNER JOIN VW_CLS_CLASS_ITEM CI ON (CI.CLASS_CODE IN ('CSPM2') AND TRIM(D.COL31)=TRIM(CI.ITEM_CODE))
+             INNER JOIN VW_CLS_CLASS_ITEM CI ON (CI.CLASS_CODE IN ('CSPM2') AND TRIM(D.COL31)=TRIM(CI.ITEM_CODE))
              
-             
-             
-             
-             
- INNER JOIN VW_CLS_CLASS_ITEM CII ON (CII.CLASS_CODE IN ('CSPM2')
+             INNER JOIN VW_CLS_CLASS_ITEM CII ON (CII.CLASS_CODE IN ('CSPM2')
           
-     
           AND REPLACE(' '||CI.ITEM_PATH,';','; ') LIKE '% '||TRIM(CII.ITEM_CODE)||';%')
-      
-      -------------------------------------------------------------------------------
-        
-        ------------------------------------------------------------------------------      
-      
    
    WHERE 
 (D.PERIOADA IN (:pPERIOADA)) AND 
@@ -105,6 +86,7 @@ SELECT
   D.FORM IN (44)
   AND
   D.CAPITOL IN (405,407)   
+   AND CII.ITEM_CODE IN ('3.1.3')
   
  -- AND D.CUIIO = 1129894
   
@@ -132,7 +114,7 @@ FROM(
 SELECT 
      2 ORDINE,
       TTT.SHOW_ORDER AS ORDINE_TARA,
-      --TTT.NAME  DENUMIRE,
+      TTT.NAME  DENUMIRE_CL,
       TTT.A01  DENUMIRE,
       CII.ITEM_CODE CODUL_SERV,
       CII.SHOW_ORDER CL_ORDER_SERV, 
@@ -143,39 +125,15 @@ SELECT
      SUM(CASE WHEN  D.CAPITOL IN (407)  AND D.RIND NOT IN ('1','-')  THEN CIS2.NVAL(D.COL4) ELSE 0 END)  AS COL4
       
       FROM CIS2.VW_DATA_ALL D 
-       
---       INNER JOIN   CIS2.RENIM  R ON (R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS) 
- 
-       
-               
-           
-           
            INNER JOIN VW_CLS_CLASS_ITEM TT ON (TT.CLASS_CODE IN ('TARI_ISO') AND TT.ITEM_CODE=D.COL33) 
            
            
        INNER JOIN VW_CLS_CLASS_ITEM TTT ON (TTT.CLASS_CODE IN ('TARI_ISO') AND TT.ITEM_PATH LIKE '%'||TTT.ITEM_CODE||';%')
-       
---       INNER JOIN   CIS2.VW_CL_CUATM C ON R.CUATM = C.CODUL
---       INNER JOIN CIS2.MD_RIND MR ON MR.ID_MD = D.ID_MD
---       INNER  JOIN MD_CAPITOL MC ON MR.CAPITOL = MC.CAPITOL AND MR.CAPITOL_VERS = MC.CAPITOL_VERS
-       
-
---        
          INNER JOIN VW_CLS_CLASS_ITEM CI ON (CI.CLASS_CODE IN ('CSPM2') AND TRIM(D.COL31)=TRIM(CI.ITEM_CODE))
-             
-             
-             
-             
         INNER JOIN VW_CLS_CLASS_ITEM CII ON (CII.CLASS_CODE IN ('CSPM2')
           
      
           AND REPLACE(' '||CI.ITEM_PATH,';','; ') LIKE '% '||TRIM(CII.ITEM_CODE)||';%')
-          
-          
-       -------------------------------------------------------------------------------
-  
-        ------------------------------------------------------------------------------  
-       
    WHERE 
 (D.PERIOADA IN (:pPERIOADA)) AND 
   (D.FORM =:pFORM) AND
@@ -188,7 +146,7 @@ SELECT
   
   AND TTT.ITEM_CODE NOT IN ('000')
   AND CII.ITEM_CODE NOT IN ('00.00.00')
-  
+   AND CII.ITEM_CODE IN ('3.1.3')
    -- AND D.CUIIO = 1129894
   
       GROUP BY
@@ -255,3 +213,4 @@ ORDINE
 
 
 
+ 

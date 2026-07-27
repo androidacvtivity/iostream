@@ -1,5 +1,15 @@
 SELECT
-
+    :pPERIOADA AS PERIOADA,
+    :pFORM AS FORM,
+    :pFORM_VERS AS FORM_VERS,
+    :pID_MDTABLE AS ID_MDTABLE,
+    :pCOD_CUATM AS COD_CUATM,
+    '0' AS NR_SECTIE,
+    '0' AS NUME_SECTIE,
+    '0' AS NR_SECTIE1,
+    '0' AS NUME_SECTIE1,
+    '0' AS NR_SECTIE2,
+   '0' AS NUME_SECTIE2,
 
    (CASE WHEN NR_ROW = '98' THEN '99' ELSE NR_ROW END)||'~'||ROWNUM  NR_ROW,
    ROWNUM AS ORDINE,
@@ -106,7 +116,7 @@ SELECT
   AND
   D.CAPITOL IN (405,407)   
   
- -- AND D.CUIIO = 1129894
+  --AND D.CUIIO = 1129894
   
       GROUP BY
  
@@ -132,8 +142,7 @@ FROM(
 SELECT 
      2 ORDINE,
       TTT.SHOW_ORDER AS ORDINE_TARA,
-      --TTT.NAME  DENUMIRE,
-      TTT.A01  DENUMIRE,
+      TTT.NAME  DENUMIRE,
       CII.ITEM_CODE CODUL_SERV,
       CII.SHOW_ORDER CL_ORDER_SERV, 
       CII.ITEM_PATH FULL_CODE,
@@ -189,12 +198,11 @@ SELECT
   AND TTT.ITEM_CODE NOT IN ('000')
   AND CII.ITEM_CODE NOT IN ('00.00.00')
   
-   -- AND D.CUIIO = 1129894
+  --  AND D.CUIIO = 1129894
   
       GROUP BY
       TTT.SHOW_ORDER,
       TTT.NAME,
-      TTT.A01, 
       CII.ITEM_CODE,
        TTT.ITEM_CODE,
        TTT.ITEM_PATH,
@@ -229,9 +237,27 @@ SELECT
                         (D.PERIOADA IN (:pPERIOADA)) AND 
                             
                            D.ID_MD  = 44519    
+                              
+                              
+                              
+                              
+                              
+                              
                               ) CR
                               
+                              
+                              
+                              
+                              
  
+
+
+
+
+
+                  
+    
+
 ORDER BY 
 
 NR_ROW,
@@ -250,8 +276,13 @@ GROUP BY
 
 CL_ORDER_SERV,
 ORDINE  
-    )
+    
+) 
 
 
 
 
+
+
+
+  

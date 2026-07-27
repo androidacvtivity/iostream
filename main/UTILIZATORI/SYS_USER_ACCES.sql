@@ -1,15 +1,6 @@
-
-
-
-
-SELECT * 
-
-
-
-
+SELECT 
+    ID_USER
 FROM  CIS2.SYS_USER_ACCES
-
 WHERE 
 FORM = 67 
-
 AND CUATM LIKE '01%'

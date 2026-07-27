@@ -1,18 +1,18 @@
---
---CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_KATALOG_ASA_2013
---(
---    CUIIO,
---    CUIIO_VERS,
---    DENUMIRE,
---   
---    CUATM,
---    CFP,
---    CFOJ,
---   
---    CAEM2
---   
---)
---AS
+
+CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_KATALOG_ASA_2014
+(
+    CUIIO,
+    CUIIO_VERS,
+    DENUMIRE,
+   
+    CUATM,
+    CFP,
+    CFOJ,
+   
+    CAEM2
+   
+)
+AS
     SELECT  
     R.CUIIO,
     R.CUIIO_VERS,
@@ -32,7 +32,7 @@
               FROM CIS2.FORM_CUIIO  FC
                    INNER JOIN (  SELECT CUIIO, MAX (CUIIO_VERS) CUIIO_VERS
                                    FROM CIS2.FORM_CUIIO
-                                  WHERE FORM IN (64) AND CUIIO_VERS <= 2013
+                                  WHERE FORM IN (64) AND CUIIO_VERS <= 2014
                                GROUP BY CUIIO) BB
                        ON (    BB.CUIIO = FC.CUIIO
                            AND BB.CUIIO_VERS = FC.CUIIO_VERS)
