@@ -6,6 +6,7 @@ AS
                 D.FORM,
                 MAX(CASE WHEN D.FORM = 57 AND D.CAPITOL IN (1091) AND D.RIND IN ('6') THEN  D.COL1 ELSE NULL END) AS NUM_MEDIU,
                 MAX(CASE WHEN D.FORM = 57 AND D.CAPITOL IN (1091) AND D.RIND IN ('CAEM') THEN  D.COL1 ELSE NULL END) AS CAEM,
+                SUM(CASE WHEN D.FORM = 57 AND D.CAPITOL IN (1092) AND D.RIND IN ('010')  THEN  D.COL2 ELSE NULL END) / 1000 AS RSF1_R10_1000,
                 (NVAL(SUM(CASE WHEN D.FORM = 57 AND D.CAPITOL IN (1092) AND D.RIND IN ('020')  THEN  D.COL2 ELSE NULL END)) + 
                 NVAL(SUM(CASE WHEN D.FORM = 57 AND D.CAPITOL IN (1092) AND D.RIND IN ('050')  THEN  D.COL2 ELSE NULL END)) +
                 NVAL(SUM(CASE WHEN D.FORM = 57 AND D.CAPITOL IN (1092) AND D.RIND IN ('060')  THEN  D.COL2 ELSE NULL END)) +
@@ -17,7 +18,7 @@ AS
                  
                 WHERE 
                 
-                D.PERIOADA IN (2013)
+                D.PERIOADA IN (2014)
                 AND D.CAPITOL IN (1091,1092)
                 AND D.FORM = 57 
                 
