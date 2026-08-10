@@ -1,0 +1,40 @@
+CREATE TABLE F64_AGREGAT_2014
+(
+    CUIIO           NUMBER,
+    CUATM           VARCHAR2(20),
+    CAEM2           VARCHAR2(20),
+
+    CAEM_CALC       VARCHAR2(50),
+
+    CAP_SR_1        NUMBER(20,2),
+    CAP_SR_2        NUMBER(20,2),
+    CAP_SR_3        NUMBER(20,2),
+    CAP_SR_4        NUMBER(20,2),
+    CAP_SR_5        NUMBER(20,2),
+    CAP_SR_6        NUMBER(20,2),
+    CAP_SR_7        NUMBER(20,2),
+
+    RIND_400_COL2   NUMBER(20,2),
+    RIND_150_COL1   NUMBER(20,2),
+    RIND_160        NUMBER(20,2),
+    RIND_200        NUMBER(20,2),
+    RIND_210        NUMBER(20,2),
+    RIND_220        NUMBER(20,2),
+    RIND_240        NUMBER(20,2),
+    RIND_260        NUMBER(20,2),
+    RIND_270        NUMBER(20,2),
+    RIND_280        NUMBER(20,2),
+    RIND_290        NUMBER(20,2),
+    RIND_296        NUMBER(20,2),
+
+    RIND_320_COL1   NUMBER(20,2),
+    RIND_320_COL2   NUMBER(20,2),
+    RIND_330_COL1   NUMBER(20,2),
+    RIND_330_COL2   NUMBER(20,2),
+    RIND_340_COL1   NUMBER(20,2),
+    RIND_340_COL2   NUMBER(20,2),
+    RIND_350_COL1   NUMBER(20,2),
+    RIND_350_COL2   NUMBER(20,2),
+    RIND_297_COL1   NUMBER(20,2),
+    RIND_970_COL1   NUMBER(20,2)
+);

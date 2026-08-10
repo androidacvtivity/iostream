@@ -43,10 +43,11 @@ WHERE
   D.FORM IN (40)        
        AND 
      
-  D.PERIOADA =:pPERIOADA --  AND
+  D.PERIOADA =:pPERIOADA   AND
  -- D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%'  
  --AND D.CAPITOL IN (1032)  AND D.RIND IN ('020') 
- -- D.CAPITOL IN (1127,1129) 
+  D.CAPITOL IN (1022) 
+  AND D.RIND IN ('19')
   -- AND R.NTII IN ('30')
   
   ------------------------------------------

@@ -1,11 +1,9 @@
-CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_DATA_ALL_ASA_2025
+-- creaza codul sql pentru un table - de ja stii in ce schema - ca sa put face insert la acest cod 
 
-AS
-      SELECT DISTINCT
-             D.CUIIO,
-             D.CUIIO_VERS,
+SELECT
+DISTINCT
+             D.CUIIO,   
              D.CUATM,
-             C.FULL_CODE,
              D.CAEM2,
              MAX (
                  CASE
@@ -55,13 +53,13 @@ AS
                      ELSE NULL
                  END)
                  CAP_SR_7,
-             SUM (
+                    SUM (
                  CASE
                      WHEN D.CAPITOL IN (1127) AND D.RIND IN ('400') THEN D.COL4
                      ELSE NULL
                  END)
                  RIND_400_COL2,
-             SUM (
+                 SUM (
                  CASE
                      WHEN D.CAPITOL IN (1124) AND D.RIND IN ('150') THEN D.COL1
                      ELSE NULL
@@ -73,7 +71,7 @@ AS
                      ELSE NULL
                  END)
                  RIND_160,
-             SUM (
+               SUM (
                  CASE
                      WHEN D.CAPITOL IN (1125) AND D.RIND IN ('200') THEN D.COL1
                      ELSE NULL
@@ -140,10 +138,8 @@ AS
                      ELSE NULL
                  END)
                  RIND_320_COL2,
-        -------------------------------------------------------------------------------------------------
-
-
-   SUM (
+                 
+                        SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('330') THEN D.COL1
                      ELSE NULL
@@ -155,13 +151,8 @@ AS
                      ELSE NULL
                  END)
                  RIND_330_COL2,
------------------------------------------------------------------------------------------------------------
-
-
--------------------------------------------------------------------------------------------------
-
-
-   SUM (
+                 
+                               SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('340') THEN D.COL1
                      ELSE NULL
@@ -173,12 +164,8 @@ AS
                      ELSE NULL
                  END)
                  RIND_340_COL2,
------------------------------------------------------------------------------------------------------------
-
--------------------------------------------------------------------------------------------------
-
-
-   SUM (
+                 
+                 SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('350') THEN D.COL1
                      ELSE NULL
@@ -190,16 +177,17 @@ AS
                      ELSE NULL
                  END)
                  RIND_350_COL2
------------------------------------------------------------------------------------------------------------
-        FROM CIS2.VW_DATA_ALL D
-             INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
+                   
+
+ FROM CIS2.VW_DATA_ALL D
+            INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
        WHERE D.FORM IN (64) AND D.PERIOADA = 2014
-    -- AND D.CUIIO = 135094
-
-
-    GROUP BY D.CUIIO,
-             D.CUIIO_VERS,
-             D.CUATM,
-             C.FULL_CODE,
-             D.CAEM2
-    ORDER BY C.FULL_CODE;
+       
+       
+       GROUP BY 
+         D.CUIIO,   
+         D.CUATM,
+         D.CAEM2
+      ORDER BY    
+         D.CUATM
+         

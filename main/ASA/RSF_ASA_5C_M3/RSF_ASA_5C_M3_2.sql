@@ -1,11 +1,53 @@
-CREATE OR REPLACE FORCE VIEW USER_BANCU.VW_DATA_ALL_ASA_2025
+DELETE
+ FROM F64_AGREGAT_2014;
+ 
+ 
+SELECT *
 
-AS
-      SELECT DISTINCT
-             D.CUIIO,
-             D.CUIIO_VERS,
+ FROM F64_AGREGAT_2014;
+--
+INSERT INTO F64_AGREGAT_2014
+(
+    CUIIO,
+    CUATM,
+    CAEM2,
+    CAEM_CALC,
+    CAP_SR_1,
+    CAP_SR_2,
+    CAP_SR_3,
+    CAP_SR_4,
+    CAP_SR_5,
+    CAP_SR_6,
+    CAP_SR_7,
+    RIND_400_COL2,
+    RIND_150_COL1,
+    RIND_160,
+    RIND_200,
+    RIND_210,
+    RIND_220,
+    RIND_240,
+    RIND_260,
+    RIND_270,
+    RIND_280,
+    RIND_290,
+    RIND_296,
+    RIND_320_COL1,
+    RIND_320_COL2,
+    RIND_330_COL1,
+    RIND_330_COL2,
+    RIND_340_COL1,
+    RIND_340_COL2,
+    RIND_350_COL1,
+    RIND_350_COL2,
+    RIND_297_COL1,
+    RIND_970_COL1 
+)
+ 
+
+SELECT
+DISTINCT
+             D.CUIIO,   
              D.CUATM,
-             C.FULL_CODE,
              D.CAEM2,
              MAX (
                  CASE
@@ -55,13 +97,13 @@ AS
                      ELSE NULL
                  END)
                  CAP_SR_7,
-             SUM (
+                    SUM (
                  CASE
                      WHEN D.CAPITOL IN (1127) AND D.RIND IN ('400') THEN D.COL4
                      ELSE NULL
                  END)
                  RIND_400_COL2,
-             SUM (
+                 SUM (
                  CASE
                      WHEN D.CAPITOL IN (1124) AND D.RIND IN ('150') THEN D.COL1
                      ELSE NULL
@@ -73,7 +115,7 @@ AS
                      ELSE NULL
                  END)
                  RIND_160,
-             SUM (
+               SUM (
                  CASE
                      WHEN D.CAPITOL IN (1125) AND D.RIND IN ('200') THEN D.COL1
                      ELSE NULL
@@ -140,10 +182,8 @@ AS
                      ELSE NULL
                  END)
                  RIND_320_COL2,
-        -------------------------------------------------------------------------------------------------
-
-
-   SUM (
+                 
+                        SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('330') THEN D.COL1
                      ELSE NULL
@@ -155,30 +195,21 @@ AS
                      ELSE NULL
                  END)
                  RIND_330_COL2,
------------------------------------------------------------------------------------------------------------
-
-
--------------------------------------------------------------------------------------------------
-
-
-   SUM (
+                 
+                               SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('340') THEN D.COL1
                      ELSE NULL
                  END)
-                 RIND_340_COL1,
+                 RIND__COL1,
              SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('340') THEN D.COL2
                      ELSE NULL
                  END)
                  RIND_340_COL2,
------------------------------------------------------------------------------------------------------------
-
--------------------------------------------------------------------------------------------------
-
-
-   SUM (
+                 
+                 SUM (
                  CASE
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('350') THEN D.COL1
                      ELSE NULL
@@ -189,17 +220,31 @@ AS
                      WHEN D.CAPITOL IN (1126) AND D.RIND IN ('350') THEN D.COL2
                      ELSE NULL
                  END)
-                 RIND_350_COL2
------------------------------------------------------------------------------------------------------------
-        FROM CIS2.VW_DATA_ALL D
-             INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
+                 RIND_350_COL2,
+                 
+                 SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1125) AND D.RIND IN ('297') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_297_COL1,
+                    SUM (
+                 CASE
+                     WHEN D.CAPITOL IN (1214) AND D.RIND IN ('970') THEN D.COL1
+                     ELSE NULL
+                 END)
+                 RIND_970_COL1
+                   
+
+ FROM CIS2.VW_DATA_ALL D
+            INNER JOIN CIS2.VW_CL_CUATM C ON C.CODUL = D.CUATM
        WHERE D.FORM IN (64) AND D.PERIOADA = 2014
-    -- AND D.CUIIO = 135094
-
-
-    GROUP BY D.CUIIO,
-             D.CUIIO_VERS,
-             D.CUATM,
-             C.FULL_CODE,
-             D.CAEM2
-    ORDER BY C.FULL_CODE;
+       
+       
+       GROUP BY 
+         D.CUIIO,   
+         D.CUATM,
+         D.CAEM2
+      ORDER BY    
+         D.CUATM
+         

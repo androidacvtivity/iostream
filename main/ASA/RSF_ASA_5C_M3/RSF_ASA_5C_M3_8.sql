@@ -1,0 +1,28 @@
+ SELECT 
+        
+            D.CUIIO,
+            R.CAEM2 AS RSF_1_CAEM2,
+            SUM(CASE WHEN D.ID_MD = 62300 THEN D.COL1 ELSE NULL END)  NMP, -- 62206
+            SUM(CASE WHEN D.ID_MD = 62206 THEN D.COL1 ELSE NULL END)  RSF1_R_010_C3,
+            SUM(CASE WHEN D.ID_MD = 62206 THEN D.COL2 ELSE NULL END)  RSF1_R_010_C4,
+            SUM(CASE WHEN D.ID_MD = 62092 THEN D.COL1 ELSE NULL END)  RSF1_R_290_C4,
+            SUM(CASE WHEN D.ID_MD = 62092 THEN D.COL2 ELSE NULL END)  RSF1_R_290_C5, 
+            SUM(CASE WHEN D.ID_MD = 62068 THEN D.COL1 ELSE NULL END)  RSF1_R_260_C4,
+            SUM(CASE WHEN D.ID_MD = 62068 THEN D.COL2 ELSE NULL END)  RSF1_R_260_C5,
+            SUM(CASE WHEN D.ID_MD = 62111 THEN D.COL1 ELSE NULL END)  RSF1_R_270_C4,
+            SUM(CASE WHEN D.ID_MD = 62111 THEN D.COL2 ELSE NULL END)  RSF1_R_270_C5,
+            SUM(CASE WHEN D.ID_MD = 62089 THEN D.COL1 ELSE NULL END)  RSF1_R_280_C4,
+            SUM(CASE WHEN D.ID_MD = 62089 THEN D.COL2 ELSE NULL END)  RSF1_R_280_C5   
+            
+            FROM CIS2.DATA_ALL_FR D INNER JOIN 
+                                  CIS2.RENIM R ON R.CUIIO = D.CUIIO 
+                                  AND R.CUIIO_VERS = D.CUIIO_VERS  
+            
+              WHERE 
+              D.PERIOADA = 2014 
+              AND D.FORM = 57
+              AND D.FORM_VERS = 2009
+             -- AND D.CUIIO = 2561932
+              GROUP BY 
+              D.CUIIO,
+              R.CAEM2
