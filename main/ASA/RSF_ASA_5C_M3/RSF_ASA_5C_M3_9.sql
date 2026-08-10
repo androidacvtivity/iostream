@@ -1,0 +1,22 @@
+CREATE TABLE USER_BANCU.RSF1_AGREGAT_2014
+(
+    CUIIO             NUMBER,
+    RSF_1_CAEM2       VARCHAR2(20),
+
+    NMP               NUMBER(20,2),
+
+    RSF1_R_010_C3     NUMBER(20,2),
+    RSF1_R_010_C4     NUMBER(20,2),
+
+    RSF1_R_290_C4     NUMBER(20,2),
+    RSF1_R_290_C5     NUMBER(20,2),
+
+    RSF1_R_260_C4     NUMBER(20,2),
+    RSF1_R_260_C5     NUMBER(20,2),
+
+    RSF1_R_270_C4     NUMBER(20,2),
+    RSF1_R_270_C5     NUMBER(20,2),
+
+    RSF1_R_280_C4     NUMBER(20,2),
+    RSF1_R_280_C5     NUMBER(20,2)
+);

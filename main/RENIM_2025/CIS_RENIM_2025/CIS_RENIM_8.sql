@@ -2,11 +2,9 @@ DECLARE -- ====================================================================
 
 CURSOR C IS
 
-SELECT 
-             CUIIO,
-             2014 CUIIO_VERS,
-             CFP   
-            FROM USER_BANCU.CFP
+ SELECT DISTINCT  
+ CUIIO 
+        FROM USER_BANCU.RENIM_AGR
   
  
             

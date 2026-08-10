@@ -2,27 +2,22 @@ DECLARE -- ====================================================================
 
 CURSOR C IS
 
-SELECT 
-  CUIIO,   
-  CUIIO_VERS,
- -- DENUMIRE,
-  --CUATM,
-  --CFP,
-  CFOJ
-  --CAEM2,
-  --IDNO         
-      FROM  AGRO_4  
+   SELECT DISTINCT  
+            CUIIO,
+            CUIIO_VERS,
+            CUATM 
+        FROM USER_BANCU.RENIM_AGR 
            ;
 
 BEGIN -- ======================================================================
 FOR CR IN C
 LOOP
-UPDATE CIS2.RENIM SET
+UPDATE CIS.RENIM SET
 --
 --DENUMIRE = CR.DENUMIRE,
---CUATM = CR.CUATM,
+CUATM = CR.CUATM
 --CFP = CR.CFP,
-CFOJ = CR.CFOJ
+--CFOJ = CR.CFOJ
 --CAEM2 = CR.CAEM2,
 --IDNO = CR.IDNO
 

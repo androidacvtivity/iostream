@@ -17,7 +17,7 @@
 --  RENIM_PERS,
 --  CAEM2  
 -- )
-
+--
 
 
 
@@ -25,7 +25,7 @@ SELECT
 
 
   CUIIO,
-  2014 CUIIO_VERS,
+  1069 CUIIO_VERS,
   DENUMIRE,
   EDIT_USER,
   STATUT,
@@ -43,10 +43,10 @@ SELECT
   CAEM2      
                     FROM   --USER_BANCU.VW_RENIM_2012_CIS2
                      
-                             USER_BANCU.VW_MAX_RENIM_CIS
+                          --   USER_BANCU.VW_MAX_RENIM_CIS
                     
                     --   VW_RENIM_2013_CIS2
-                        -- USER_BANCU.VW_MAX_RENIM_TRIM_CIS
+                          USER_BANCU.VW_MAX_RENIM_TRIM_CIS
                          -- VW_MAX_RENIM_TRIM_CIS_491
                       --    VW_MAX_RENIM_299_CIS
                           
@@ -54,13 +54,12 @@ SELECT
                     WHERE 
    CUIIO IN (
 
-SELECT FC.CUIIO
-                  
-              FROM CFP FC
+   SELECT DISTINCT  CUIIO 
+        FROM USER_BANCU.RENIM_AGR
 
 )
 -------------------------------------
-AND CUIIO_VERS <>  2014;  
+AND CUIIO_VERS <>  1069;  
 
 --AND 
 --CUIIO NOT IN (

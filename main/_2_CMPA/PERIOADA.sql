@@ -1,0 +1,6 @@
+select 
+    PERIOADA 
+    from CIS2.MD_PERIOADA
+    where 
+    TIP_PERIOADA = 5
+    AND (PERIOADA BETWEEN FLOOR(:pPERIOADA/4)*4 AND :pPERIOADA)

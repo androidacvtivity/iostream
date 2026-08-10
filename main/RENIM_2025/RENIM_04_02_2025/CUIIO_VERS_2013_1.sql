@@ -1,40 +1,40 @@
-INSERT INTO CIS2.RENIM (
-    CUIIO,
-    CUIIO_VERS,
-    DENUMIRE,
-    EDIT_USER,
-    STATUT,
-    CUATM,
-    CFP,
-    CFOJ,
-    COCM,
-    CAEM,
-    BUGET,
-    TIP,
-    PROD,
-    FOR_CUB,
-    GENMUZEE,
-    TIPMUZEE,
-    TIP_LOCAL,
-    TIP_INST,
-    CAEM2,
-    N85_NTL,
-    N85_NTIIP,
-    N85_NDIIP,
-    N85_NPDS,
-    N85_NRIIP,
-    N85_NSIIP,
-    GENMUZEE2,
-    NFI,
-    NTII,
-    NPDS,
-    ORGANE,
-    TIP_INV,
-    RENIM_PERS,
-    ORGANE_COND,
-    GEN_INSTITUTIE,
-    IDNO
-)
+--INSERT INTO CIS2.RENIM (
+--    CUIIO,
+--    CUIIO_VERS,
+--    DENUMIRE,
+--    EDIT_USER,
+--    STATUT,
+--    CUATM,
+--    CFP,
+--    CFOJ,
+--    COCM,
+--    CAEM,
+--    BUGET,
+--    TIP,
+--    PROD,
+--    FOR_CUB,
+--    GENMUZEE,
+--    TIPMUZEE,
+--    TIP_LOCAL,
+--    TIP_INST,
+--    CAEM2,
+--    N85_NTL,
+--    N85_NTIIP,
+--    N85_NDIIP,
+--    N85_NPDS,
+--    N85_NRIIP,
+--    N85_NSIIP,
+--    GENMUZEE2,
+--    NFI,
+--    NTII,
+--    NPDS,
+--    ORGANE,
+--    TIP_INV,
+--    RENIM_PERS,
+--    ORGANE_COND,
+--    GEN_INSTITUTIE,
+--    IDNO
+--)
 
 
 
@@ -89,16 +89,21 @@ SELECT
         
 
 and CUIIO IN (
-141165241,
-41197598,
-40926061,
-41934252,
-41743894,
-41637229   
+
+    SELECT DISTINCT  CUIIO 
+        FROM USER_BANCU.RENIM_AGR
 
 )
 
 AND CUIIO_VERS <>  1069 
 
-;
+AND CUIIO NOT IN (
+40079939,
+40580326,
+40789316,
+40833916,
+41547472
+
+)
+
 
