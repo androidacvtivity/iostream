@@ -40,8 +40,9 @@ FROM (
         D.FORM IN (64)
         AND D.CAPITOL IN (1127)
         AND D.PERIOADA IN (2013)
-        AND D.RIND NOT IN ('400')
---        AND D.CUIIO = 34275
+ --       AND D.RIND NOT IN ('400')
+       -- AND D.CUIIO = 26844
+
     GROUP BY
         
     
@@ -62,7 +63,7 @@ ORDER BY
     
 WHERE
 1=1
-AND CAEM2_CAP4 LIKE '56%'
+--AND CAEM2_CAP4 LIKE '56%'
 --AND 
 
 --CUIIO  = 458963
