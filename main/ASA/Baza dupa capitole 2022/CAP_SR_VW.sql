@@ -1,5 +1,6 @@
+
+
 SELECT 
-D.ANUL,
 D.CUIIO,
 R.IDNO,
 R.DENUMIRE,
@@ -15,10 +16,12 @@ FROM  CIS2.VW_DATA_ALL D
                     INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS  
                     
     WHERE
+       D.FORM IN (64) AND 
      D.FORM_VERS = :PFORM_VERS  AND      
   D.PERIOADA = 2013 AND
   D.CUATM_FULL LIKE '%'||:pCOD_CUATM||';%'   AND
   D.CAPITOL IN (100) 
+  AND D.RIND NOT IN ('98','--','CD','-','INMPUT')
  
 
 GROUP BY
@@ -37,10 +40,3 @@ ORDER BY
 
 D.CUIIO,
 D.RIND
-
-
-                 
-  
-  
-  
-  
