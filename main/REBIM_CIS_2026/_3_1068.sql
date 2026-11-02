@@ -17,15 +17,15 @@
 --  RENIM_PERS,
 --  CAEM2  
 -- )
---
---
---
+
+
+
 
 SELECT 
 
 
   CUIIO,
-  1068 CUIIO_VERS,
+  1070 CUIIO_VERS,
   DENUMIRE,
   EDIT_USER,
   STATUT,
@@ -55,12 +55,21 @@ SELECT
 
  
              
-  SELECT 
-    DISTINCT CUIIO   
-  
-  FROM USER_BANCU.RENIM_CIS_5C_1068         
+2048979,
+37688095,
+40217264,
+40512885,
+40657589,
+41086611,
+41100133,
+41239983,
+41328600,
+41378420,
+41547472,
+41557364
+     
 
 )
 -------------------------------------
---AND CUIIO_VERS <> 1068;  
+AND CUIIO_VERS <> 1070;  
 

@@ -1,0 +1,32 @@
+SELECT
+    CUIIO,
+    CUIIO_VERS,
+    TRIM(IDNO) AS IDNO
+FROM USER_BANCU.RENIM_AGR
+WHERE LENGTH(TRIM(IDNO)) > 13;
+
+UPDATE USER_BANCU.RENIM_AGR
+SET IDNO = TRIM(IDNO)
+WHERE SUBSTR(IDNO, 1, 1) = ' ';
+
+
+UPDATE USER_BANCU.RENIM_AGR
+SET IDNO = RTRIM(
+    LTRIM(
+        IDNO,
+        ' ' || CHR(9) || CHR(10) || CHR(13) ||
+        CHR(0) || UNISTR('\00A0') ||
+        UNISTR('\200B') || UNISTR('\FEFF')
+    ),
+    ' ' || CHR(9) || CHR(10) || CHR(13) ||
+    CHR(0) || UNISTR('\00A0') ||
+    UNISTR('\200B') || UNISTR('\FEFF')
+)
+WHERE
+       INSTR(IDNO, CHR(9)) > 0
+    OR INSTR(IDNO, CHR(10)) > 0
+    OR INSTR(IDNO, CHR(13)) > 0
+    OR INSTR(IDNO, CHR(0)) > 0
+    OR INSTR(IDNO, UNISTR('\00A0')) > 0
+    OR INSTR(IDNO, UNISTR('\200B')) > 0
+    OR INSTR(IDNO, UNISTR('\FEFF')) > 0;

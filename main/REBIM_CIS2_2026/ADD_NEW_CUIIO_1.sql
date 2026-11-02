@@ -36,15 +36,15 @@
 --    IDNO
 --)
 -- 
---
---
---
+
+
+
 
 
 
 SELECT 
  CUIIO,
- 2014 CUIIO_VERS,
+ 2015 CUIIO_VERS,
  DENUMIRE,
  EDIT_USER,
  STATUT,
@@ -81,22 +81,65 @@ SELECT
 
    
                     FROM   -- USER_BANCU.VW_MAX_RENIM_CIS2_1067  
-                      --  USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
+           --             USER_BANCU.VW_MAX_RENIM_TRIM_CIS2    
                           -- USER_BANCU.VW_MAX_RENIM_2LIVII 
-                         USER_BANCU.VW_MAX_RENIM_CIS2_2014
-                      -- USER_BANCU.VW_MAX_RENIM_CIS2
+                       --  USER_BANCU.VW_MAX_RENIM_CIS2_2014
+                       USER_BANCU.VW_MAX_RENIM_CIS2
             
                 ----------------------------------------------------------------    
                     WHERE 
          
          
          CUIIO IN (
-        
-SELECT CUIIO
-      
-   FROM LICHIDARE
-      
-            
+7027976,
+7028237,
+7032285,
+7031726,
+7031624,
+7031357,
+7028409,
+7028527,
+7028705,
+7028585,
+7028591,
+7039318,
+7025960,
+40868338,
+40868197,
+7032670,
+7035562,
+7035579,
+7035059,
+7035071,
+7035361,
+7035102,
+7027120,
+7032368,
+7032492,
+7030339,
+7031392,
+7030702,
+7034060,
+7034769,
+7035183,
+7035220,
+7036171,
+7036366,
+7035243,
+7036538,
+2053070,
+7038365,
+7038187,
+7034841,
+7027812,
+7036751,
+7037163,
+7037182,
+7037228,
+7033066,
+7033161,
+7031446
+
 )
 
-and CUIIO_VERS =  2014
+and CUIIO_VERS <> 2015

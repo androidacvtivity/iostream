@@ -1,0 +1,26 @@
+SELECT
+ DISTINCT D.CUIIO,   
+ D.RIND,
+ SUM(D.COL1) AS COL1
+
+ 
+ 
+FROM   
+    CIS2.VW_DATA_ALL D
+     
+        
+     
+WHERE
+  D.FORM IN (64)             AND 
+ (:pID_MDTABLE=:pID_MDTABLE) AND
+  D.FORM_VERS = :pFORM_VERS  AND 
+  D.FORM = :pFORM  AND      
+  D.PERIOADA =:pPERIOADA 
+  AND D.CAPITOL IN (100)
+ -- AND D.RIND IN ('1','2','3','4','5','6','7') 
+  AND D.RIND IN ('5') 
+
+GROUP BY 
+D.CUIIO,
+D.RIND
+
