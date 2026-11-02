@@ -97,7 +97,12 @@ SELECT
              
                   INNER JOIN CIS2.RENIM R ON R.CUIIO = D.CUIIO AND R.CUIIO_VERS = D.CUIIO_VERS 
            WHERE D.PERIOADA = :pPERIOADA_LUNA AND D.FORM IN (:pFORM)
-            AND D.DATA_REG  < TO_DATE('06/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS') 
+            AND 
+            
+            -- cum corect sa scriu in oracle 01.07.2026 - 01.10.2026
+            D.DATA_REG  < TO_DATE('06/01/2026 00:00:00', 'MM/DD/YYYY HH24:MI:SS') 
+            
+            -- 01.07.2026 - 01.10.2026
            
              AND D.FORM_VERS IN (:pFORM_VERS)      
            
